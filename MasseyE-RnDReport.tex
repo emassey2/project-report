@@ -5,6 +5,8 @@
 % https://github.com/mas-group/project-report
 % Based on the template created by Ronni Hartanto in 2003
 %
+\usepackage{natbib}
+\bibliographystyle{plainnat} % Use the plainnat bibliography style
 
 \documentclass[thesis]{mas_report}
 % \documentclass[rnd]{mas_report}
@@ -36,12 +38,12 @@
 \statementpage
 
 \begin{abstract}
-  $ABSTRACT
+  \$ABSTRACT
 \end{abstract}
 
 
 \begin{acknowledgements}
-  Thanks to $FRIENDS_AND_FAMILY
+  Thanks to \$FRIENDS\_AND\_FAMILY
 \end{acknowledgements}
 
 
@@ -59,9 +61,9 @@
 
 \subfile{chapters/ch01_introduction}
 \subfile{chapters/ch02_stateoftheart}
-\subfile{chapters/ch03_methodology}
-\subfile{chapters/ch04_solution}
-\subfile{chapters/ch05_evaluation}
+\subfile{chapters/ch03_comparison_criteria}
+\subfile{chapters/ch04_case_study}
+\subfile{chapters/ch05_setup}
 \subfile{chapters/ch06_results}
 \subfile{chapters/ch07_conclusion}
 
@@ -81,7 +83,8 @@
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------------
 \addcontentsline{toc}{chapter}{References}
-\bibliographystyle{plainnat} % Use the plainnat bibliography style
+
 \bibliography{bibliography.bib} % Use the bibliography.bib file as the source of references
+\nocite{*}
 
 \end{document}
