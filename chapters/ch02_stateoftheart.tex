@@ -86,7 +86,7 @@ to the time at which the robot was operating that objects in the robots
 environment may have changed. With the introduction of online learning, the
 robot would be able to observe these changes and factor them in to its
 navigational system. This was the first addition to attempt to avoid the static
-nature of the transition states of the HMM.
+nature of the transition states of the HMM. \\
 
 Further improvement to occupancy grids with HMMs came with the concept of
 modeling trajectories of objects in the environment\cite{Wang2015}. This is an
@@ -100,6 +100,33 @@ a nearby cell that is currently occupied.
 
 \subsection{ Spatio-Temporal Hilbert Maps }
 
+In contrast to the discrete nature of occupancy grids, Hilbert maps provide a
+continuous representation of an environment which allows for arbitrary world
+model resolution. They rely on "fast kernel approximations that project the
+data in a Hilbert space where a logistic regression classifier is learnt"
+A stochastic gradient optimization can then applied. This approach is similar to
+that of a Gaussian processes occupancy map but with a much lower computational
+cost computational cost computational cost computational cost. Having been
+introduced as recently as 2016, Hilbert maps, and the addition of a temporal
+component, are still a fairly new field of research but already some of the
+authors from the original paper have already begun to introduce a temporal
+component to this new form of world model. \cite{Ramos2016, Senanayake2016} \\
+
+In static Hilbert maps, the kernel can be thought of as the location of an
+obstacle or object. When introducing the temporal dimension, the centroid of a
+moving object is extracted from raw data over time. This data can the be used
+and trained on to create a model that can predict the direction and speed of an
+object at a given location at a given time. It is particularly well suited to
+short-term predictions such as car traffic on a road or at an intersection.
+\cite{Senanayake2016} \cite{Senanayake2017}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/STHM_diag.png}
+  \caption{Spatio-temporal Hilbert map training process (GP - Gaussian Process)}
+  \cite{Senanayake2016}
+  \label{figure:example}
+\end{figure}
 
 \section{ Map Independent Models }
 \subsection{ FreMen }

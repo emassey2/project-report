@@ -8,7 +8,6 @@
     number = {4},
     pages = {964--977},
     title = {{FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments}},
-    url = {http://eprints.lincoln.ac.uk/26196/1/krajnik{\_}TRO.pdf},
     volume = {33},
     year = {2017}
 }
@@ -39,7 +38,6 @@
     mendeley-groups = {R{\&}D All,R{\&}D MVP},
     pages = {130},
     title = {{Lifelong Information-driven Exploration for Mobile Robots to Complete and Refine Spatio-Temporal Maps in Changing Environments}},
-    url = {http://labe.felk.cvut.cz/{~}tkrajnik/theses/phd{\_}joao.pdf},
     year = {2017}
 }
 @article{Coppola2016,
@@ -68,7 +66,6 @@
     number = {2},
     pages = {684--691},
     title = {{Lifelong Information-Driven Exploration to Complete and Refine 4-D Spatio-Temporal Maps}},
-    url = {http://ieeexplore.ieee.org/document/7378884/},
     volume = {1},
     year = {2016}
 }
@@ -128,7 +125,6 @@
     number = {789349985},
     pages = {409--414},
     title = {{Temporal occupancy grids: a method for classifying the spatio-temporal properties of the environment}},
-    url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=1041424},
     volume = {1},
     year = {2002}
 }
@@ -147,8 +143,60 @@
     number = {2},
     pages = {p257--286},
     title = {{Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition}},
-    url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=18626},
     volume = {77},
     year = {1989}
 }
+@article{Meyer-Delius2012,
+    abstract = {The majority of existing approaches to mobile robot mapping assumes that the world is static, which is gen-erally not justified in real-world applications. However, in many navigation tasks including trajectory planning, surveillance, and coverage, accurate maps are essen-tial for the effective behavior of the robot. In this pa-per we present a probabilistic grid-based approach for modeling changing environments. Our method repre-sents both, the occupancy and its changes in the cor-responding area where the dynamics are characterized by the state transition probabilities of a Hidden Markov Model. We apply an offline and an online technique to learn the parameters from observed data. The advan-tage of the online approach is that it can dynamically adapt the parameters and at the same time does not re-quire storing the complete observation sequences. Ex-perimental results obtained with data acquired by real robots demonstrate that our model is well-suited for rep-resenting changing environments. Further results show that our technique can be used to substantially improve the effectiveness of path planning procedures.},
+    author = {Meyer-Delius, Daniel and Beinhofer, Maximilian and Burgard, Wolfram},
+    file = {:home/ethan/uni/RND/resources/papers/Occupancy{\_}Grid{\_}Models{\_}for{\_}Robot{\_}Mapping{\_}in{\_}Changing{\_}Environments.pdf:pdf},
+    isbn = {9781577355687},
+    journal = {Proc. of the Twenty-Sixth AAAI Conference on Artificial Intelligence},
+    keywords = {HMM,Robotics (Special Track),occupancy grid},
+    mendeley-groups = {R{\&}D MVP,R{\&}D All,Occupancy Grid,HMM},
+    mendeley-tags = {HMM,occupancy grid},
+    pages = {2024--2030},
+    title = {{Occupancy Grid Models for Robot Mapping in Changing Environments}},
+    year = {2012}
+}
+@article{Wang2015,
+    author = {Wang, Zhan and Jensfelt, Patric and Folkesson, John},
+    file = {:home/ethan/uni/RND/resources/papers/10126-45975-1-PB.pdf:pdf},
+    keywords = {AAAI Technical Report WS-15-09},
+    mendeley-groups = {R{\&}D All,Occupancy Grid,HMM},
+    title = {{Modeling Spatial-Temporal Dynamics of Human Movements for Predicting Future Trajectories}},
+    year = {2015}
+}
+@article{Ramos2016,
+    author = {Ramos, Fabio and Ott, Lionel},
+    isbn = {9780992374716},
+    issn = {17413176},
+    journal = {International Journal of Robotics Research},
+    keywords = {Cognitive robotics,learning and adaptive systems,mapping,mobile and distributed robotics SLAM,range sensing,sensing and perception computer vision},
+    pages = {1717--1730},
+    title = {{Hilbert maps: Scalable continuous occupancy mapping with stochastic gradient descent}},
+    volume = {35},
+    year = {2016}
+}
+@article{Senanayake2016,
+    abstract = {We consider the problem of building continuous occupancy representations in dynamic environments for robotics applications. The problem has hardly been discussed previously due to the complexity of patterns in urban environments, which have both spatial and temporal dependencies. We address the problem as learning a kernel classifier on an efficient feature space. The key novelty of our approach is the incorporation of variations in the time domain into the spatial domain. We propose a method to propagate motion uncertainty into the kernel using a hierarchical model. The main benefit of this approach is that it can directly predict the occupancy state of the map in the future from past observations, being a valuable tool for robot trajectory planning under uncertainty. Our approach preserves the main computational benefits of static Hilbert maps — using stochastic gradient descent for fast optimization of model parameters and incremental updates as new data are captured. Experiments conducted in road intersections of an urban environment demonstrated that spatio-temporal Hilbert maps can accurately model changes in the map while outperforming other techniques on various aspects.},
+    author = {Senanayake, Ransalu and Ott, Lionel and O'Callaghan, Simon and Ramos, Fabio},
+    issn = {10495258},
+    journal = {Advances in Neural Information Processing Systems 29},
+    pages = {3918--3926},
+    title = {{Spatio-Temporal Hilbert Maps for Continuous Occupancy Representation in Dynamic Environments}},
+    year = {2016}
+}
+@article{Senanayake2017,
+    abstract = {— Understanding the dynamics of urban environ-ments is crucial for path planning and safe navigation. However, the dynamics might be extremely complex making learning the environment an unfathomable task. Within the methods available for learning dynamic environments, dynamic Gaussian process occupancy maps (DGPOM) are very attractive because they can produce spatially-continuous occupancy maps taking into account neighborhood information, and provide probabilis-tic estimates, naturally inferring the uncertainty of predictions. Despite these properties, they are extremely slow, especially in dynamic mapping where the parameters of the map have to be updated as new data arrive from range sensors such as LiDARs. In this work, we leverage recent advancements in stochastic variational inference (SVI) to quickly learn dynamic areas in an online fashion. Further, we propose an information-driven technique to " intelligently " select inducing points required for SVI without relying on any object trackers which essentially improves computational time as well as robustness. These long-term occupancy maps entertain all attractive properties of DGPOM while the learning process is significantly faster, yet accurate. Our experiments with both simulation and real robot data on road intersections show a significant improvement in speed while maintaining a comparable or better accuracy.},
+    author = {Senanayake, Ransalu and O'Callaghan, Simon and Ramos, Fabio},
+    doi = {10.1109/ICRA.2017.7989294},
+    isbn = {9781509046331},
+    issn = {10504729},
+    journal = {Proceedings - IEEE International Conference on Robotics and Automation},
+    pages = {2532--2539},
+    title = {{Learning highly dynamic environments with stochastic variational inference}},
+    year = {2017}
+}
+
 
