@@ -100,6 +100,14 @@ a nearby cell that is currently occupied.
 
 \subsection{ Spatio-Temporal Hilbert Maps }
 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{images/STHM_diag.png}
+  \caption{Spatio-temporal Hilbert map training process (GP - Gaussian Process)}
+  \cite{Senanayake2016}
+  \label{figure:example}
+\end{figure}
+
 In contrast to the discrete nature of occupancy grids, Hilbert maps provide a
 continuous representation of an environment which allows for arbitrary world
 model resolution. They rely on "fast kernel approximations that project the
@@ -120,24 +128,99 @@ object at a given location at a given time. It is particularly well suited to
 short-term predictions such as car traffic on a road or at an intersection.
 \cite{Senanayake2016} \cite{Senanayake2017}
 
-\begin{figure}
+\section{ Map Independent Models }
+
+\subsection{ FreMen }
+
+Frequency Map Enhancement, or FreMEn as it became known, is a technique for
+spatio-temporal world modeling that can be used independent of mapping or
+world modeling technique. It was introduced by Tomáš Krajník, Jaime Pulido
+Fentanes, Grzegorz Cielniak, Christian Dondrup, an Tom Duckett in 2014. It's
+original goals focused on improving mapping for long-term scenarios.
+Additionally, it was notice that a large number of previous approaches had
+focused on mapping multiple static environments over time which worked well
+for environments that changed slowly, but were not necessarily well fit for
+highly dynamic environments. FreMEn was designed to counter these issues.
+\cite{Fentanes2014} Although initially used with octomaps, three dimensional
+occupancy grids, it was later decoupled from this mapping technique allowing
+it to be an extremely diverse and flexible technique. \\
+
+In it's original and most basic form, FreMEn assumes that an environment can be
+broken down into multiple independent components. It is then further assumed
+that these independent components will take one of two binary states. Examples
+of this include a door being open or shut, a room being occupied, or a cell in
+an occupancy grid being free or occupied. Each one of these states can not
+always be directly observed, and the tools e.g. sensors available to the robot
+my have noise and cannot be taken as one hundred percent ground truth. Thus,
+each one of these components has a certain probability assigned to it. This
+probability defines the likelihood of it being in a given state, e.g. a door
+open or closed.  Finally, since these states can be observed multiple times
+over a given period of time, their probabilities can then be defined as
+functions dependent on time. \\
+
+At the heart of FreMEn lies a well known mathematical tool commonly used for
+signal processing, the Fourier Transform. Since FreMEn focuses on long term
+observations of dynamic, often human, environments, it is assumed that harmonic
+patterns will develop over time. The Fourier Transform can then be applied to
+these long term observations to convert them into the spectral domain for
+storage. Furthermore, because the Fourier Transform is easily reversible,
+with the inverse Fourier Transform, one can easily convert between the stored
+observations in the spectral domain back to the time domain. This allows for
+predictions at any given time t. Not only is this extremely useful for future
+predictions, but this method can also be used to analyze the accuracy of the
+model by comparing previously observed data from the past to the models
+predictions. Using this historical accuracy one can then tune the order of the
+spectral model to obtain more accurate historical predictions with hopes of
+also having more accurate future predictions. More information on this process
+can be found in the original paper\cite{Fentanes2014} and the follow up FreMEn
+paper \cite{Krajnik2015}. \\
+
+\subsubsection{ Improvements and Additions }
+
+As ground breaking and as flexible as FreMEn is, due to the many assumptions
+made, it is not without its flaws. One major assumption made is that areas of
+observation can be observed not only frequently but periodically in the most
+strict sense. That is to say, it is not only important that a location be
+visited and observed, but that the observations follow a pattern of equally
+spaced and timed observations. This is due to the Fast Fourier Transform (FFT)
+technique that is used in the original papers. Thus, latter authors devised and
+implemented other methods of storing data and making predictions. This often
+involved phase shifting or modifying the amplitude of the observation as well
+as using a modified equation derived from the Fourier Transform instead of the
+standard FFT. More information can be found in the paper \cite{Santos2016}. \\
+
+Another major limitation of FreMEn is its assumption that all observable
+behavior can be modeled with binary states. An  attempt to solve this issue
+was to replace the Bernoulli distribution of FreMen with the specific hope of
+being able to better represent human patterns present in environment such as
+an office building or hospital. Specifically, they "extend the technique
+(FreMEn) by employing both Poisson processes as the counting model to replace
+the binary states of FreMEn and a new way of selecting the most prominent
+frequency components of the Fourier spectrum."\cite{Jovan2016} This approach,
+however, does not come without its own set of assumptions. Since human
+activity is assumed, the authors also assume behavior would be best grouped by
+the work week. For example, data sampled for a two months would be broken into
+8 week sections. This works extremely well for patterns that are persistent on
+a weekly basis but perhaps not as well for seasonal changes for example. At
+the very least, one must apply some critical thinking to how data should be
+group depending on the desired application.
+
+
+\begin{figure}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{images/STHM_diag.png}
-  \caption{Spatio-temporal Hilbert map training process (GP - Gaussian Process)}
-  \cite{Senanayake2016}
+  \includegraphics[width=\linewidth]{images/poisson-spectral-process.png}
+  \caption{The λ time series of a corridor updated over 4 week period.}
+  \cite{Jovan2016}
   \label{figure:example}
 \end{figure}
 
-\section{ Map Independent Models }
-\subsection{ FreMen }
-\subsubsection{ Poisson-Spectral Models }
-
+TODO: perhaps a section about the different FreMEn applications available e.g.
+FreMEn grids, FroctoMaps etc
 
 \section{ Existing Methods for Evaluation or Comparison }
 
+\subsection{ Current Methods }
 \subsection { Example 1 }
 \subsection { Example 2 }
 
-
-CITATION \cite{art1}.
-\section{Limitations of previous work}
+\subsection{ Limitations and Areas of Oversight }
