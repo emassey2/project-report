@@ -1,149 +1,151 @@
 %!TEX root = ../report.tex
 
-\chapter{ Introduction }
+\begin{document}
+  \chapter{ Introduction }
 
-A robots world model is its internal representation of its environment that
-allows it to reason and make decisions. This ability to make decisions, and
-thus how well a robot performs in an environment, can be directly correlated
-to the quality of the model that a robot contains.  Historically, these models
-have been static two or three dimensional representations, but within the past
-decade or two multiple methods have been developed to introduce an additional
-dimension to these maps, the dimension of time. The inclusion of times allows
-for a robot to make decisions about when it may want to accomplish a task, or
-perhaps know to avoid a certain area at a given time. In the simple case of an
-office, a robot may learn to avoid areas of high traffic around the cafeteria
-during lunch time or learn that a shortcut between to builds is open, but only
-during work hours. These simple examples illustrate the type of knowledge and
-efficiency that can be gleaned by introducing a temporal component to a robots
-world model. This new type of world model has come to be known as a
-spatio-temporal world model as it is a model of the world that contains
-spatial information, that of the physical environment, as well as temporal
-information, how the environment changes through time.\\
+  A robots world model is its internal representation of its environment that
+  allows it to reason and make decisions. This ability to make decisions, and
+  thus how well a robot performs in an environment, can be directly correlated
+  to the quality of the model that a robot contains.  Historically, these models
+  have been static two or three dimensional representations, but within the past
+  decade or two multiple methods have been developed to introduce an additional
+  dimension to these maps, the dimension of time. The inclusion of times allows
+  for a robot to make decisions about when it may want to accomplish a task, or
+  perhaps know to avoid a certain area at a given time. In the simple case of an
+  office, a robot may learn to avoid areas of high traffic around the cafeteria
+  during lunch time or learn that a shortcut between to builds is open, but only
+  during work hours. These simple examples illustrate the type of knowledge and
+  efficiency that can be gleaned by introducing a temporal component to a robots
+  world model. This new type of world model has come to be known as a
+  spatio-temporal world model as it is a model of the world that contains
+  spatial information, that of the physical environment, as well as temporal
+  information, how the environment changes through time.\\
 
-Automatically guided vehicles (AVGs), often present in the field of logistics,
-stand to benefit a great deal from these improvements in world modeling.
-Moving logistics from point A to point B is an extremely common task in a wide
-variety of domains spanning industrial, commercial, and even residential
-applications. AVGs, have most prominently been used in industrial settings for
-a few decades already, but have been relegated to a discrete and limited set
-of predictable tasks. This is especially true when logistics must be
-transported through a particularly dynamic or human environment.\\
+  Automatically guided vehicles (AVGs), often present in the field of logistics,
+  stand to benefit a great deal from these improvements in world modeling.
+  Moving logistics from point A to point B is an extremely common task in a wide
+  variety of domains spanning industrial, commercial, and even residential
+  applications. AVGs, have most prominently been used in industrial settings for
+  a few decades already, but have been relegated to a discrete and limited set
+  of predictable tasks. This is especially true when logistics must be
+  transported through a particularly dynamic or human environment.\\
 
-Recent work into introducing a temporal component to this world models has
-already begun, and is showing great promise. A variety of methods have been
-introduced to allow for an AVG to observe and make predictions about it's
-environment through time. However, since this field is relatively knew, and
-with new advancements and approaches being introduce even within the past view
-years, it is becoming increasingly harder to evaluate or choose between the
-different spatio-temporal world modeling options. It is for this reason that a
-method, or set of criteria, be devised for comparing and contrasting the
-variety of solutions. The analysis of these methods will not only allow for
-others to choose the most fitting approach for a given environment, but also
-expose deficiencies in the current approaches and guide future research
-efforts.  Improvements in this field will ultimately result in more flexible
-AVGs that can operate in a wider variety of environments and for longer
-periods of autonomy.
+  Recent work into introducing a temporal component to this world models has
+  already begun, and is showing great promise. A variety of methods have been
+  introduced to allow for an AVG to observe and make predictions about it's
+  environment through time. However, since this field is relatively knew, and
+  with new advancements and approaches being introduce even within the past view
+  years, it is becoming increasingly harder to evaluate or choose between the
+  different spatio-temporal world modeling options. It is for this reason that a
+  method, or set of criteria, be devised for comparing and contrasting the
+  variety of solutions. The analysis of these methods will not only allow for
+  others to choose the most fitting approach for a given environment, but also
+  expose deficiencies in the current approaches and guide future research
+  efforts.  Improvements in this field will ultimately result in more flexible
+  AVGs that can operate in a wider variety of environments and for longer
+  periods of autonomy.
 
-\section{ Challenges and Difficulties }
+  \section{ Challenges and Difficulties }
 
-Historically, world modeling techniques could be thought of as simply a mapping
-and path planning problem in either two dimensional or three dimensional space.
-These problems have been studied for decades and thus there already exist a
-handful of well known solutions, each with there own advantages and
-disadvantages. However, with the fairly recent introduction of the fourth
-dimension, time, into the equation there has been the introduction of a number
-of different methods. \\
+  Historically, world modeling techniques could be thought of as simply a mapping
+  and path planning problem in either two dimensional or three dimensional space.
+  These problems have been studied for decades and thus there already exist a
+  handful of well known solutions, each with there own advantages and
+  disadvantages. However, with the fairly recent introduction of the fourth
+  dimension, time, into the equation there has been the introduction of a number
+  of different methods. \\
 
-The early and simplistic approaches to introducing temporal components into
-world models started as early as 2002 \cite{Arbuckle2002} but within the past
-decade or so there has been an uptick both in the number of different
-approaches and the complexity of the methods. \cite{Krajnik2017} [TODO ADD
-OTHER CITATIONS] With this increase in complexity and variety of approaches
-combined with a lack of historical perspective and analysis, it can be
-daunting task to select the 'correct' or even a well fitting spatio-temporal
-world model for a new project. A few papers have introduced some simple means
-for comparison, but these have been limited to a simple discussion about the
-space and time complexity of an approach, or an internal reflection on
-variations of a proposed method.
-
-
-\section{ Motivation }
-
-With so many different methods and no historical knowledge or method of comparison
-this paper aims to provide a template for comparing existing models that should
-be extensible to account for the inevitable release of future methods. To that
-aim the following goals shall be met:
-
-\begin{itemize}
-  \item Summary of the major existing spatio-temporal world modeling techniques.
-
-  \item Collection of performance measurement or other comparison techniques as
-    defined by the papers themselves.
-
-  \item Introduction of meta-information in order to better compare the existing
-    world modeling techniques
-
-  \item A quick and easy to use table for high level overview and comparison of techniques
-
-  \item Example application of the aforementioned information to select a fitting
-    technique for a real-world application
-
-  \item Subsequent evaluation and discussion on the appropriateness of technique
-    selected, especially with respect to the introduced meta-information
-
-\end{itemize}
-
-It is with this collection of existing comparison techniques, new meta-information,
-and a tangible example that other projects may be able to more easily evaluate
-and select the best fitting spatio-temporal world modeling technique for the
-project. Additionally, when new spatio-temporal world model techniques are
-introduced, it should be with relative easy that their information be integrated
-into this method for comparative analysis for future use.
+  The early and simplistic approaches to introducing temporal components into
+  world models started as early as 2002 \cite{Arbuckle2002} but within the past
+  decade or so there has been an uptick both in the number of different
+  approaches and the complexity of the methods. \cite{Krajnik2017} [TODO ADD
+  OTHER CITATIONS] With this increase in complexity and variety of approaches
+  combined with a lack of historical perspective and analysis, it can be
+  daunting task to select the 'correct' or even a well fitting spatio-temporal
+  world model for a new project. A few papers have introduced some simple means
+  for comparison, but these have been limited to a simple discussion about the
+  space and time complexity of an approach, or an internal reflection on
+  variations of a proposed method.
 
 
+  \section{ Motivation }
 
-\section{ Problem Formulation }
+  With so many different methods and no historical knowledge or method of comparison
+  this paper aims to provide a template for comparing existing models that should
+  be extensible to account for the inevitable release of future methods. To that
+  aim the following goals shall be met:
 
-In order to best choose between preexisting solutions for spatio-temporal
-world modeling and guide future development it is vital comparative criteria be
-established. This comparative analysis will set out to clarify and quantify
-these approaches. Although the comparative analysis will be general enough to be
-applicable for any project wanting to incorporate spatio-temporal wold modeling,
-it will ultimately be viewed through the lens of a specific real-world application
-with a focus in long-term planning. More details about the specific application
-will be discussed later however, it is important to note that viewing the
-various modeling methods through the lens of real-world application, is quite
-powerful. \\
+  \begin{itemize}
+    \item Summary of the major existing spatio-temporal world modeling techniques.
 
-Improvements in world modeling, specifically within the domain of
-spatio-temporal world modeling, have already yielded significant effects
-on the performance of robotic logistic systems. These improvements directly
-translate into decreases in travel time as well as increases in reliability
-that hinges on knowing what areas to avoid a what times. These improvements in
-turn create a much more powerful and scaleable logistics network with less
-downtime. This ultimately leads to more goods being delivered which saves
-both time and money, and in the case of hospitals, possibly lives. \\
+    \item Collection of performance measurement or other comparison techniques as
+      defined by the papers themselves.
 
-Despite all of these benefits, and the numerous number of different approaches
-for spatio-temporal world modeling, there currently lacks any method for
-accurately comparing and contrasting the different approaches. It is with this
-in mind that this thesis will collect, describe, compare, and contrast these
-approaches.  It will use the preexisting criteria already available when possible as some,
-but not necessarily all, of the work includes basic performance statistics.
-Furthermore, in work where these criteria are not mentioned explicitly, or are
-not otherwise available, an attempt to derive the information either via
-calculation or collected via simulation. Lastly, new criteria will be devised
-or otherwise assigned to allow account for information desired and not provided
-or other meta-information that would aid in comparing these methods. \\
+    \item Introduction of meta-information in order to better compare the existing
+      world modeling techniques
 
-Finally, an example study will be included which will attempt to select the
-best-suited approach for a real-world scenario, known as ROPOD. The real-world
-scenario in question involves moving logistics internally within a hospital.
-It consists of a central server in charge of planning and routing multiple
-robots.  Additionally, it will be assumed planning will be done with
-OpenStreetMap and thus will use a graph-based approach. More details and
-specifics about this project will be discussed in a later section. \\
+    \item A quick and easy to use table for high level overview and comparison of techniques
+
+    \item Example application of the aforementioned information to select a fitting
+      technique for a real-world application
+
+    \item Subsequent evaluation and discussion on the appropriateness of technique
+      selected, especially with respect to the introduced meta-information
+
+  \end{itemize}
+
+  It is with this collection of existing comparison techniques, new meta-information,
+  and a tangible example that other projects may be able to more easily evaluate
+  and select the best fitting spatio-temporal world modeling technique for the
+  project. Additionally, when new spatio-temporal world model techniques are
+  introduced, it should be with relative easy that their information be integrated
+  into this method for comparative analysis for future use.
 
 
-TODO: perhaps an introduction or allusion to the experiments to come?
 
+  \section{ Problem Formulation }
+
+  In order to best choose between preexisting solutions for spatio-temporal
+  world modeling and guide future development it is vital comparative criteria be
+  established. This comparative analysis will set out to clarify and quantify
+  these approaches. Although the comparative analysis will be general enough to be
+  applicable for any project wanting to incorporate spatio-temporal wold modeling,
+  it will ultimately be viewed through the lens of a specific real-world application
+  with a focus in long-term planning. More details about the specific application
+  will be discussed later however, it is important to note that viewing the
+  various modeling methods through the lens of real-world application, is quite
+  powerful. \\
+
+  Improvements in world modeling, specifically within the domain of
+  spatio-temporal world modeling, have already yielded significant effects
+  on the performance of robotic logistic systems. These improvements directly
+  translate into decreases in travel time as well as increases in reliability
+  that hinges on knowing what areas to avoid a what times. These improvements in
+  turn create a much more powerful and scaleable logistics network with less
+  downtime. This ultimately leads to more goods being delivered which saves
+  both time and money, and in the case of hospitals, possibly lives. \\
+
+  Despite all of these benefits, and the numerous number of different approaches
+  for spatio-temporal world modeling, there currently lacks any method for
+  accurately comparing and contrasting the different approaches. It is with this
+  in mind that this thesis will collect, describe, compare, and contrast these
+  approaches.  It will use the preexisting criteria already available when possible as some,
+  but not necessarily all, of the work includes basic performance statistics.
+  Furthermore, in work where these criteria are not mentioned explicitly, or are
+  not otherwise available, an attempt to derive the information either via
+  calculation or collected via simulation. Lastly, new criteria will be devised
+  or otherwise assigned to allow account for information desired and not provided
+  or other meta-information that would aid in comparing these methods. \\
+
+  Finally, an example study will be included which will attempt to select the
+  best-suited approach for a real-world scenario, known as ROPOD. The real-world
+  scenario in question involves moving logistics internally within a hospital.
+  It consists of a central server in charge of planning and routing multiple
+  robots.  Additionally, it will be assumed planning will be done with
+  OpenStreetMap and thus will use a graph-based approach. More details and
+  specifics about this project will be discussed in a later section. \\
+
+
+  TODO: perhaps an introduction or allusion to the experiments to come?
+
+\end{document}
