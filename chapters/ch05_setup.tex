@@ -14,25 +14,20 @@ spatio-temporal world modeling techniques.
 
 \section{ Environmental Representation}
 
-Given the complexity and size of the target environment, as seen in Figure
-TODO, it is necessary to pair down features of the building
-until only the core components remain. The three dynamic environmental
-components being target are doors, elevators, and carts that are often strewn
-about the hallways and surrounding rooms. Therefore, a model environments have
-been designed for simulations to be run on that each contain one of these three key
-components. The model environments that have been designed take heavy
-influence from the actual environment but some notable changes have been made.
-The models have a decreased area and a slightly more simplistic design to
-allow for faster model training and path planning. Additionally, extraneous
-rooms and hallways have been removed. A comparison between the actual hospital
-and the designed model can be seen below.\\TODO add pictures from simulated rooms
+Given the complexity and size of the target environment for ROPOD, a large
+hospital, it is necessary to pair down features of the building until only the
+core components remain. The three dynamic environmental components being
+target are doors, elevators, and carts that are often strewn about the
+hallways and surrounding rooms. Therefore, a model environment has been
+designed for the simulations to be run on that contains these three key
+components.  The model environment that has been designed takes heavy
+influence from the actual environment but some notable have been made. The
+model has a decreased area to allow for faster model training and path
+planning. Additionally, extraneous rooms and hallways have been removed. A
+comparison between the actual hospital and the designed model can be seen below.
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{images/agaplesion_uebersichtsplan.png}
-  \caption{One floor of the hospitals layout.}
-  \label{figure:hospital_overview}
-\end{figure}
+TODO add picture
+
 
 \section{ Common Assumptions }
 In order to insure only the desired component is being tested at any given
@@ -119,8 +114,6 @@ data relevant to scale-ability of the modeling technique given the eventual scop
 
   \item Planning Memory Consumption
 
-  \item Size of Generated Model
-
 \end{itemize}
 
 
@@ -150,76 +143,48 @@ modeling. \\
 
 \subsection{ Experimental Details }
 
-In order to minimize the complexity of the experiment while also maximizing
-the value of resulting data the simulation involves only a hallway and three
-distinct doors.  Behind each door is a room where a package must be
-delivered.  Each model will be directly, or indirectly be tasked with
-predicting the state of these door. Door A will represent a door that would be
-open during regular work hours, that is to say 9:00-17:00 Monday through
-Friday. Door B simulates something close to the inverse of that, a door that
-only experiences fluctuations during the workday.  That is to say, from
-9:00-17:00 the door is not predictable, i.e. is a random state. Outside of
-work hours Monday through Friday, the door is always open. Door C will
-simulate a sudden and long term change in the environment. This could be
-construction or someone going on an extended vacation. The door will always be
-open the first three weeks and then will be closed for the remainder of the
-experiment. Figure 5.1 displays the starting and goal points of for desired
-paths.
+In order to keep this test as straight forward as possible, only one door has
+been included. The door belongs to a room that where a package must be
+delivered Each model will be directly, or indirectly be tasked with predicting
+the state of this door. Figure 5.1 displays the starting and goal point of
+the desired path. A simple 50\% confidence value will be used. That is to
+say, if a model predicts that the door will be 50\% or more likely to be open
+will result in the robot attempting to deliver the package.
 
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{images/ward_24_door.png}
-  \caption{Multiple rooms behind doors in ward 24. }
+  \caption{Multiple rooms behind doors in ward 24.}
   \label{figure:ward_24_door}
 \end{figure}
 
 TODO should I include something like this here or elsewhere?
-A simple 50\% confidence value will be used. That is to say, if a model
-predicts that the door will be 50\% or more likely to be open will result in
-the robot attempting to deliver the package.  It is clear that this 50\%
-cutoff does not take into account the penalties of making a wrong prediction,
-but this experiment was designed to investigate the accuracy of the
-prediction. How the information of the prediction is handled afterwards is
-undoubtedly valuable, but is outside the scope of this current research. \\
+It is clear that this 50\% cutoff does not take into account the penalties of
+making a wrong prediction, but this experiment was designed to investigate the
+accuracy of the prediction. How the information of the prediction is handled
+afterwards is undoubtedly valuable, but is outside the scope of this current
+research.
+
+\
+TODO include description of how the simulation was generated.
 
 
 \section{ Congested Hallways }
 
 \subsection{ Experimental Motivation }
 
-Hallways, although often seen as an area of high foot traffic, can often serve
-a different purpose. When a hallway does not see a lot of foot traffic,
-especially from the public, it is common for it to become an area of temporary
-storage.  Through use it is common for these storage areas to begin to become
-cluttered. This can be seen as a temporary obstacle, but this is also
-sometimes periodic behavior. The main goal of this  experiment is to see how
-well each of the models deal with objects as they are placed in the hallways.
-It does a good job of testing both periodic behavior, as well as temporary
-trends in the data.
-
-Figure 5.2 shows the basement of the hospital. This area is used as storage
-most often and carts or other objects can build up in the surrounding rooms and
-often overflow into the hallways as well. Although it is uncommon, occasionally
-it is possible for sections of the hallway to become impassible for a robot.
-These areas, although still passible for humans, are not large enough for a
-robot carrying equipment to pass safely through.
 
 
 \subsection{ Experimental Details }
 
-The simulation begins with the robot having already exited the main elevator.
-At this point, the models are queried for maps that will be used for planning.
-In order to best display and compare the features of the modeling techniques
-it is assumed that the hallway on the left, the shorter of the two paths, will
-become blocked with a certain frequency. In addition, both hallways may have
-objects that will not be easy to traverse, and thus slow the robot down. Much
-like the previous experiment, a cell of an occupancy grid, or edge of a graph
-with lower than than 50\% chance of being passible will be considered
-impassible and thus a different path must be taken.
-
-TODO discussion about occupancy grids vs graphs?
-
+Figure 5.3 displays the starting and goal point of the
+desired path. In order to keep this test as straight forward as possible, only
+one door has been included. The door belongs to a hallway that acts like a
+shortcut between the two other hallways. Each model will be directly, or
+indirectly tasked with predicting the state of this door. A simple 50\%
+confidence value will be used. That is to say, if a model predicts that the
+door will be 50\% or more likely to be open that path will be taken. \\
 
 
 \begin{figure}[!htb]
@@ -229,64 +194,5 @@ TODO discussion about occupancy grids vs graphs?
   \label{figure:basement_congestion}
 \end{figure}
 
-The four main areas of notable congestion can be seen in figure 5.3. Area A
-can be seen almost of an extension of area C. As C grows larger, objects will
-often begin to overflow into the hallway restricting the otherwise shortest
-path to the storage area. Furthermore, At times, A can become completely cutoff.
-Area B is never seen to be completed congested, and thus is always a safe option,
-but there is intermittent and unpredictable foot traffic that may cause disruptions.
-C and D are the main areas for storage. C may act as an indicator for A, and
-D may occasionally grow large enough to prevent a path to the goal forcing the
-robot to go around the pillar (the darker gray square, TODO label).\\
 
-As alluded to above, the simulated areas will act as follows. C and D will start
-small as small piles at the beginning of the month growing linearly as the first
-two weeks progress before resting back to a small area. This is to simulate the
-objects being moved in to permanent storage. Area A will only be affected towards the
-last few days before the objects are moved. Since area B is already part of a
-longer path, and the foot traffic is fairly limited, it will be assumed area B
-is always free and not affected making it a safe, but inefficient choice.
-
-
-
-\section{ Busy Elevators }
-
-\subsection{ Experimental Motivation }
-
-The three dimensional nature of human buildings and restrictions caused by
-wheeled robots often require that a robot take an elevator to reach it's
-destination. This is an extremely common occurrence for ROPOD because the
-base station for the robots are situated in the basement. Additionally, these
-elevators are not dedicated to ROPOD and are instead shared with the rest of the hospital.
-Thus the time between calling an elevator and it arriving can vary. It would
-be desirable for ROPOD to be able to predict both at what times the elevators
-are busy, and the approximate time it takes to call the elevator.
-
-
-TODO how to deal with binary restrictions? Another cutoff? Weighted average using confidence value?
-Since some of the methods being tested are only able to represent the environment
-in terms of binary predictions a work around must be used.
-
-\subsection{ Experimental Details }
-
-The elevators, as mentioned above, will be the only objects that do not easily
-map to a binary representation. The elevators, for this simulation will be treated
-as a single unit. A few times during the day have been observed as times of peak
-use. During these times the elevator has a much higher probability of taking
-longer to arrive, or containing people that may hinder the robots ability to enter
-the elevator. Peak times for the simulation include an hour before and after
-noon, representing the lunch rush and opening hours around 9:00. At these times
-a binomial distribution will be used to generate the increase in weight time as
-well as the likelihood an elevator is not useable after being called.\\
-
-TODO should I include more specifics and formulas used for the distributions
-and such here? Or in the later sections?
-
-
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{images/basement_elevator.png}
-  \caption{Location of the elevators in the basement. }
-  \label{figure:basement_elevator}
-\end{figure}
+TODO include description of how the simulation was generated.
