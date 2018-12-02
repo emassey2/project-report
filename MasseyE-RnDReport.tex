@@ -1,15 +1,5 @@
-%
-% LaTeX2e Style for MAS R&D and master thesis reports
-% Author: Argentina Ortega Sainz, Hochschule Bonn-Rhein-Sieg, Germany
-% Please feel free to send issues, suggestions or pull requests to:
-% https://github.com/mas-group/project-report
-% Based on the template created by Ronni Hartanto in 2003
-%
-\usepackage{natbib}
-\bibliographystyle{plainnat} % Use the plainnat bibliography style
-
-\documentclass[thesis]{mas_report}
-% \documentclass[rnd]{mas_report}
+%\documentclass[thesis]{mas_report}
+\documentclass[rnd]{mas_report}
 
 % ****************************************************
 % THIS INFORMATION SHOULD BE UPDATED FOR YOUR REPORT
@@ -23,6 +13,8 @@
 % \thirdpartylogo{path/to/your/image}
 
 \begin{document}
+\frontmatter
+
 \begin{titlepage}
     \maketitle
 \end{titlepage}
@@ -30,22 +22,12 @@
 %----------------------------------------------------------------------------------------
 %	PREFACE
 %----------------------------------------------------------------------------------------
-
 \pagestyle{plain}
-
-
 \cleardoublepage
 \statementpage
 
-\begin{abstract}
-  \$ABSTRACT
-\end{abstract}
-
-
-\begin{acknowledgements}
-  Thanks to \$FRIENDS\_AND\_FAMILY
-\end{acknowledgements}
-
+\subfile{chapters/abstract}
+\subfile{chapters/acknowledgment}
 
 \tableofcontents
 \listoffigures
@@ -54,7 +36,6 @@
 %-------------------------------------------------------------------------------
 %	CONTENT CHAPTERS
 %-------------------------------------------------------------------------------
-
 \mainmatter % Begin numeric (1,2,3...) page numbering
 
 \pagestyle{mainmatter}
@@ -67,14 +48,11 @@
 \subfile{chapters/ch06_results}
 \subfile{chapters/ch07_conclusion}
 
-
 %-------------------------------------------------------------------------------
-%	APPENDIX
+%	APPENDICES
 %-------------------------------------------------------------------------------
-
 \begin{appendices}
-\subfile{chapters/appendix}
-
+    \subfile{chapters/appendix}
 \end{appendices}
 
 \backmatter
@@ -83,8 +61,7 @@
 %	BIBLIOGRAPHY
 %-------------------------------------------------------------------------------
 \addcontentsline{toc}{chapter}{References}
-
+\bibliographystyle{plainnat} % Use the plainnat bibliography style
 \bibliography{bibliography.bib} % Use the bibliography.bib file as the source of references
-\nocite{*}
 
 \end{document}

@@ -16,16 +16,17 @@
   \section{ Environmental Representation}
 
   Given the complexity and size of the target environment for ROPOD, a large
-  hospital, it is necessary to pair down features of the building until only the
-  core components remain. The three dynamic environmental components being
-  target are doors, elevators, and carts that are often strewn about the
-  hallways and surrounding rooms. Therefore, a model environment has been
-  designed for the simulations to be run on that contains these three key
-  components.  The model environment that has been designed takes heavy
-  influence from the actual environment but some notable have been made. The
-  model has a decreased area to allow for faster model training and path
-  planning. Additionally, extraneous rooms and hallways have been removed. A
-  comparison between the actual hospital and the designed model can be seen below.
+  hospital, it is necessary to pair down features of the building until only
+  the core components remain. The three dynamic environmental components being
+  target are doors, path planning with carts that are often strewn about the
+  hallways and surrounding rooms, and elevators. Therefore, a model
+  environment has been designed for the simulations to be run on that contains
+  these three key components.  The model environment that has been designed
+  takes heavy influence from the actual environment but some notable have been
+  made. The model has a decreased area to allow for faster model training and
+  path planning. Additionally, extraneous rooms and hallways have been
+  removed. A comparison between the actual hospital and the designed model can
+  be seen below.
 
   TODO add picture
 
@@ -43,7 +44,8 @@
 
     \item All information other than the objects under test are perfectly known
 
-    \item Observations made/provided by the training data are assumed to be ground-truth
+    \item Observations made/provided by the training data are assumed to be
+          ground-truth
 
   \end{itemize}
 
@@ -56,54 +58,73 @@
 
   \begin{itemize}
 
-    \item Training data consisting of observations made every 10 minutes over a simulated month will
-          be provided to the models
+    \item Training data consisting of observations made every 15 minutes over
+          a simulated month will be provided to the models
 
-    \item 3 training sets will be made:
-      \begin{itemize}
+    \item All data generation will be done using the same program and the
+          specifics of how the data is generated will be discussed further
+          below in the relevant experiment section
 
-        \item TODO further discuss generation of datasets
+    \item Using the same generation procedure, a new month will be generated
 
-        \item Highly consistent generation
+    \item The models will be trained using the original month and then tested
+          against both the original month and the new test month
 
-        \item Generation consistent with early periodicity of data obtained
+    \item In the case of the doors and elevator, only the objects themselves
+          will be modeled and the comparison will only be how well the generated
+          models can predict the ground thruth
 
-        \item Data with higher chance of abnormalities
-
-      \end{itemize}
-
-    \item Using the same generation procedure, a set of three new months will be
-          generated
-
-    \item 4 times will be randomly selected each day of the month using a
-          uniform distribution for which the models must generate maps
-
-    \item An optimal path using the ground truth will be generated for each of
-          these time slots using the selected models
-
-    \item Additionally, maps will be generated using the ground truth, best
-          case, and worst case, assumptions
+    \item In the case of the more advanced hallway scenario, predictions about
+          objects in the environment will be used to plan a path and this path
+          will be compared with paths planned using the ground truth
 
     \item All of these paths will then be compared using the criteria described
           below.
 
-    \item TODO what about a test with sparseness of data
-
     \item All experiments will be done on the same hardware
       \begin{itemize}
-        \item Desktop PC
-        \item i7-2600k 3.4GHz
+        \item ASUS UX330UAK Laptop
+        \item i5-7200k 2.5GHz
         \item 8GB DDR3
-        \item Ubuntu 14.04 Trusty Tahr
+        \item Arch Linux 4.19.4
       \end{itemize}
 
   \end{itemize}
 
+  \section{ Data Generation }
+
+  Data generation is done using a combination of built in Python libraries and
+  the NumPy library. Each object is broken down into a series of days which is
+  then further broken down into a series of behaviors. Each behavior
+  represents the likelihood of an object being in a given state between two
+  times.  Furthermore, each behavior has a starting state and an ending state,
+  which if different, are swept through linearly. E.g. if a behavior is
+  modeling a binary state of a door that starts at 100\% open and then becomes
+  100\% closed an hour later at the half hour mark the door would have the
+  door being at a 50\% likelihood of being open. Additionally, it is possible
+  to specify the amount of Gaussian noise that is added on top of the
+  behavior where the nominal state is used as mu and the sigma is used to
+  specify the magnitude of the noise. Months of data are thus generated by
+  walking through these behaviors in 15 minute increments for each day in the
+  month where each month is assumed to have exactly 31 days.
+
+  For example, if a door was open from noon until midnight every day, and then closed from
+  midnight until noon there would be two behaviors one from midnight until
+  noon and one from noon until right before midnight. In this case, the
+  starting and ending values of each behavior would be the same and no noise
+  would be introduced. This would create a sharp, well defined change at
+  exactly noon and midnight every day. Further details and specifics about data
+  generation will be discussed in their respective sections.
+
+  \section{ Model Parameters }
+  TODO: add section to talk about how model params where chosen
+
 
   \section{ Comparison Criteria }
-  In order to evaluate the intricacies of the selected models a wide variety of
-  data points have been selected for comparison. A focus has been placed on collecting
-  data relevant to scale-ability of the modeling technique given the eventual scope of the ROPOD project.
+  In order to evaluate the intricacies of the selected models a wide variety
+  of data points have been selected for comparison. A focus has been placed on
+  collecting data relevant to accuracy and scale-ability of the modeling
+  technique given the eventual scope of the ROPOD project.
 
   \begin{itemize}
 
@@ -117,7 +138,6 @@
 
   \end{itemize}
 
-
   \section{ Doored Areas}
 
   \subsection{ Experimental Motivation }
@@ -130,7 +150,7 @@
   or chaotic time of the day. \\
 
   Regardless of the reason, it is certain that the states of doors are often
-  both dynamic and periodic. In the ideal case, a robot, much like humans,
+  both dynamic exhibiting both periodic and long term changes. In the ideal case, a robot, much like humans,
   would learn when certain doors are closed and be able to plan accordingly.
   Making an accurate prediction can save time, but making an inaccurate
   predication can also be costly. An in accurate prediction would force a robot
@@ -144,14 +164,18 @@
 
   \subsection{ Experimental Details }
 
-  In order to keep this test as straight forward as possible, only one door has
-  been included. The door belongs to a room that where a package must be
-  delivered Each model will be directly, or indirectly be tasked with predicting
-  the state of this door. Figure 5.1 displays the starting and goal point of
-  the desired path. A simple 50\% confidence value will be used. That is to
-  say, if a model predicts that the door will be 50\% or more likely to be open
-  will result in the robot attempting to deliver the package.
+  In order to keep this test as straight forward as possible, only the door
+  object itself has been modeled. The doors could belong to a room where a
+  package must delivered or perhaps a hallway that could be used as a
+  shortcut. Each model will be directly, or indirectly be tasked with
+  predicting the state of this door. Figure 5.1 displays an example of three
+  doors in ward 24 of the hospital that may display the dynamic behavior
+  previously mentioned. \\
 
+  When evaluating the predictions made by the models a simple 50\% confidence
+  value will be used. That is to say, if a model predicts that the door will
+  be 50\% or more likely to be open will result in the robot attempting to
+  deliver the package. \\
 
   \begin{figure}[!htb]
     \centering
@@ -160,16 +184,85 @@
     \label{figure:ward_24_door}
   \end{figure}
 
-  TODO should I include something like this here or elsewhere?
-  It is clear that this 50\% cutoff does not take into account the penalties of
-  making a wrong prediction, but this experiment was designed to investigate the
-  accuracy of the prediction. How the information of the prediction is handled
-  afterwards is undoubtedly valuable, but is outside the scope of this current
-  research.
+  It is clear that this 50\% cutoff does not take into account the penalties
+  of making a wrong prediction, but this particular experiment was designed to
+  investigate the accuracy of the prediction. The hallway experiment discussed
+  below will delve a little deeper into the ramifications of inaccurate
+  predictions. That being said, how the information of the prediction is
+  handled afterwards is undoubtedly valuable, but is outside the scope of this
+  current research.
 
-  \
-  TODO include description of how the simulation was generated.
+  \subsection{ Data Generation }
 
+  As mentioned above, both the training and the test data for all models was
+  generated using the same program.
+
+  The specifics for each door are as follows.
+
+  \subsection{ Door A }
+
+  Door A is models a door that is highly influenced by the daily schedule of a
+  9:00 to 17:00 job and has a high amount of periodic behavior with a small
+  amount of noise.  There are 5 behaviors which model a standard work day. The
+  time from midnight until work starts at 9 has the door in a normally closed
+  state.  From 9:00 until 12:00 the door is likely open. 12:00 until 13:00 is
+  considered lunch time and thus the door is likely closed. Work resumes at
+  13:00 until 17:00 and thus likely open. From 17:00 until midnight
+  the door remains in a likely closed state. Finally, the door is always
+  closed on weekends with a 100\% probability and no noise. \\
+
+  When the door is in a likely open state it has 70\% chance of being open.
+  Likewise, when in a likely closed state it has a 70\% chance of being closed.
+  Finally, when noise is introduced during the weekday it uses a standard deviation
+  of 0.1 where mu is either 0.3 or 0.7 and 0.5 is the cutoff for being open or
+  closed. \\
+
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{images/Door_A_Example_Month.png}
+    \caption{The training data for Month A}
+    \label{figure:Door A Training Month}
+  \end{figure}
+
+  \subsection{ Door B }
+
+  Door B, in a similar manor to door A, also tries to encapsulate the periodic
+  behaviors of a work day but with a little more noise. Door B is always open
+  from midnight until the start of the work day at 9:00. During the work day
+  the door is a constant state of flux, being open and shut at random. This is
+  modeled using a mu of 0.5 and a standard deviation of 0.1. This ends when
+  the work day is over at 17:00 and the door goes back to remaining open until
+  the next work day starts. To add additional periodic complexity, such as a
+  weekly meeting or delivery, every third weekday the door will be closed the
+  entire day. This trend is continued across month boundaries. This means if
+  the doors was closed on the day before the last day of the first month it
+  will again be closed on the second day of the next month. Finally, on
+  weekends the door will always be open with 100\% certainty and no noise. \\
+
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{images/Door_B_Example_Month.png}
+    \caption{The training data for Month B}
+    \label{figure:Door B Training Month}
+  \end{figure}
+
+  \subsection{ Door C }
+
+  Door C does not attempt to model any periodic behavior but instead test
+  long-term change in an environment. A simple illustration of the long-term
+  non-periodic change could be that of construction. The door has always been
+  open in the past but it leads to a wing of the building that is now either
+  being remodeled or has been removed. In the test data, this behavior is
+  achieved by having the door be open for the first three weeks and then being
+  closed for the rest of the training month and through the test month. In
+  this model no noise was introduced. \\
+
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{images/Door_C_Example_Month.png}
+    \caption{The training data for Month C}
+    \label{figure:Door C Training Month}
+  \end{figure}
 
   \section{ Congested Hallways }
 
@@ -195,6 +288,4 @@
     \label{figure:basement_congestion}
   \end{figure}
 
-
-  TODO include description of how the simulation was generated.
 \end{document}
