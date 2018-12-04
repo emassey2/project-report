@@ -40,7 +40,7 @@ prediction is most likely due to the extra steps taken to wrap the data back
 in on itself temporally.  This additional training and accuracy comes at a
 great cost however. HyperTime manages only a small performance increase over
 around one percent over FreMEn with a total training and prediction time
-taking on the order of two magnitudes longer of both Gaussian and FreMEn.
+taking on the order of two magnitudes longer compared to either Gaussian or FreMEn.
 Finally, it appears that the Gaussian model completely failed to predict any
 open state.  This is thought to be due to the sparseness of positive, or open
 states resulting in the model oscillating between 0 and just under 0.5 thus
@@ -115,7 +115,8 @@ In terms of resource usage, a similar trend to door A is observed. Gaussian
 and FreMEn predictions take under 100 milliseconds while Duckett takes around
 an order of magnitude longer, and HyperTime yet another order of magnitude
 longer. Finally, similar to door A, all approaches use about the same amount
-of memory for training and predicting within about 10 megabytes.
+of memory for training and predicting using around 30 megabytes while being
+within about 10 megabytes of one another.
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -234,12 +235,34 @@ is meaningless.
   \caption{Model Accuracy Over Time - Door C}
 \end{figure}\\ \\
 
-\subsection{ Final Thoughts }
-In terms of memory usage, all four methods appear to be relatively similar, which is to be expected.
 
 \section{ Congested Hallways }
 TODO pair down images and move them to the end of the paper
 
+Having already given an in depth look at the individual predictions in the
+previous section, this section will not focus on detailing every methods results on every data set,
+but instead focus on meta information that can be abstracted as well as
+performance with respect to path planning, the ultimate use goal.
+To this effect, although graphs for every single result are not
+present in this section they are available in TODO WHATS THE SECTION CALLED? \\
+
+\subsection{ Prediction Accuracy Versus Behavior Frequency }
+TODO list figures where these numbers can be found ?
+TODO add talk about the same mistake in hypertime on trash
+
+With a moderately size set that has varying frequencies such as the one
+described above, it is possible to observe a relationship between the accuracy
+of a given spatio-temporal modeling technique and the period of the behavior
+attempting to be modeled. In general, that data suggest that behaviors with
+a higher frequency are better modeled using Fourier methods like FreMEn and
+HyperTime. This is most obvious when looking at behaviors that repeated multiple
+times a day such as the laundry or meal nodes. In these experiments the Fourier
+methods achieved an impressive 100\% accuracy. TODO should this go here or
+else where\?  One caveat to these impressive results is the lack of noise
+present in the data used for the hallway test. Large amounts of noise were
+explicitly left out of this particular experiment in to minimize the variables
+present. The presence and effect of noise in data is, however, analyzed in
+both the door and elevator experiments. \\
 
 \begin{table}[h!]
   \centering
@@ -247,43 +270,13 @@ TODO pair down images and move them to the end of the paper
     \begin{tabular}{|l|l|l|l|l|}
       \hline
       & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
-      Historical Accuracy             & 91.13\% & 61.49\%  & 64.52\% & 64.52\%   \\ \hline
-      Prediction Accuracy             & 32.26\% & 64.05\%  & 63.21\% & 67.74\%   \\ \hline
-      Computation Time (Milliseconds) & 600     & 60       & 70      & 1140      \\ \hline
-      Memory Usage (KB)               & 31120   & 35364    & 35552   & 37192     \\ \hline
+      Historical Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
+      Prediction Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
+      Computation Time (Milliseconds) & 610     & 60       & 70       & 1860     \\ \hline
+      Memory Usage (KB)               & 30984   & 35160    & 35172    & 37632    \\ \hline
     \end{tabular}%
   }
-  \caption{Hallway Trash Section 0}
-\end{table}
-
-\begin{table}[h!]
-  \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
-      Historical Accuracy             & 90.96\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
-      Prediction Accuracy             & 35.79\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
-      Computation Time (Milliseconds) & 610     & 60       & 70       & 2120    \\ \hline
-      Memory Usage (KB)               & 31116   & 35400    & 34928    & 37520   \\ \hline
-    \end{tabular}%
-  }
-  \caption{Hallway Trash Section 1}
-\end{table}
-
-\begin{table}[h!]
-  \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
-      Historical Accuracy             & 92.31\% & 55.24\%  & 96.17\% & 99.83\%   \\ \hline
-      Prediction Accuracy             & 68.92\% & 55.24\%  & 95.97\% & 99.87\%   \\ \hline
-      Computation Time (Milliseconds) & 610     & 60       & 90      & 6790      \\ \hline
-      Memory Usage (KB)               & 31032   & 35660    & 35520   & 38372     \\ \hline
-    \end{tabular}%
-  }
-  \caption{Hallway Delivery Section}
+  \caption{Hallway Laundry Section}
 \end{table}
 
 \begin{table}[h!]
@@ -316,22 +309,146 @@ TODO pair down images and move them to the end of the paper
   \caption{Hallway Meal Section 1}
 \end{table}
 
-\begin{table}[h!]
+
+When observing the behavior that occurs with the least frequency, the trash
+nodes, the opposite trend is observed. Fourier methods no longer are able to
+accurately predict behaviors and their predictions drop to around 66\% accuracy.
+This is not believed to be a problem predicting or modeling behaviors with a
+lower frequency, but rather a consequence of the ratio between frequency and
+length of observation. TODO should future work go here\? It is postulated that
+with a larger data set, achievable by increasing the time of observation while
+maintaining the density of observations, the predictions would improve. \\
+
+While Fourier methods appear directly correlated with frequency, Duckett
+appears to have an inverse relationship with frequency. In the meal and
+laundry nodes Duckett has a prediction accuracy between around 60\% to 80\%.
+Furthermore, the lowest prediction accuracy of 61.63\% is achieved on the meal
+node that happens to have the highest number of changes per day. It is believed
+that the poor behavior of Duckett on behaviors with high frequency is due to
+how the averages are stored and computed. The method undergoes a type of
+trashing where in by the time the model has adjusted to current state of a
+behavior the behavior changes. It is important to note, that if prior knowledge
+or a previous data set is known, the model parameters such as refresh rate TODO
+correct terminology? can be tuned to best fit the frequency of a given behavior.
+However, this would have to be done for ever behavior, or at least a set or class
+of given behaviors and there currently does not exist a method to do this
+automatically or on a large scale. One final note about Duckett's performance
+with respect to frequency, similar to what happened in the door B experiment,
+Duckett fails to accurately predict behaviors that have periods that do not
+fall on month boundaries. This is visible in the difference between historical
+and future prediction accuracy for the trash sections dropping as far as from
+91.13\% to 32.13\% in the trash 0 node. Once again, this is not a direct failure
+of the Duckett model itself, but a result of forcing Duckett to make long
+term predictions. It's historical predictions are much more accurate to it's
+real-world behavior as TODO correct terminology? Duckett is more similar to
+an online learning model, changing it's predictions after every few observations,
+than and offline learning model that trains on trains on a set of data. \\
+
+
+
+
+\begin{table}[htb!]
   \centering
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
       & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
-      Historical Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
-      Prediction Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
-      Computation Time (Milliseconds) & 610     & 60       & 70       & 1860     \\ \hline
-      Memory Usage (KB)               & 30984   & 35160    & 35172    & 37632    \\ \hline
+      Historical Accuracy             & 92.31\% & 55.24\%  & 96.17\% & 99.83\%   \\ \hline
+      Prediction Accuracy             & 68.92\% & 55.24\%  & 95.97\% & 99.87\%   \\ \hline
+      Computation Time (Milliseconds) & 610     & 60       & 90      & 6790      \\ \hline
+      Memory Usage (KB)               & 31032   & 35660    & 35520   & 38372     \\ \hline
     \end{tabular}%
   }
-  \caption{Hallway Laundry Section}
+  \caption{Hallway Delivery Section}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[htb!]
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      Historical Accuracy             & 91.13\% & 61.49\%  & 64.52\% & 64.52\%   \\ \hline
+      Prediction Accuracy             & 32.26\% & 64.05\%  & 63.21\% & 67.74\%   \\ \hline
+      Computation Time (Milliseconds) & 600     & 60       & 70      & 1140      \\ \hline
+      Memory Usage (KB)               & 31120   & 35364    & 35552   & 37192     \\ \hline
+    \end{tabular}%
+  }
+  \caption{Hallway Trash Section 0}
+\end{table}
+
+\begin{table}[htb!]
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      Historical Accuracy             & 90.96\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
+      Prediction Accuracy             & 35.79\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
+      Computation Time (Milliseconds) & 610     & 60       & 70       & 2120    \\ \hline
+      Memory Usage (KB)               & 31116   & 35400    & 34928    & 37520   \\ \hline
+    \end{tabular}%
+  }
+  \caption{Hallway Trash Section 1}
+\end{table}
+
+
+\subsection{ Terminology and Metrics }
+
+In order to accurately and fairly compare the path planning results, terminology
+was devised to describe the mistakes made when planning using a models
+predictions. Errors encountered when attempting to execute a path produced
+using a models predictions were grouped into two categories: hard errors \&
+soft errors. \\
+
+Hard errors are errors that cause issues that are impossible for
+a robot to theoretically recover from. This only happens when the ground truth
+path and the model predicted plan are at odds. That is to say, hard errors are
+when the ground truth claims a path is not currently possible and the predicted
+model claims there exists a valid path or vice versa. \\
+
+Soft errors are errors that occur when the ground truth path and the model
+predicted path both agree on the existence of a path but disagree on the
+specifics. This means that soft errors only occur when there exists a path
+to the goal, but the model predicted path is either to long or would cause
+the robot to run into an area with obstacles. However, because we know,
+according to the ground that a path is possible, in theory the robot could
+create another plan with this newly discovered information and still make it
+to its goal. \\
+
+Assuming that the path produced by the model is valid, the path
+length is calculated and then compared against the ground truth path. Since
+both hard and soft errors produce invalid paths, they are not used to
+calculate the number of average cells traveled. This number is used a quick and
+easy way to calculate the efficiency of paths generated while using a given
+spatio-temporal world model. \\
+
+As alluded to in the previous section, there is no noise introduced
+into the simulated data. Thus, aside from Duckett, the historical and future
+predictions are, for all intents and purposes identical. The reasons for this
+will be discussed in the section below, but because of this only the future
+path planning results will be analyzed. Finally, a keen reader may notice both
+historical and future total time spent planning are the same. This is because
+during simulation both historical and future predictions were produced. \\
+
+Finally, it is important to note that although all of the behaviors were
+combined to produce a path prediction, the models were not simultaneously
+trained and asked to predict the various behaviors. Instead, each behavior,
+similar to the door experiment, was predicted individually and sequentially.
+Therefore, in order to have an overview of the resources used, the total
+time spent on planning was calculated by summing up each of the individual
+times it took to train a specific model. Due to the fact that this was happening
+sequentially and not simultaneously, memory usage can then be taken as an
+average or a maximum over time. A maximum was chosen as it is assumed that
+memory is a finite resource that does not change overtime and therefore as long
+as a system has the minimum amount of memory available to meet a programs
+maximum demands there will not be any issues during run-time. In the future,
+if this was turned into a multi-threaded process the sum may wished to be
+used. A naive and safe assumption if this figure is desired is to simply
+multiple the maximum amount of memory used by the number of objects for which
+a predictive model is desired. \\
+
+\begin{table}[htb!]
   \centering
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
@@ -340,12 +457,14 @@ TODO pair down images and move them to the end of the paper
       Number of Hard Errors              & 1790   & 2418   & 1488   & 1488 \\ \hline
       Number of Soft Errors              & 442    & 62     & 80     & 80   \\ \hline
       Average Additional Cells Traversed & 5.74   & 6.34   & 3.12   & 3.12 \\ \hline
+      Total Time Spent Planning          & 3650   & 360    & 440    & 13780\\ \hline
+      Maximum Memory Usage               & 31384  & 35660  & 35588  & 38372\\ \hline
     \end{tabular}%
   }
   \caption{Historical Path Planning Results}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[htb!]
   \centering
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
@@ -354,12 +473,68 @@ TODO pair down images and move them to the end of the paper
       Number of Hard Errors              & 1790   & 2418   & 1488   & 1488 \\ \hline
       Number of Soft Errors              & 444    & 62     & 80     & 80   \\ \hline
       Average Additional Cells Traversed & 5.74   & 6.34   & 3.12   & 3.12 \\ \hline
+      Total Time Spent Planning          & 3650   & 360    & 440    & 13780\\ \hline
+      Maximum Memory Usage               & 31384  & 35660  & 35588  & 38372\\ \hline
     \end{tabular}%
   }
   \caption{Future Path Planning Results}
-\end{table} \\ \\ \\
+\end{table}
 
 
+
+
+\subsection{ Path Planning Results }
+
+Figure \ref{fig:G_FP_res} shows the various models performance metrics over
+simulated time. It is the goal of the models to reduce the numbers of errors
+and additional distance traveled when providing information for path planning
+and thus the methods with the lowest lines on the graph are the most
+preferable methods. Using this general rule, it is clear that the Fourier
+methods have achieved the best results with a tie for both hard and soft errors
+amongst themselves. They are beaten out by Gaussian Mixture Models for soft
+errors, but this is only due to the significant number of hard errors that
+the Gaussian Mixture Model achieved. With so many hard errors the method hardly
+had any chance to rack up additional soft errors. Additionally, because hard
+errors imply the complete failure to predict if the goal is achievable they
+are substantially worse. \\
+
+One notable affect of using each of the multiple behavior predictions to do path
+planning is that there is an averaging effect over the data. Individual mistakes
+or incorrect predictions don't always make or break a plan. One place this is
+extremely obvious is in Duckett's prediction of high frequency events.
+Despite the disparity between historical and future predictions for Duckett in
+terms of these individual behavior prediction, the only difference in the final
+metrics are two additional soft errors during future predictions. This may be
+because of the large number of hard errors encountered preventing more
+soft errors from being generated, similar to the Gaussian Mixture Model.
+Another factor for this smoothing behavior, however, is the location of the
+various behaviors and how they relate to a plan being possible. \\
+
+In terms of computational cost, the path planning results appear to roughly
+scale linearly with the previous individual experiments results with minor
+deviations. The maximum memory used hovers between 30 to 40 megabytes for all
+of the experiments much like before. Similarly, Duckett takes an order of
+magnitude longer than Gaussian Mixture Models and FreMEn to produce results.
+HyperTime again takes another order of magnitude longer than Duckett taking
+almost 14 seconds However, a large disparity is visible when looking at the
+sum of time taken to produce a path. Despite taking less than 30 times as long
+to produce results, FreMEn achieved the same prediction and path planning
+performance as HyperTime. TODO write section Future work would need to be done
+to determine if FreMEn can maintain these results while dealing with noisy
+data or data with odd frequency periods or orders. \\
+
+
+
+
+\begin{figure}
+  \begin{tabular}{cc}
+    {\includegraphics[width = 5in]{images/results/Future_Average_Hard_Errors_During_Planning.png}} \\
+    {\includegraphics[width = 5in]{images/results/Future_Average_Soft_Errors_During_Planning.png}} \\
+    {\includegraphics[width = 5in]{images/results/Future_Average_Distance_From_Optimal_Path_During_Planning.png}} \\
+  \end{tabular}
+  \caption{ Future Planning Results}
+  \label{fig:G_FP_res}
+\end{figure}
 
 
 
@@ -404,7 +579,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_hallway_L_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Delivery}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -414,7 +589,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Future_hallway_L_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Laundry}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -422,9 +597,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_L.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Laundry}
-\end{figure}\\ \\
-
-
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -434,7 +607,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Meal Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -444,7 +617,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Future_hallway_M0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Meal Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -452,7 +625,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_M0.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Meal Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 
 
@@ -464,7 +637,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Meal Section 1}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -474,7 +647,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Future_hallway_M1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Meal Section 1}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -482,7 +655,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_M1.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Meal Section 1}
-\end{figure}\\ \\
+\end{figure}
 
 
 
@@ -494,7 +667,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Trash Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -504,7 +677,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Future_hallway_T0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Trash Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -512,7 +685,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_T0.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Trash Section 0}
-\end{figure}\\ \\
+\end{figure}
 
 
 
@@ -524,7 +697,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Trash Section 1}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -534,7 +707,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Future_hallway_T1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Trash Section 1}
-\end{figure}\\ \\
+\end{figure}
 
 \begin{figure}
   \begin{tabular}{cc}
@@ -542,8 +715,7 @@ TODO pair down images and move them to the end of the paper
     {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_T1.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Trash Section 1}
-\end{figure}\\ \\
-
+\end{figure}
 
 
 
@@ -551,5 +723,9 @@ TODO pair down images and move them to the end of the paper
 \section{ Busy Elevators }
 
 
+\subsection{ Final Thoughts }
+In terms of memory usage, all four methods appear to be relatively similar, which is to be expected.
 Duckett good at
+Fourier good at
+
 \end{document}
