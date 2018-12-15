@@ -125,11 +125,14 @@
   being expected to preform as well as the others, has been included as a
   comparison with previous experiments like that done in TODO SITE. FreMEn and
   HyperTime will both use an order of three as that has, on average produced,
-  the best results as seen in TODO SITE and improve Duckett info. The Duckett
-  approach will contain three sub-models. The models will have a TODO wording
-  .75, .25, and .05 TODO replacement rate? all with a size of 20. This is to
-  closely match the approach in TODO PAPER. The three internal models will be
-  averaged together to produce a prediction.\\
+  the best results as seen in TODO SITE and improve Duckett info. During
+  non-binary prediction HyperTime requires an upper limit for it estimates. In
+  the case of the elevator experiment, an upper limit of 30 (seconds) has been
+  given. This will be expanded upon in Section 6. The Duckett approach will
+  contain three sub-models. The models will have a TODO wording .75, .25, and
+  .05 TODO replacement rate? all with a size of 20. This is to closely match
+  the approach in TODO PAPER. The three internal models will be averaged
+  together to produce a prediction.\\
 
   It is important to note that unlike the other three approaches, Duckett does
   not inherently support the ability to predict events arbitrarily in the future.
@@ -426,5 +429,121 @@
   or obstacles completely cut of a given path. Examples of this are when both
   laundry and the first trash node are present or when both trash nodes and both
   meal nodes are present.
+  \clearpage
+
+
+
+
+
+  \section{ Busy Elevators }
+
+  \subsection{ Experimental Motivation }
+
+  Historically, many efforts in the field of spatio-temporal world modeling
+  have been focused on modeling or classifying behavior into one of two binary
+  states. (TODO give some citations here) Although this works well of
+  representing the traverseability of an environment or presence of an object,
+  it does not translate well into the tracking and predicting the behavior and
+  state of many real-world objects. The ability to track and predict
+  non-binary behavior is particularly important when a robot shares an
+  environment with humans. This could be tracking the density of people in an
+  environment, the speed at which traffic flows, or any number of other
+  non-binary variables that exist in a dynamic environment. \\
+
+  With regards to ROPOD, an excellent example of this for is non-binary
+  behavior is the necessity to use elevators to move goods about the hospital.
+  Specifically, the time between calling an elevator and the actual arrive of
+  the elevator may often appear random, but when observed throughout time
+  it is possible to observe patterns in the wait time. In order to better
+  optimize which elevator should be called or when a deliver should be made it
+  is important to have accurate models for predicting this behavior.
+  Additionally, although this information alone is useful, this concept can
+  be applied to a multitude of areas within a dynamic human environment. \\
+
+  \subsection{ Experimental Details }
+
+  \subsection{ Adaption of Non-Binary Models }
+
+  Two of the models being tested, HyperTime and Duckett, nativity support
+  classification of non-binary data. Although FreMEn and Gaussian Mixture Models
+  do not directly support the prediction of non-binary states, they have been
+  modified in order to produce results for analysis. Before training either of
+  the models, the data sets are ordered and split in half at the median. The
+  median value is then used for classification. If an observed value is below
+  the median it is a 0, whereas above would be a 1. In this way, a continuous
+  dataset can be broken into two states. Predictions are then made as normal.
+  In order to convert back to a non-binary value, each half of the split data
+  set is averaged producing an average value for all values classified as 0 and
+  all values classified as 1. This averages are then used for predictions. \\
+
+  For example, if the original data set contained six observations,
+  [1, 2, 3, 4, 5, 6] the dataset would be split into [1, 2, 3] and [4, 5, 6].
+  Any prediction lower than four would be a 0 and higher a 1. All 0's during
+  prediction would then be the average of the first dataset, e.g. 2 and all
+  1's would result in a prediction of 5.
+
+  \subsection{ Data Generation }
+
+  As mentioned in the two previous sections, both the training and the test
+  data for all models was generated using the same program. However, obviously
+  due to the nature of the non-binary data, slight changes were made to be able
+  to represent any set of arbitrary real numbers. Behaviors no longer represent
+  the likelihood of an object being in one of two states, but instead, in this
+  specific case, represent the average time one must wait after calling an
+  elevator. There are still linear transitions between behaviors as well as
+  a variable amount Gaussian noise being applied on top of the nominal state
+  (i.e. noise applied on top of the average wait time). The month of training
+  data is visible in TODO. \\
+
+
+  \subsubsection{ Average Daily Model}
+  In this particular simulation, ever day was treated as the same type of day
+  for the month long simulations. Each day starts and ends with almost no wait
+  time to simulate how infrequent the elevators are used during those times.
+  Peak elevator use time, and thus peak delays, are said to occur around times
+  when people would being arriving or leaving work or lunch. The specifics of
+  the behaviors and their parameters are visible in Table
+  \ref{table:elevator_day_t}. While ~\ref{figure:Elevator Training Data} show
+  what an entire month of this data looks like.
+
+  \begin{table}[!htb]
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      Behavior Name          & End Time & Nominal Wait in Seconds (\mu) & Noise in Seconds (\sigma) & Max Wait \\ \hline
+      Morning Lull           & 6:00     & 0                                 & 0.4                           & 2        \\ \hline
+      Morning Early Arrivals & 7:30     & 0                                 & 0.5                           & N/A      \\ \hline
+      Morning Pre Rush       & 8:30     & 2                                 & 2                             & N/A      \\ \hline
+      Morning Work           & 10:00    & 9                                 & 1                             & N/A      \\ \hline
+      Early Lunch            & 11:00    & 4                                 & 1                             & N/A      \\ \hline
+      Lunch Pre Rush         & 11:30    & 4                                 & 2                             & N/A      \\ \hline
+      Lunch Rush             & 12:30    & 9                                 & 2                             & N/A      \\ \hline
+      Midday Work            & 13:30    & 9                                 & 1                             & N/A      \\ \hline
+      Evening Pre Rush       & 16:00    & 4                                 & 2                             & N/A      \\ \hline
+      Evening Rush           & 17:30    & 9                                 & 2                             & N/A      \\ \hline
+      Day Wind Down          & 22:00    & 9                                 & 0.5                           & N/A      \\ \hline
+      Day End                & 24:00    & 0                                 & 0.4                           & 2        \\ \hline
+    \end{tabular}
+    \caption{Behaviors used to describe daily wait times for the elevator}
+    \label{table:elevator_day_t}
+  \end{table}
+
+
+
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{images/Elevator_Data_Example_Month.png}
+    \caption{The training data for the first elevator month}
+    \label{figure:Elevator Training Data}
+  \end{figure}
+
+
+  \subsection{ High Resolution Data }
+
+  Finally, an additional data set has been included for comparison. During
+  normal data generation observations are assumed to occur consistently ever
+  15 minutes. In the additional ``High Resolution'' dataset, observations happen
+  ever 1 minute. The inclusion of this additional dataset aims to outline how
+  the models preform with larger sets of data while keeping the actual
+  underlying data similar to the regular resolution dataset.
 
 \end{document}
