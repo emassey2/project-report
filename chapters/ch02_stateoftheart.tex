@@ -27,8 +27,8 @@
   \subsubsection{ Temporal Occupancy Grids }
   One of the earliest and most straight forward attempts to introduce a temporal
   component to a world model were by extending existing world models, occupancy
-  grids in particular. This can be seen in Temporal Occupancy Grids: a Method for
-  Classifying the Spatio-Temporal Properties of the Environment.
+  grids in particular. This can be seen in ``Temporal Occupancy Grids: a Method for
+  Classifying the Spatio-Temporal Properties of the Environment''.
   \cite{Arbuckle2002} In this paper Arbuckle et al introduce the concept of
   temporal occupancy grids (TOGs). The authors noted that the key to these TOGs
   were that they "can differentiate between different patterns of occupancy, even
@@ -130,6 +130,36 @@
 
   \section{ Map Independent Models }
 
+  \subsection{ Multi-Map Approach }
+  Extending or perhaps drawing inspiration from some of the earlier work like ``Temporal Occupancy Grids: a Method for
+  Classifying the Spatio-Temporal Properties of the Environment''
+  \cite{Arbuckle2002} a map independent approach was introduced by Duckett et al
+  in the mid 2000s. In their paper ``Dynamic Maps for Long-Term Operation of Mobile Service Robots''
+  the authors describe a method for predicting and anticipating changes in
+  a dynamic environment to improve localization and navigation. This was done
+  by simply maintaining multiple maps of a given area with each one of the maps
+  being updated a different time scale. Specifically, each cell in an occupancy
+  grid, or each edge in a graph would have an author determined number of maps
+  associated with it. In the paper, the example is given with three maps, the
+  idea being a short-term, medium, and long-term memory/map of an environment.
+  Each of these maps would have a set number of observations, e.g. 20. When
+  the desired number of observations are made all the maps are updated. When
+  an update happens a certain number of observations are selected at random to
+  remain as the map prepares for the next set of observations. The number of
+  observations to remain, sometimes referred to as the update ratio, determines
+  what timescale a map will model. Maps keep very few observations are said to
+  act like a short-term memory with long-term memory maps maintaining most of
+  their observations during updates. A single map can then be chosen at a given
+  time or they can be averaged together depending on the desired behavior. \\
+
+  The main benefits to this approach are it's simplicity and ability to be
+  customized and tuned while working regardless of pre-existing map
+  implementations. Unfortunately, there are a lot of parameters that are needed
+  to be tuned. Additionally, the authors note that the method for selecting
+  the correct map is not an easy problem and often depends on the environment
+  encountered and the data collected.
+
+
   \subsection{ FreMen }
 
   Frequency Map Enhancement, or FreMEn as it became known, is a technique for
@@ -191,19 +221,52 @@
 
   Another major limitation of FreMEn is its assumption that all observable
   behavior can be modeled with binary states. An  attempt to solve this issue
-  was to replace the Bernoulli distribution of FreMen with the specific hope of
+  was to replace the Bernoulli distribution of FreMEn with the specific hope of
   being able to better represent human patterns present in environment such as
   an office building or hospital. Specifically, they "extend the technique
   (FreMEn) by employing both Poisson processes as the counting model to replace
   the binary states of FreMEn and a new way of selecting the most prominent
   frequency components of the Fourier spectrum."\cite{Jovan2016} This approach,
-  however, does not come without its own set of assumptions. Since human
-  activity is assumed, the authors also assume behavior would be best grouped by
-  the work week. For example, data sampled for a two months would be broken into
-  8 week sections. This works extremely well for patterns that are persistent on
-  a weekly basis but perhaps not as well for seasonal changes for example. At
-  the very least, one must apply some critical thinking to how data should be
-  group depending on the desired application.
+  however, does not come without its own set of assumptions and problems. By
+  using a Poisson process instead of a Bernoulli distribution they are no longer
+  limited to binary states, but because a probability mass distribution is used
+  the primary factors are $\gamma$ and N. $\gamma$ being the average number of
+  occurrences of an object or behavior in a fixed time and N being the actual
+  number of occurrences in a given time frame. These factors limit this
+  approach to only being able to estimate objects or behaviors that are
+  countable. This would not work well for something like predicted travel time
+  for instance. \\
+
+  In the same paper,
+  ``A Poisson-Spectral Model for Modelling Temporal Patterns in Human Data Observed by a Robot``
+  \cite{Jovan2016}, another interesting modification was made. In order to fit
+  the Poisson Process with the observed month long data, and at an attempt to
+  increase confidence, the data was broken into week long segments and then
+  stacked on top of itself. The thought behind this being, not only does it
+  increase the number of data points to train on, but behaviors in human
+  environments can often be cyclic on week boundaries. Although this works well
+  assuming all behaviors happen with weekly periodicity, this is not always
+  the case, and thus behaviors that don't occur every seven days at the same
+  may be incorrectly predicted.
+
+  This idea of manipulating and folding observed data over itself through time
+  continued to evolve however. Recently, in
+  ``Warped Hypertime Representations for Long-term Autonomy of Mobile Robots''
+  \cite{krajnik2018} this idea is taken a step further. This paper, continues
+  to build off of FreMEn, using the same Fourier like approach to observing
+  periodicity in a data set. It continues to build off of the ideas mentioned
+  in \cite{Jovan2016}. Now, no longer is data restricted to being folded at a
+  single point, instead, it is folded back on itself at one of many possible
+  frequencies. When and where to fold the data is determined using one of two
+  recommended methods. Either expectation maximization or K-means clustering is
+  used. The processes of finding when and where to fold is iterative and the number
+  of folds, which can be thought of as the order, can be either hard limited
+  or determined during training when the error introduced by increasing the
+  order is greater than that of the previous step. This approach not only allows
+  for non-binary predictions of any data observation type, but it also allows
+  for very sparse or infrequent data to be predicted on due to the folding of
+  the data.
+
 
 
   \begin{figure}[!htb]
@@ -214,14 +277,57 @@
     \label{figure:PSP}
   \end{figure}
 
-  TODO: perhaps a section about the different FreMEn applications available e.g.
-  FreMEn grids, FroctoMaps etc
 
   \section{ Existing Methods for Evaluation or Comparison }
 
-  \subsection{ Current Methods }
-  \subsection { Example 1 }
-  \subsection { Example 2 }
+  It is clear that there are a multitude of different methods for doing
+  spatio-temporal world modeling. Given the wide range of methods available
+  there has been an initial push to attempt to evaluate and compare methods
+  with other approaches. The vast majority of these evaluations look internally,
+  comparing a given method with a set of parameters, with the same method with
+  the parameters tuned in a slightly different manor. Yet others, although fewer
+  in number, do set more general criteria that can be directly used or extended
+  to evaluate their performance with respect to any other spatio-temporal
+  world modeling techniques. Since methods for comparing a model against itself
+  with different parameters can often be very specific this section will focus
+  on those existing methods that have been, or can be, extended to allow any
+  modeling method to be compared to another.
 
-  \subsection{ Limitations and Areas of Oversight }
+  \subsection{ Current Methods and Limitations}
+
+  \subsubsection { Prediction Accuracy }
+  Arguably the most obvious and most used metric for comparing spatio-temporal
+  world modeling techniques is that of comparing the accuracy of a prediction
+  to ground truth over time. In the case of binary data, for example in
+  ``Occupancy Grid Models for Robot Mapping in Changing Environments''
+  \cite{Meyer-Delius2012} the accuracy of an occupancy grid map is evaluated as
+  a whole over a discreet number of time steps. For a given time step t,
+  each cell in the grid is compared to a ground truth value. These are then
+  summed up to produce an average accuracy at a given time t and plotted over
+  time. These were used to compare different maps produced by the same algorithm
+  but with different parameters. ``Spatio-Temporal Hilbert Maps for Continuous
+  Occupancy Representation in Dynamic Environments'' \cite{Senanayake2016}
+  takes this a step further and uses this method to compare variations of its
+  technique both forward and backward in time. This allows them to further
+  improve training and tune their techniques parameters. Finally, ``Learning Temporal Context for Activity Recognition'' \cite{Coppola2016}
+  extends this method for comparison to be used to compare multiple different
+  spatio-temporal world modeling techniques over multiple days worth of data.
+
+  \subsubsection { Resource Usage }
+
+  One extremely relevant method that is often used in other fields of study
+  is a comparison of run-time usage of computational resources. This is even
+  more pertinent when one considers the affect spatio-temporal world models may
+  have on a system when deployed to a real-world environment. This is especially
+  important when the ability to scale is required. Unfortunately, currently
+  there lacks any standard technique for collecting or comparing this data.
+  Perhaps one of the only examples of a discussion of run-time resource usage
+  appears in ``Spatio-Temporal Hilbert Maps for Continuous Occupancy Representation in Dynamic Environments'' \cite{Senanayake2016}.
+  Sadly, this is only gives a rough estimate, on the order of a half second,
+  that an average single observation and prediction would take. Moving forward
+  it would be desirable to have not only fine grain observations of run-time
+  memory and processor usage, but also a comparison of resource usage with
+  respect to the multiple techniques being compared instead of a single observation.
+
+
 \end{document}

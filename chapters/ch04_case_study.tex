@@ -3,14 +3,261 @@
 \begin{document}
   \chapter{ROPOD: A Case Study}
 
+  With a large number of methods for spatio-temporal world modeling outlined
+  in the State of the Art section it has come time to apply the tools
+  from our criteria for comparison to an example case study. For the
+  purposes of this paper the ROPOD project has been selected as an excellent
+  candidate for the case study. \\
+
   \section{ What is ROPOD? }
 
+  ROPOD is a European Union's Horizon 2020 research and innovation funded
+  research project that aims to bring ``ultra-flat, ultra-flexible,
+  cost-effective robotic pods for handling legacy in logistics``
+  \footnote[1]{https://www.h-brs.de/en/ropod}. In additional to its buisness
+  oriented goals, ROPOD, being a research project, also has a focus on the
+  development and implementation of cutting edge technology.  The main goal of
+  the project is to enable low cost robotic solutions for moving logistics
+  around a preexisting human environment. Specifically, the current target
+  test bed for ROPOD is a mid sized hospital situated in Frankfurt, Germany.
+  ROPOD is comprised of a multi-robot system combined with a central server.
+  Although, the individual robots are in charge of navigation and orientation
+  on a local level, the central server is responsible for planning when and
+  how specific actions are completed. In particular, the central server uses a
+  modified and extended version of
+  OpenStreetMap\footnote[2]{https://www.openstreetmap.org} also knows as OSM to
+  maintain the main global world model.
+  This means that all information storage and path planning need to work in
+  combination with OSM. Of specific interest to this project is the global path
+  planning, which focuses on modeling both individual objects in an
+  environment as well as maintaining and graph with nodes and edges. \\
 
-  \section{ Evaluation Using Established Criteria }
 
-  \subsection{ Proposed/Selected Method }
+  \section{ Why ROPOD? }
+  ROPOD offers simultaneously many benefits and interesting technical
+  challenges that make it an excellent choice for a case study. First and
+  foremost, one of the main benefits is that the robots involved will be
+  operating in a real-world environment with all the intricacies and
+  complexities that come with it. Of particular note for this case study is
+  because the targeted operating environment is cohabited by humans its is
+  postulated that much of the behaviors and dynamical obstacles encountered
+  will be of periodic and thus predictable nature. Furthermore, because ROPOD
+  is a multi-robot system, as the number of robots increase so does that
+  frequency and range of data collected increase. It is believed that this
+  will further increase accuracy of predictions, or at the very least increase
+  the size and scope of the dataset of training. Finally, because the targeted
+  area of operation is a logistics network, this allows for paths to be
+  planned a significant time in the future. Furthermore, the use of a central
+  server allows for more complex calculations and predictions to be done. All
+  of these facts combine to allow a both a methodical and comprehensive model
+  to be developed. \\
 
-  \subsection{ Areas of Strength }
+  ROPOD is not without its technical complexities, however. Once again, as a
+  result of the operating environment being both dynamic and human, many
+  different types of objects and behaviors must be modeled. Binary objects,
+  such as doors being open or closed, are the first to jump to mind, but more
+  complex, non-binary objects must also be efficiently and accurately modeled.
+  Examples of this included things like how long one must wait for an elevator
+  after it's been called, the average travel time between two nodes, or the
+  density of people in a specific area. All of these behaviors and more must be
+  modeled for any given time and space in the hospital. This provides an immense
+  test space with numerous areas for technical complications. Additionally,
+  although ROPOD is being funded and targeted for research, it still requires
+  efficient results and forces projects to focuses on practical results within
+  a reasonable time frame. This means that even if an algorithm or method
+  is theoretical the best on paper, it may not be the best solution for ROPOD
+  if consumes to many computational resources or has other requirements that
+  cannot be met. Lastly, related to the previous point, ROPOD must integrate
+  with existing technology that has already been integrated with ROPOD. This
+  means that any solution chosen must mesh well with OSM and similar design
+  decisions. \\
 
-  \subsection{ Areas of Weakness }
+
+
+  \section{ Methods Under Consideration }
+
+  Drawing from the multitude of spatio-temporal world modeling methods mentioned
+  in the State of the Art section, a handful have been selected. A wide and
+  diverse set of methods have been selected carefully to cover the multiple
+  approaches in creating a spatio-temporal world model. They provide not only
+  an exceptional range of method coverage but also multiple methods of similar
+  styles like occupancy gird and Fourier transform approaches have been included
+  for further in depth and specific comparisons. Therefore, the following
+  methods will be evaluated for use with ROPOD:
+
+  TODO perhaps table here
+  TODO SITE!
+  \begin{itemize}
+    \item Occupancy Girds with Input-Output Hidden Markov Model (IOHMM) - Modeling Spatial-Temporal Dynamics of Human Movements for Predicting Future Trajectories \cite{wang2015}
+    \item Conditional Transition Maps (CTM) - Conditional Transition Maps: Learning Motion Patterns in Dynamic Environments \cite{Kucner2013}
+    \item Spatio-Temporal Hilbert Maps (STHM) - Spatio-Temporal Hilbert Maps for Continuous Occupancy Representation in Dynamic Environments \cite{Senanayake2016}
+    \item Dynamic Multi-Map (DMM/Duckett) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{biber2005}
+    \item Frequency Map Enhancement (FreMEn) - FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments \cite{Krajnik2015}
+    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{kranjik2018}
+  \end{itemize}
+
+  The following sections contain a brief overview of the selected methods.
+  Although they will not cover all the specifics of a given implementation they
+  mention the relevant information for comparison. Sources have been provided
+  for each paper if the reader wishes to build a better understanding of one
+  or more of these approaches in detail.
+
+  \subsection { Occupancy Girds with Input-Output Hidden Markov Model (IOHMM) }
+  As the name implies, this method is primarily inspired by, and meant to be
+  used with, occupancy grids. This effects many of the design decisions and
+  resulting performance metrics. Aside from the regular computational complexity
+  that comes from using neural networks, the Markov model was designed to be
+  used with 4+1 edges. One for each of the neighbors, up, down, left, and right,
+  as well as one for the center, or no change. Although this is how it is
+  described in the paper, it is possible to imagine this being extended to any
+  arbitrary number of connections for use with other grids or graphs with more
+  or less than 4 neighbors per cell or node. Despite this possibility, as it is
+  described in the paper, the method is specifically designed with HMM occupancy
+  grids in mind and thus is considered map dependent. Since the HMM weights can be
+  be saved the data storage size reasonably low. However, because an HMM is used,
+  and only one model is stored, there are no future or historical predictions
+  only current predictions are possible. Due to the use of neural nets
+  the learning method is considered offline as significant training must be
+  done for prediction. Finally, although no source code or package is directly
+  available, this method relies heavily on preexisting technology like HMM,
+  occupancy grids, and neural nets. Using the paper as a guide, it would be
+  reasonable to tie these technologies together without too many difficulties
+  minus the standard roadblocks when working on a new project.
+
+  \subsection { Conditional Transition Maps (CTM) }
+  CTMs, as proposed in Conditional Transition Maps: Learning Motion Patterns
+  in Dynamic Environments \cite{Kucner2013}, are similar to IOHMM on a conceptual
+  level. They both involve using the connections between occupancy grid cells
+  to model and predict future behavior. For similar reasons they are unable to
+  do historical or long-term future predictions. They are restricted to only
+  predicting tendency of motion over time. The implementation details between
+  the two are, however, different. CTM has additional connections at each cell.
+  Not only are there connections for the four cardinal directions from a cell
+  but there intermediates are also included now increasing the number of connections
+  from 4 to 8. Furthermore, the direction of travel, in or out, is now also
+  considered. Combined, this means that there are 64 parameters per cell, one
+  parameter for each combination of input and output direction. Neural nets
+  are also not used for learning in this approach. Instead a custom designed
+  method is proposed. Due to the use of a custom method for prediction, and
+  the lack of work available the implementation complexity is increased to a 3.
+
+  \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
+
+  STHM extends existing Hilbert maps with the goal of providing a real-time
+  dynamic object tracking and prediction. Objects are detected as moving when
+  two or more scans show motion between their estimated centers. These objects
+  are then given motion vectors at every given time t. This means that not
+  only does model complexity scale with the number of dynamic objects, it also
+  scales with desired length of historical observations being made. Due to the
+  fact that observations are being kept over time and predictions on objects
+  are also being made over the same time, historical predictions are possible.
+  Furthermore, future predictions can be made with included uncertainty as
+  time increases. This method uses many preexisting technologies, such
+  as Hilbert maps, stochastic gradient descent, and Gaussian process regression,
+  Given the large and diverse number of techniques, plus the complexity with
+  which they are connected to make a working system, this approach is considered
+  to have an extremely high implementation complexity. Finally, no existing
+  approach is currently available for use.
+
+  \subsection { Dynamic Multi-Map (DMM/Duckett) }
+  The dynamic multi-map approach heavily depends on the number of maps and their
+  respective timescales. Although DMM was originally intended for use with
+  occupancy grids, in can relatively easily be implemented to represent any
+  number of objects or behavior. Additionally, selection of the maps is not
+  defined, the maps themselves being a series of averages means this acts as
+  an online learning method. Because of this, historical and future predictions
+  are not inherently possible. If maps were stored historical predictions
+  could be possible but this would also drastically decrease the storage
+  efficiency dependent on the rate of sampling. Finally, although no current
+  implementation of DMM is publicly available, given the relative ease of
+  maintaining multiple maps and keeping a given amount of data during updates
+  DMM is fairly simple to implement by hand. The major outstanding drawback
+  is the lack of a well defined method for choosing between or combining maps.
+  This is unfortunate as this has an impact on much of the information to do
+  with DMM.
+
+  \subsection { Frequency Map Enhancement (FreMEn) }
+  FreMEn relies heavily on the use of a modified version of the Fourier
+  transform. This decision informs a lot of it's properties. A model order must
+  be defined for FreMEn. This order, which can be thought of as the number of
+  cosines with coefficients that will be summed to make a prediction, dictates
+  both time, and to some degree, space complexity for training. Once trained,
+  however, predictions are a simple equation away. Therefore, FreMEn can be
+  viewed as an offline learning method where training is done over a relatively
+  long period of time and a model can be used for a given set of time before
+  training again. Additionally, because predictions are done by computing a
+  result at a given time t, predictions can be made at any arbitrary time,
+  past, present, or future. It's well suited for doing predictions on any type
+  of map or object with the caveat that the data must be binary, i.e. FreMEn
+  can only classify data into one of two categories. Lastly, since the
+  implementation heavily relies upon a commonly understood concept with only
+  minor support, it is considered a 2 for complexity. This is non-issue,
+  however, as FreMEn is available both on
+  GitHub \footnote[0]{https://github.com/strands-project/fremen}
+  as well as in packages available for Ubuntu that add ROS
+  support. \footnote[1]{http://strands.acin.tuwien.ac.at/software.html}
+
+
+  \subsection { Hypertime }
+
+  Created as an extension to FreMEn, Hypertime no longer has a binary restriction
+  on the classification of data. Additionally, data is now dynamically analyzed
+  and wrapped back in on itself to improve observation coverage and improve
+  predictions. Both of these behaviors are heavily dependent on the clustering
+  method, of which Hypertime currently provides two, K-means clustering and
+  Expectation Maximization. Both of these methods are discussed at length in
+  the paper, but their main goal is determining where and when the data observed
+  should be looped back in on itself. Depending on the order provided and the
+  number of clusters estimated, a linear scaling performance hit is expected.
+  Once again, since Hypertime uses FreMEn, historical and future predictions
+  are possible. Additionally, this work is again available on GitHub
+  \footnote[2]{https://github.com/gestom/Hypertime-RAL-18-0278/tree/master/door\_state/src/models}
+  thus making the work availability a 1. On the other hand, due to the added
+  complexity of wrapping space time and the inclusion of additional classification
+  components, complexity has been bumped up to a 3.
+
+  \subsection{ Summary of Approaches }
+
+  The information gathered in the previous sections has been summarized in the
+  following table:
+
+  % Please add the following required packages to your document preamble:
+  % \usepackage{graphicx}
+  \begin{table}[]
+  \resizebox{\textwidth}{!}{%
+  %Name
+  %Additional Model Complexity
+  %Learning Method
+  %Offline vs Online
+  %Efficiency of Data Storage
+  %Map Dependent
+  %Restriction(s)
+  %Historical Predictions
+  %Long-Term Predictions
+  %Work Availability
+  %Implementation Complexity
+  %Suitable Fields of Application
+  \begin{tabular}{|p{3cm}|p{4cm}|p{3cm}|p{2cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|p{2cm}|p{4cm}|p{4cm}|p{3cm}|}
+  \hline
+  Name      & Additional Model Complexity                                                & Learning Method             & Offline vs Online & Efficiency of Data Storage                     & Map Dependent & Restriction(s)         & Historical Predictions & Long-Term Predictions & Work Availability & Implementation Complexity & Suitable Fields of Application                                     \\ \hline
+  IOHMM     & (4+1)*Cells                                                                & Neural Net                  & Offline           & HMM weights                                    & Yes           & Only motion prediction & No                     & No                    & 2                 & 2                         & Motion prediction                                                  \\ \hline
+  CTM       & (8*8)*Cells                                                                & Cross-correlation           & Offline           & Cell Connections                               & Yes           & Only motion prediction & No                     & No                    & 3                 & 3                         & Motion prediction                                                  \\ \hline
+  STHM      & Scales linear with number of dynamic objects being tracked                 & Stochastic Gradient Descent & Online            & 2D vector per object at every time t           & Yes           & N/A                    & Yes                    & Yes                   & 3                 & 3                         & Live dynamic object tracking and prediction                        \\ \hline
+  DMM       & Scales linear with number of maps                                          & Stochastic Sampling         & Online            & Varies with number of maps and samples per map & No            & N/A                    & No                     & No                    & 3                 & 1                         & Very versatile. Works with both binary and continuous observations \\ \hline
+  FreMEn    & Scales linear with Fourier Order                                           & Modified Fourier Transform  & Online            & Order dependent summation of cosines           & No            & Binary Predictions     & Yes                    & Yes                   & 1                 & 2                         & Binary data prediction (e.g. doors)                                \\ \hline
+  Hypertime & Scales linear with Fourier Order \& further dependent on clustering method & FreMen + time folding       & Online            & Order dependent summation of cosines           & No            & N/A                    & Yes                    & Yes                   & 1                 & 3                         & Very versatile. Works with both binary and continuous observations \\ \hline
+  \end{tabular}%
+  }
+  \end{table}
+
+  \section{ Method Elimination }
+
+  note about one strike is not enough to limit a given method
+
+  \subsection{ The Why and How of Method Elimination }
+
+  \subsection{ choose a few ways to eliminate a few methods }
+
+  \section{ Qualitative Analysis of Remaining Methods }
+
 \end{document}
