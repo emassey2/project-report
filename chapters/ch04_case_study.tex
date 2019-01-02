@@ -141,24 +141,6 @@
   method is proposed. Due to the use of a custom method for prediction, and
   the lack of work available the implementation complexity is increased to a 3.
 
-  \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
-
-  STHM extends existing Hilbert maps with the goal of providing a real-time
-  dynamic object tracking and prediction. Objects are detected as moving when
-  two or more scans show motion between their estimated centers. These objects
-  are then given motion vectors at every given time t. This means that not
-  only does model complexity scale with the number of dynamic objects, it also
-  scales with desired length of historical observations being made. Due to the
-  fact that observations are being kept over time and predictions on objects
-  are also being made over the same time, historical predictions are possible.
-  Furthermore, future predictions can be made with included uncertainty as
-  time increases. This method uses many preexisting technologies, such
-  as Hilbert maps, stochastic gradient descent, and Gaussian process regression,
-  Given the large and diverse number of techniques, plus the complexity with
-  which they are connected to make a working system, this approach is considered
-  to have an extremely high implementation complexity. Finally, no existing
-  approach is currently available for use.
-
   \subsection { Dynamic Multi-Map (DMM/Duckett) }
   The dynamic multi-map approach heavily depends on the number of maps and their
   respective timescales. Although DMM was originally intended for use with
@@ -175,6 +157,23 @@
   is the lack of a well defined method for choosing between or combining maps.
   This is unfortunate as this has an impact on much of the information to do
   with DMM.
+
+  \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
+  STHM extends existing Hilbert maps with the goal of providing a real-time
+  dynamic object tracking and prediction. Objects are detected as moving when
+  two or more scans show motion between their estimated centers. These objects
+  are then given motion vectors at every given time t. This means that not
+  only does model complexity scale with the number of dynamic objects, it also
+  scales with desired length of historical observations being made. Due to the
+  fact that observations are being kept over time and predictions on objects
+  are also being made over the same time, historical predictions are possible.
+  Furthermore, future predictions can be made with included uncertainty as
+  time increases. This method uses many preexisting technologies, such
+  as Hilbert maps, stochastic gradient descent, and Gaussian process regression,
+  Given the large and diverse number of techniques, plus the complexity with
+  which they are connected to make a working system, this approach is considered
+  to have an extremely high implementation complexity. Finally, no existing
+  approach is currently available for use.
 
   \subsection { Frequency Map Enhancement (FreMEn) }
   FreMEn relies heavily on the use of a modified version of the Fourier
@@ -242,8 +241,8 @@
   Name      & Additional Model Complexity                                                & Learning Method             & Offline vs Online & Efficiency of Data Storage                     & Map Dependent & Restriction(s)         & Historical Predictions & Long-Term Predictions & Work Availability & Implementation Complexity & Suitable Fields of Application                                     \\ \hline
   IOHMM     & (4+1)*Cells                                                                & Neural Net                  & Offline           & HMM weights                                    & Yes           & Only motion prediction & No                     & No                    & 2                 & 2                         & Motion prediction                                                  \\ \hline
   CTM       & (8*8)*Cells                                                                & Cross-correlation           & Offline           & Cell Connections                               & Yes           & Only motion prediction & No                     & No                    & 3                 & 3                         & Motion prediction                                                  \\ \hline
-  STHM      & Scales linear with number of dynamic objects being tracked                 & Stochastic Gradient Descent & Online            & 2D vector per object at every time t           & Yes           & N/A                    & Yes                    & Yes                   & 3                 & 3                         & Live dynamic object tracking and prediction                        \\ \hline
   DMM       & Scales linear with number of maps                                          & Stochastic Sampling         & Online            & Varies with number of maps and samples per map & No            & N/A                    & No                     & No                    & 3                 & 1                         & Very versatile. Works with both binary and continuous observations \\ \hline
+  STHM      & Scales linear with number of dynamic objects being tracked                 & Stochastic Gradient Descent & Online            & 2D vector per object at every time t           & Yes           & N/A                    & Yes                    & Yes                   & 3                 & 3                         & Live dynamic object tracking and prediction                        \\ \hline
   FreMEn    & Scales linear with Fourier Order                                           & Modified Fourier Transform  & Online            & Order dependent summation of cosines           & No            & Binary Predictions     & Yes                    & Yes                   & 1                 & 2                         & Binary data prediction (e.g. doors)                                \\ \hline
   Hypertime & Scales linear with Fourier Order \& further dependent on clustering method & FreMen + time folding       & Online            & Order dependent summation of cosines           & No            & N/A                    & Yes                    & Yes                   & 1                 & 3                         & Very versatile. Works with both binary and continuous observations \\ \hline
   \end{tabular}%
@@ -252,12 +251,111 @@
 
   \section{ Method Elimination }
 
-  note about one strike is not enough to limit a given method
+  Having collected a number of different methods for spatio-temporal world
+  modeling, it is now time to whittle down the methods to a smaller, more
+  manageable number. The methodology for selecting methods to eliminate will
+  vary between projects, but most often it is useful to narrow in on properties
+  of the desired method that are categorically missing from one or more of the
+  methods. In the case of ROPOD, it is important that the method be able to
+  represent multiple dynamic objects, represent binary and non-binary states,
+  and be readily available for use in the form of a library or be reasonable to
+  implement in order to match the strict work plan timeline. Additionally, although
+  things like computational complexity, learning method, and offline vs online
+  learning are important, they will not be the main focus of this sections.
+  Although, these categories give valuable insight into the potential performance
+  of a method, at least in the case of ROPOD, due to the use of a central server
+  it is assumed that there is a bit more leniency in computational performance.
+  One last thing of note, a single issue with a method may be overlooked or be
+  able to be worked around. It is only when a method has multiple issues that
+  it should be eliminated. With this in mind, the above methods will be
+  evaluated one by one resulting in a paired down list of methods that can
+  then be tested. \\
 
-  \subsection{ The Why and How of Method Elimination }
+  \subsection { Occupancy Girds with Input-Output Hidden Markov Model (IOHMM) }
+  IOHMM starts off with a very strong mark against it. It is best suited for
+  motion prediction, which although valuable for ROPOD, is not applicable to
+  this specific case study. Another major strike against this method is its
+  dependency on using an occupancy grid. Similar to the issue with motion
+  prediction, although this may not be an issue for other parts of the ROPOD
+  project, this specific case study uses a graph like structure for path
+  planning. This method would also not be able to represent individual objects,
+  another strike against it. Finally, with mediocre, availability and
+  implementation complexity, it is clear that IOHMM is not a good fit for this
+  case study.
 
-  \subsection{ choose a few ways to eliminate a few methods }
+  \subsection { Conditional Transition Maps (CTM) }
+  CTM follows in the footsteps of IOHMM. Its dependency on occupancy grids as
+  well as being best suited for motion prediction are major strikes against it.
+  On top of that, the combination of work availability, or lack there of, and
+  its increased implementation complexity make it the easiest option to
+  eliminate from this list.
 
-  \section{ Qualitative Analysis of Remaining Methods }
+  \subsection { Dynamic Multi-Map (DMM/Duckett) }
+  DMM or as it is referred to later in the paper, Duckett, is an interesting
+  method with respect to this case study. Despite its somewhat naive approach
+  of averages, it does look well fit to the case study on paper. It is map
+  independent, allowing it to be used for graph edges as well as individual
+  objects. Additionally, it has no prediction restrictions on the type of
+  behaviors or objects it can make predictions about. It has no known work
+  available which would be a strike against it, but given its design, should
+  be relatively easy to implement. Duckett's lack of future or historical
+  predictions is a bit of an inconvenience but can be overlooked as it is not
+  strictly necessary for ROPOD, but rather merely a desirable feature. Given
+  these reasons it will not be eliminated during the qualitative analysis.
+
+  \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
+  STHM is another very interesting method with respect to ROPOD. The live
+  dynamic object tracking and prediction, although perhaps useful for some
+  cases of ROPOD does not meet all the requirements listed. Much like CTM and
+  STHM, is map dependent which is a major strike against it as the maps for
+  ROPOD have already been chosen and defined. Unlike CTM and STHM, it does not
+  have the motion only prediction restriction which makes it a bit more
+  desirable. Unfortunately, the final nail in the coffin for STHM is its lack
+  of work availability and implementation complexity. It is possible with some
+  work the other issues could be overcome, but solving those issues would take
+  a considerable amount of time. Combine that time with the time need to write
+  and implementation from scratch and STHM no longer appears suitable for this
+  use case.
+
+  \subsection { Frequency Map Enhancement (FreMEn) }
+  FreMEn acts somewhat like a foil to STHM, at least with respect to it's
+  qualitative analysis and possible elimination. Its map independent which is
+  a quick mark in its favor. Its very versatile and could represent both graph
+  edges as well as individual objects in an environment. One major restriction
+  and mark against it though is its inability to represent objects or behaviors
+  that are non-binary, that is to say, objects or behaviors that have more than
+  two states. Despite this restriction, the work is readily available which
+  nudges it just on the other side of elimination. Time will have to be spent
+  to work around this binary restriction, but ultimately, FreMEn may be a good
+  solution to this case study. At the very least, it could fit well for
+  representing if objects like doors and hallways are passible at a given time.
+  Lastly, the ability to make historical or long-term future predictions is
+  a minor, but appreciated plus.
+
+  \subsection { Hypertime }
+  Hypertime is perhaps the best looking method on paper. Since it is an
+  extension of FreMEn, it gets all of FreMEn's benefits. It is map independent
+  and has historical and future predictions as well. Unlike FreMEn, it no
+  longer has any restrictions on the type of predictions it can make. This is
+  a huge bonus. Finally, with preexisting work being readily available, Hypertime
+  appears to be an excellent choice and will definitely be tested in the
+  experimental section.
+
+  \subsection{ Results }
+  \subsubsection{ Eliminated Methods }
+  The following methods have been eliminated:
+  \begin{itemize}
+    \item Occupancy Girds with Input-Output Hidden Markov Model (IOHMM) - Modeling Spatial-Temporal Dynamics of Human Movements for Predicting Future Trajectories \cite{wang2015}
+    \item Conditional Transition Maps (CTM) - Conditional Transition Maps: Learning Motion Patterns in Dynamic Environments \cite{Kucner2013}
+    \item Spatio-Temporal Hilbert Maps (STHM) - Spatio-Temporal Hilbert Maps for Continuous Occupancy Representation in Dynamic Environments \cite{Senanayake2016}
+  \end{itemize}
+
+  \subsubsection{ Methods Selected for Experimental Testing }
+  The following methods will be tested further in the experimental section:
+  \begin{itemize}
+    \item Dynamic Multi-Map (DMM/Duckett) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{biber2005}
+    \item Frequency Map Enhancement (FreMEn) - FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments \cite{Krajnik2015}
+    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{kranjik2018}
+  \end{itemize}
 
 \end{document}
