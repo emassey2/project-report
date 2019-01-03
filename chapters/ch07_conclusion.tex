@@ -5,7 +5,68 @@
 
     \section{Contributions}
 
-    \section{Lessons learned}
+    First and foremost, this work introduced a comprehensive method for the
+    comparison of various spatio-temporal world modeling methods. Although as
+    mentioned in the State of the Art section some previous work in this area
+    already exists, it was limited both in its ability to be applied to various
+    methods as well as the depth at which any two methods could be compared. The
+    new techniques for comparison established in the Criteria for Comparison
+    section build on the state of the art increasing its breadth and depth.
+    Furthermore, the ROPOD case study section shows in detail how these criteria
+    can be used with respect to an actual project. This is an extremely important
+    contribution as all previous work merely used criteria to look reflexively
+    at the quality of a new approach and not instead at which method would be
+    best suited for a given problem. \\
 
-    \section{Future work}
+    Building on top of the qualitative analysis work already presented in this
+    paper, the experimental section provided insight into how one would select
+    a set of experiments to test and refine the previously obtained results.
+    These experiments highlight unique aspects of the techniques presented that
+    were not necessarily highlighted in their original papers. Additionally,
+    this section provides a road map into what type of experiments should be
+    done, what results to look for, and how to evaluate those results. \\
+
+    Finally, for both the qualitative and experimental sections, a huge major
+    was placed on work being done with respect to a real-world project. In the
+    past although work has been done with real world projects, the comparative
+    techniques have been primarily focused on the performance of the algorithm
+    itself. That is to say previous work has focused solely on how ``correct''
+    a spatio-temporal modeling technique was for an individual object. This work
+    focuses on additional information like computational intensity, as well
+    as performance when working with the resulting predictions. \\
+
+    \subsection{ Recommendations for ROPOD }
+
+    \section{ Lessons Learned }
+
+    \section{ Future work }
+
+    Although this work has made noticeable contributions to the field, it is
+    certain that much work remains. Once again, ROPOD can be used as an example
+    to base future work around. ROPOD, unlike previous work, is a multi-robot
+    system. This means that while running test with respect to a single robot
+    is valid and fully accurate the addition of multiple robots creates
+    additional opportunities and complexities. With multiple robots moving about
+    the hospital at different times there is the possibility of gathering much
+    more data about the environment which decreases the sparsity of data
+    collected. This is theorized to increase model accuracy, as visible in the
+    elevator experiments, but may also cause issues when trying to deal with
+    or merge multiple samples of the same object at the same time. Moreover,
+    the prescience of multiple robots may themselves introduce spatio-temporal
+    complexities themselves. Having multiple robots moving about a shared
+    space, especially during peak traffic, could create additional obstacles
+    in the form of congestion that would need to be planned around. \\
+
+    Another area of future work as bravely touched on above is the collection
+    of additional real-world data. This data is often more noisy, irregular,
+    and generally unpredictable when compared to even the best simulated data
+    It would be ideal if this new data could be collected and compiled into a
+    new dataset. Early steps have been been taken as exemplified in the
+    'Brayford' dataset \cite{Krajnik2014}. This dataset, however, contains
+    3D data for a single room. Observation was done using a static device and
+    thus observations are at regular intervals and contain minimal noise.
+    Furthermore, because this is was only one device the complexities of a
+    multi-robot system are also overlooked. All of this combines to make a
+    rich opportunity ripe for exploration.
+
 \end{document}
