@@ -961,9 +961,43 @@ half to 2 minutes.
 \end{figure}
 
 
-\subsection{ Final Thoughts }
-In terms of memory usage, all four methods appear to be relatively similar, which is to be expected.
-Duckett good at
-Fourier good at
+\section{ Final Thoughts }
+
+After reviewing the three experiments and four methods numerous trends can be
+identified. Starting with computational efficiency, memory usage appears
+relatively consistent through all experiments and methods. With just under 3000
+data points per test month, and around 30KB of memory used per run,
+it would appear that each data point takes a slightly more than 10 bytes plus
+some overhead. This represents the minimum cost for something like Duckett, but
+other methods use slightly more memory. Specifically, from most to least memory
+used on average, Hypertime, FreMEn, Gaussian, Duckett. \\
+
+With respect to computational usage in the time domain, a different pattern is
+observed. Ignoring minor fluctuation between experiments, Gaussian and FreMEn
+where consistently using tens or hundreds of milliseconds on 3000 data points.
+FreMEn would then be using an order of magnitude more, and Hypertime yet another
+order of magnitude more. Although this is the average case, it would appear that
+the scaling is not linear for Hypertime as demonstrated in the high resolution
+elevator experiment. Future testing will have to be done to determine the
+scaling factor. \\
+
+In terms of accuracy, the various methods each had their own strengths and
+weaknesses. The Gaussian method, while being on average a very efficient
+method, had consistently the least accurate predictions. It would appear the
+Gaussian method was only able to make semi-accurate predictions when presented
+with data that was both highly regular, contained minimal noise, and had a
+relatively high frequency of occurrence with respect to the observed time
+frame. The Fourier based methods, FreMEn and Hypertime, faired much better
+with noisier and irregular data. This trend was specifically true when the data
+had a relatively high frequency as observable in Laundry or Meal nodes in the
+path finding experiment. Despite having to overcome binary restrictions, FreMEn
+still faired relatively well on the elevator experiment demonstrating a good
+amount of versatility. Finally, and perhaps most interestingly, Duckett
+displayed a multitude of interesting results. Performance seems highly dependent
+on the frequency of the data involved. When the refresh rate of the multi maps
+was tuned closed to that of the frequency of object or behavioral changes, it
+preformed in a similar category to that of Hypertime while using vastly fewer
+resources. However, when tuned to a non optimal frequency, Duckett can preform
+on occasion worse than even the Gaussian method. TODO maybe a hair more here
 
 \end{document}

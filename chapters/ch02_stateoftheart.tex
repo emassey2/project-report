@@ -89,14 +89,18 @@
   nature of the transition states of the HMM. \\
 
   Further improvement to occupancy grids with HMMs came with the concept of
-  modeling trajectories of objects in the environment\cite{Wang2015}. This is an
-  important improvement because the dynamic motion of objects in an environment,
-  such as humans walking a hallway, could now be better modeled. This process
-  was dubbed Input-Output HMM (IOHMM) due nature of how cells of the grid would
-  communicate with one another. Each cell would not only look through it's own
-  historical data but also be able to communicate with its neighbors. In effect,
-  this could allow a cell in hallway to be able to predict occupancy based off of
-  a nearby cell that is currently occupied.
+  modeling trajectories of objects in the environment
+  \cite{Wang2015}. Although early work was done without the use of HMMs
+  \cite{Kucner2013}, newer techniques have been developed using HMMs.
+  Regardless, this new approach is an important improvement because the
+  dynamic motion of objects in an environment, such as humans walking a
+  hallway, could now be better modeled. This process was dubbed Input-Output
+  HMM (IOHMM) due nature of how cells of the grid would communicate with one
+  another. Each cell would not only look through it's own historical data but
+  also be able to communicate with its neighbors. In effect, this could allow
+  a cell in hallway to be able to predict occupancy based off of a nearby cell
+  that is currently occupied as well as historical occupation. This is particularly
+  well suited for the prediction of trajectories and resulting cell occupation.
 
   \subsection{ Spatio-Temporal Hilbert Maps }
 
