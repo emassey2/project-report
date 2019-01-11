@@ -118,31 +118,31 @@
   \section{ Model Parameters }
   TODO expand? \\
 
-  Four models will be tested: Duckett's TODO, FreMEn, HyperTime, and Gaussian
+  Four models will be tested: DMM, FreMEn, HyperTime, and Gaussian TODO do I mention this was thrown in because why not
   Mixture Models. HyperTime and FreMEn are of particular interest as they will
   be able to represent non-binary states. HyperTime will be using the
   expectation mean variant TODO why? The Gaussian Mixture Model, despite not
   being expected to preform as well as the others, has been included as a
   comparison with previous experiments like that done in TODO SITE. FreMEn and
   HyperTime will both use an order of three as that has, on average produced,
-  the best results as seen in TODO SITE and improve Duckett info. During
+  the best results as seen in TODO SITE and improve DMM info. During
   non-binary prediction HyperTime requires an upper limit for it estimates. In
   the case of the elevator experiment, an upper limit of 30 (seconds) has been
-  given. This will be expanded upon in Section 6. The Duckett approach will
+  given. This will be expanded upon in Section 6. The DMM model will
   contain three sub-models. The models will have a TODO wording .75, .25, and
   .05 TODO replacement rate? all with a size of 20. This is to closely match
   the approach in TODO PAPER. The three internal models will be averaged
   together to produce a prediction.\\
 
-  It is important to note that unlike the other three approaches, Duckett does
+  It is important to note that unlike the other three approaches, DMM does
   not inherently support the ability to predict events arbitrarily in the future.
   It is limited to a single immediate prediction. Therefore, future predictions
   will done by simply projecting historical predictions forward on a monthly basis.
-  That is to say, whatever Duckett's prediction was on the third of the first month
+  That is to say, whatever a given DMM's prediction was on the third of the first month
   it will be the same on the third of the next month. \\
 
-  The Duckett implementation was done using Python 3 while Gaussian Mixture
-  Models, FreMEn, and HyperTime were all written in C++. The Duckett implementation
+  The DMM implementation was done using Python 3 while Gaussian Mixture
+  Models, FreMEn, and HyperTime were all written in C++. The DMM implementation
   was written by the author of this paper TODO phrasing? while the other three
   are available on Tom Krajnik's Github page. TODO link? Finally, the non-binary
   version of HyperTime, although not currently freely available on Github, can
@@ -464,7 +464,7 @@
 
   \subsection{ Adaption of Non-Binary Models }
 
-  Two of the models being tested, HyperTime and Duckett, nativity support
+  Two of the models being tested, HyperTime and DMM, nativity support
   classification of non-binary data. Although FreMEn and Gaussian Mixture Models
   do not directly support the prediction of non-binary states, they have been
   modified in order to produce results for analysis. Before training either of

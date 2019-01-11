@@ -5,7 +5,7 @@
 
 \section{ Notes on Analysis }
 TODO: add this section\?
-note about common things like how Duckett Historical is actually live and future is using old data mapped to new
+note about common things like how DMM Historical is actually live and future is using old data mapped to new
 notes about cyclic and decay artifacts in accuracy over time
 
 \section{ Doored Areas }
@@ -23,7 +23,7 @@ where the models accuracy are evaluated over time. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 84.11\% & 77.80\%  & 92.51\% & 97.66\%   \\ \hline
       Prediction Accuracy             & 77.15\% & 79.43\%  & 87.08\% & 88.87\%   \\ \hline
       Computation Time (Milliseconds) & 610     & 50       & 70      & 5630      \\ \hline
@@ -46,33 +46,33 @@ open state.  This is thought to be due to the sparseness of positive, or open
 states resulting in the model oscillating between 0 and just under 0.5 thus
 never reaching the open threshold. \\
 
-\begin{figure}
-  \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_door_A_Duckett.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_A_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_door_A_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_A_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Historical Recreations - Door A}
-\end{figure} \\ \\
-
-\begin{figure}
-  \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_door_A_Duckett.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_A_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_door_A_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_A_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Future Predictions - Door A}
-\end{figure} \\ \\
-
-\begin{figure}
-  \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_door_A.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_door_A.png}} \\
-  \end{tabular}
-  \caption{Model Accuracy Over Time - Door A}
-\end{figure} \\ \\
+%\begin{figure}
+%  \begin{tabular}{cc}
+%    {\includegraphics[width = 3in]{images/results/Historical_door_A_DMM.png}} &
+%    {\includegraphics[width = 3in]{images/results/Historical_door_A_FreMEn.png}} \\
+%    {\includegraphics[width = 3in]{images/results/Historical_door_A_Gaussian.png}} &
+%    {\includegraphics[width = 3in]{images/results/Historical_door_A_HyT-EM.png}} \\
+%  \end{tabular}
+%  \caption{Historical Recreations - Door A}
+%\end{figure} \\ \\
+%
+%\begin{figure}
+%  \begin{tabular}{cc}
+%    {\includegraphics[width = 3in]{images/results/Future_door_A_DMM.png}} &
+%    {\includegraphics[width = 3in]{images/results/Future_door_A_FreMEn.png}} \\
+%    {\includegraphics[width = 3in]{images/results/Future_door_A_Gaussian.png}} &
+%    {\includegraphics[width = 3in]{images/results/Future_door_A_HyT-EM.png}} \\
+%  \end{tabular}
+%  \caption{Future Predictions - Door A}
+%\end{figure} \\ \\
+%
+%\begin{figure}
+%  \begin{tabular}{cc}
+%    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_door_A.png}} &
+%    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_door_A.png}} \\
+%  \end{tabular}
+%  \caption{Model Accuracy Over Time - Door A}
+%\end{figure} \\ \\
 
 \subsection { Door B }
 
@@ -89,7 +89,7 @@ minimal periods of periodic data. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 85.71\% & 59.81\%  & 75.20\% & 71.55\%   \\ \hline
       Prediction Accuracy             & 69.24\% & 62.17\%  & 76.95\% & 75.78\%   \\ \hline
       Computation Time (Milliseconds) & 600     & 60       & 80      & 1440      \\ \hline
@@ -99,20 +99,20 @@ minimal periods of periodic data. \\
   \caption{Door B Data Overview}
 \end{table} \\
 
-Duckett, relying almost solely on averages, does surprisingly well on this
+DMM, relying almost solely on averages, does surprisingly well on this
 experiment beating out all other models in both historical and prediction
-accuracy.  It is, however, important to note the flaws in Duckett's long-term
+accuracy.  It is, however, important to note the flaws in DMM's long-term
 prediction. Due to the fact that future predictions are not directly possible
-using Duckett and thus previous month data is used, it is clear to see that
-while Duckett performed overall well historically, it is not without problems
+using DMM and thus previous month data is used, it is clear to see that
+while DMM performed overall well historically, it is not without problems
 in future prediction.  Of particular interest is its failure to continue to
 accurately predict a periodic behavior that does not occur on month
 boundaries. Since the behavior that happens every three days does not happen
-on the same day between the two months Duckett incorrectly predicts its
+on the same day between the two months DMM incorrectly predicts its
 occurrence as happening on the same days as last month.
 
 In terms of resource usage, a similar trend to door A is observed. Gaussian
-and FreMEn predictions take under 100 milliseconds while Duckett takes around
+and FreMEn predictions take under 100 milliseconds while DMM takes around
 an order of magnitude longer, and HyperTime yet another order of magnitude
 longer. Finally, similar to door A, all approaches use about the same amount
 of memory for training and predicting using around 30 megabytes while being
@@ -120,7 +120,7 @@ within about 10 megabytes of one another.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_door_B_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_door_B_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_door_B_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_door_B_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_door_B_HyT-EM.png}} \\
@@ -130,7 +130,7 @@ within about 10 megabytes of one another.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_door_B_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_door_B_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_door_B_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_door_B_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_door_B_HyT-EM.png}} \\
@@ -154,22 +154,22 @@ With door A exemplifying the occasionally periodic and somewhat noisy
 behaviour in the real world, door C serves as almost the exact opposite,
 modeling a one time, long-term change.
 Perhaps some what expectedly, the results in terms of prediction accuracy are
-almost completely opposite that of door A with Duckett having the best
+almost completely opposite that of door A with DMM having the best
 performance both historically and with future predictions. \\
 
 Unfortunately, despite its better performance by the numbers in table 6.3,
 looking at the resulting graphs in table 6.7 and 6.8 shows a somewhat
 initially disappointing result. As discussed in the door B experiment,
-Duckett, merely uses it's historically prediction again for future
+DMM, merely uses it's historically prediction again for future
 predictions. This is clearly visible by the prediction of the door being open
-for the first three weeks in the future predictions.  However, Duckett was not
+for the first three weeks in the future predictions.  However, DMM was not
 designed for long-term future predictions and instead meant to be used
-``live''. When this is accounted for, Duckett's performance is once again
+``live''. When this is accounted for, DMM's performance is once again
 impressive.  In fact, as discussed TODO: where will this be discussed? the
-historical predictions made by Duckett can be view as it's ``live''
+historical predictions made by DMM can be view as it's ``live''
 predictions and thus it would be expected that in the real world it would
 continue to predict the door as being closed as long as long-term future
-predictions are not requested. This means that it is likely Duckett's
+predictions are not requested. This means that it is likely DMM's
 performance would be closer to 100\% for future actives for as long as the door
 remained shut. \\
 
@@ -178,7 +178,7 @@ remained shut. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 99.56\% & 62.75\%  & 67.74\% & 67.74\%   \\ \hline
       Prediction Accuracy             & 31.82\% & 14.58\%  & 00.00\% & 00.00\%   \\ \hline
       Computation Time (Milliseconds) & 570     & 60       & 70      & 530       \\ \hline
@@ -209,7 +209,7 @@ is meaningless.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_door_C_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_door_C_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_door_C_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_door_C_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_door_C_HyT-EM.png}} \\
@@ -219,7 +219,7 @@ is meaningless.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_door_C_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_door_C_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_door_C_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_door_C_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_door_C_HyT-EM.png}} \\
@@ -269,7 +269,7 @@ both the door and elevator experiments. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
       Prediction Accuracy             & 78.93\% & 26.04\%  & 100.00\% & 100.00\% \\ \hline
       Computation Time (Milliseconds) & 610     & 60       & 70       & 1860     \\ \hline
@@ -284,7 +284,7 @@ both the door and elevator experiments. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 61.63\% & 52.08\%  & 100.00\% & 100.00\% \\ \hline
       Prediction Accuracy             & 61.63\% & 52.08\%  & 100.00\% & 100.00\% \\ \hline
       Computation Time (Milliseconds) & 620     & 60       & 70       & 880      \\ \hline
@@ -299,7 +299,7 @@ both the door and elevator experiments. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 74.93\% & 65.62\%  & 100.00\% & 100.00\% \\ \hline
       Prediction Accuracy             & 74.93\% & 65.62\%  & 100.00\% & 100.00\% \\ \hline
       Computation Time (Milliseconds) & 600     & 60       & 70       & 990      \\ \hline
@@ -319,12 +319,12 @@ length of observation. TODO should future work go here\? It is postulated that
 with a larger data set, achievable by increasing the time of observation while
 maintaining the density of observations, the predictions would improve. \\
 
-While Fourier methods appear directly correlated with frequency, Duckett
+While Fourier methods appear directly correlated with frequency, DMM
 appears to have an inverse relationship with frequency. In the meal and
-laundry nodes Duckett has a prediction accuracy between around 60\% to 80\%.
+laundry nodes DMM has a prediction accuracy between around 60\% to 80\%.
 Furthermore, the lowest prediction accuracy of 61.63\% is achieved on the meal
 node that happens to have the highest number of changes per day. It is believed
-that the poor behavior of Duckett on behaviors with high frequency is due to
+that the poor behavior of DMM on behaviors with high frequency is due to
 how the averages are stored and computed. The method undergoes a type of
 trashing where in by the time the model has adjusted to current state of a
 behavior the behavior changes. It is important to note, that if prior knowledge
@@ -332,15 +332,15 @@ or a previous data set is known, the model parameters such as refresh rate TODO
 correct terminology? can be tuned to best fit the frequency of a given behavior.
 However, this would have to be done for ever behavior, or at least a set or class
 of given behaviors and there currently does not exist a method to do this
-automatically or on a large scale. One final note about Duckett's performance
+automatically or on a large scale. One final note about DMM's performance
 with respect to frequency, similar to what happened in the door B experiment,
-Duckett fails to accurately predict behaviors that have periods that do not
+DMM fails to accurately predict behaviors that have periods that do not
 fall on month boundaries. This is visible in the difference between historical
 and future prediction accuracy for the trash sections dropping as far as from
 91.13\% to 32.13\% in the trash 0 node. Once again, this is not a direct failure
-of the Duckett model itself, but a result of forcing Duckett to make long
+of the DMM model itself, but a result of forcing DMM to make long
 term predictions. It's historical predictions are much more accurate to it's
-real-world behavior as TODO correct terminology? Duckett is more similar to
+real-world behavior as TODO correct terminology? DMM is more similar to
 an online learning model, changing it's predictions after every few observations,
 than and offline learning model that trains on trains on a set of data. \\
 
@@ -352,7 +352,7 @@ than and offline learning model that trains on trains on a set of data. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 92.31\% & 55.24\%  & 96.17\% & 99.83\%   \\ \hline
       Prediction Accuracy             & 68.92\% & 55.24\%  & 95.97\% & 99.87\%   \\ \hline
       Computation Time (Milliseconds) & 610     & 60       & 90      & 6790      \\ \hline
@@ -367,7 +367,7 @@ than and offline learning model that trains on trains on a set of data. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 91.13\% & 61.49\%  & 64.52\% & 64.52\%   \\ \hline
       Prediction Accuracy             & 32.26\% & 64.05\%  & 63.21\% & 67.74\%   \\ \hline
       Computation Time (Milliseconds) & 600     & 60       & 70      & 1140      \\ \hline
@@ -382,7 +382,7 @@ than and offline learning model that trains on trains on a set of data. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Accuracy             & 90.96\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
       Prediction Accuracy             & 35.79\% & 61.09\%  & 67.74\%  & 67.74\% \\ \hline
       Computation Time (Milliseconds) & 610     & 60       & 70       & 2120    \\ \hline
@@ -424,7 +424,7 @@ easy way to calculate the efficiency of paths generated while using a given
 spatio-temporal world model. \\
 
 As alluded to in the previous section, there is no noise introduced
-into the simulated data. Thus, aside from Duckett, the historical and future
+into the simulated data. Thus, aside from DMM, the historical and future
 predictions are, for all intents and purposes identical. The reasons for this
 will be discussed in the section below, but because of this only the future
 path planning results will be analyzed. Finally, a keen reader may notice both
@@ -453,7 +453,7 @@ a predictive model is desired. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Number of Hard Errors              & 1790   & 2418   & 1488   & 1488 \\ \hline
       Number of Soft Errors              & 442    & 62     & 80     & 80   \\ \hline
       Average Additional Cells Traversed & 5.74   & 6.34   & 3.12   & 3.12 \\ \hline
@@ -469,7 +469,7 @@ a predictive model is desired. \\
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Number of Hard Errors              & 1790   & 2418   & 1488   & 1488 \\ \hline
       Number of Soft Errors              & 444    & 62     & 80     & 80   \\ \hline
       Average Additional Cells Traversed & 5.74   & 6.34   & 3.12   & 3.12 \\ \hline
@@ -501,8 +501,8 @@ are substantially worse. \\
 One notable affect of using each of the multiple behavior predictions to do path
 planning is that there is an averaging effect over the data. Individual mistakes
 or incorrect predictions don't always make or break a plan. One place this is
-extremely obvious is in Duckett's prediction of high frequency events.
-Despite the disparity between historical and future predictions for Duckett in
+extremely obvious is in DMM's prediction of high frequency events.
+Despite the disparity between historical and future predictions for DMM in
 terms of these individual behavior prediction, the only difference in the final
 metrics are two additional soft errors during future predictions. This may be
 because of the large number of hard errors encountered preventing more
@@ -513,9 +513,9 @@ various behaviors and how they relate to a plan being possible. \\
 In terms of computational cost, the path planning results appear to roughly
 scale linearly with the previous individual experiments results with minor
 deviations. The maximum memory used hovers between 30 to 40 megabytes for all
-of the experiments much like before. Similarly, Duckett takes an order of
+of the experiments much like before. Similarly, DMM takes an order of
 magnitude longer than Gaussian Mixture Models and FreMEn to produce results.
-HyperTime again takes another order of magnitude longer than Duckett taking
+HyperTime again takes another order of magnitude longer than DMM taking
 almost 14 seconds However, a large disparity is visible when looking at the
 sum of time taken to produce a path. Despite taking less than 30 times as long
 to produce results, FreMEn achieved the same prediction and path planning
@@ -544,7 +544,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_D_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_D_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_D_HyT-EM.png}} \\
@@ -554,7 +554,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_D_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_D_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_D_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_D_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_D_HyT-EM.png}} \\
@@ -573,7 +573,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_L_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_L_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_L_HyT-EM.png}} \\
@@ -583,7 +583,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_L_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_L_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_L_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_L_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_L_HyT-EM.png}} \\
@@ -601,7 +601,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_HyT-EM.png}} \\
@@ -611,7 +611,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_M0_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_M0_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_M0_HyT-EM.png}} \\
@@ -631,7 +631,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_HyT-EM.png}} \\
@@ -641,7 +641,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_M1_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_M1_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_M1_HyT-EM.png}} \\
@@ -661,7 +661,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_HyT-EM.png}} \\
@@ -671,7 +671,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_T0_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_T0_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_T0_HyT-EM.png}} \\
@@ -691,7 +691,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_HyT-EM.png}} \\
@@ -701,7 +701,7 @@ data or data with odd frequency periods or orders. \\
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_T1_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_hallway_T1_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_hallway_T1_HyT-EM.png}} \\
@@ -727,7 +727,7 @@ data or data with odd frequency periods or orders. \\
 Upon even a cursory glance at the resulting graphs, such as the one in figure
 ~\ref{figure:Future_Recreations_-_Elevator_Data}, it is immediately
 obvious that each model has a different approach to classification and
-prediction of the data. Duckett, with the current prediction approach of
+prediction of the data. DMM, with the current prediction approach of
 averaging each of its sub-models is perhaps the easiest to understand at first
 glance. It results in a somewhat smooth curve that follows the training data
 extremely closely. \\
@@ -786,7 +786,7 @@ else
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Average Additional Wait Time (Seconds)     & 3.05    & 3.24     & 2.13    & 1.90      \\ \hline
       Future Average Additional Wait Time (Seconds)         & 3.06    & 3.25     & 2.12    & 1.92      \\ \hline
       Computation Time (Milliseconds)                       & 610     & 60       & 70      & 7690      \\ \hline
@@ -803,7 +803,7 @@ else
   \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|l|l|l|l|}
       \hline
-      & Duckett & Gaussian & FreMEn  & HyperTime \\ \hline
+      & DMM & Gaussian & FreMEn  & HyperTime \\ \hline
       Historical Average Additional Wait Time (Seconds)     & 1.58    & 4.47     & 2.05    & 1.58      \\ \hline
       Future Average Additional Wait Time (Seconds)         & 1.65    & 4.47     & 2.05    & 1.59      \\ \hline
       Computation Time (Milliseconds)                       & 7350    & 90       & 350     & 250037    \\ \hline
@@ -817,8 +817,8 @@ else
 Table ~\ref{table:Elevator_Wait_Time_Overview} shows similar results to those
 in previous sections with a few notable exceptions. To begin, computation time
 remains mostly consistent with Gaussian Mixture Models and FreMEn coming in at
-the upper tens of milliseconds with Duckett and order of magnitude higher and
-HyperTime being yet another order of magnitude higher than Duckett. HyperTime
+the upper tens of milliseconds with DMM and order of magnitude higher and
+HyperTime being yet another order of magnitude higher than DMM. HyperTime
 although still remaining under 10 seconds, does take slightly longer than would
 be expected compared to previous results. This extra time is believed to originate
 due to the switch from binary to non-binary classification. As mentioned previously,
@@ -833,7 +833,7 @@ assumed to be for the same reason. Finally, prediction wise, once again
 similar results are visible. HyperTime has the best results with under 2
 seconds of average distance from the correct wait time. Next comes FreMen
 trailing just slightly behind at barely over 2 seconds. This is followed up
-by Duckett and then Gaussian. \\
+by DMM and then Gaussian. \\
 
 All said, the results are not too surprising when looking at previously ran
 experiments, that is until the results in Table
@@ -843,11 +843,11 @@ data, sampled at a rate of once per minute instead of once per 15 minutes really
 exaggerates and exemplifies the data found in the lower resolution data. \\
 
 Perhaps the most obvious and most interesting change is the drastic improvement
-in Duckett. Duckett halved it's wait time error over the lower resolution data.
-The main conclusion to be drawn from this is the importance of tuning Duckett
+in DMM. DMM halved it's wait time error over the lower resolution data.
+The main conclusion to be drawn from this is the importance of tuning DMM
 to refresh its internal representation of objects with the expected occurrence
 of periodic changes with respect to the rate at which that data is being
-sampled. Duckett struggles to predict changes in daily behavior when samples
+sampled. DMM struggles to predict changes in daily behavior when samples
 occur at 15 minute increments as seen both in the low resolution data for the
 elevator as well as the meal nodes back in the navigation experiment.
 Additionally, a small decrease in wait time prediction is now much more obvious.
@@ -900,7 +900,7 @@ half to 2 minutes.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_elevator_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_elevator_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_elevator_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_elevator_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_elevator_HyT-EM.png}} \\
@@ -911,7 +911,7 @@ half to 2 minutes.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_elevator_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_elevator_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_elevator_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_elevator_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_elevator_HyT-EM.png}} \\
@@ -931,7 +931,7 @@ half to 2 minutes.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_HyT-EM.png}} \\
@@ -942,7 +942,7 @@ half to 2 minutes.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_Duckett.png}} &
+    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_DMM.png}} &
     {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_FreMEn.png}} \\
     {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_Gaussian.png}} &
     {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_HyT-EM.png}} \\
@@ -953,8 +953,8 @@ half to 2 minutes.
 
 \begin{figure}
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_Elevator_Data_High_Res.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_Elevator_Data_High_Res.png}} \\
+    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_High_Resolution_Elevator_Data.png}} &
+    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_High_Resolution_Elevator_Data.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - High Resolution Elevator Data}
   \label{figure:Model_Accuracy_Over_Time_-_High_Resolution_Elevator_Data}
@@ -968,9 +968,9 @@ identified. Starting with computational efficiency, memory usage appears
 relatively consistent through all experiments and methods. With just under 3000
 data points per test month, and around 30KB of memory used per run,
 it would appear that each data point takes a slightly more than 10 bytes plus
-some overhead. This represents the minimum cost for something like Duckett, but
+some overhead. This represents the minimum cost for something like DMM, but
 other methods use slightly more memory. Specifically, from most to least memory
-used on average, Hypertime, FreMEn, Gaussian, Duckett. \\
+used on average, Hypertime, FreMEn, Gaussian, DMM. \\
 
 With respect to computational usage in the time domain, a different pattern is
 observed. Ignoring minor fluctuation between experiments, Gaussian and FreMEn
@@ -992,12 +992,12 @@ with noisier and irregular data. This trend was specifically true when the data
 had a relatively high frequency as observable in Laundry or Meal nodes in the
 path finding experiment. Despite having to overcome binary restrictions, FreMEn
 still faired relatively well on the elevator experiment demonstrating a good
-amount of versatility. Finally, and perhaps most interestingly, Duckett
+amount of versatility. Finally, and perhaps most interestingly, DMM
 displayed a multitude of interesting results. Performance seems highly dependent
 on the frequency of the data involved. When the refresh rate of the multi maps
 was tuned closed to that of the frequency of object or behavioral changes, it
 preformed in a similar category to that of Hypertime while using vastly fewer
-resources. However, when tuned to a non optimal frequency, Duckett can preform
+resources. However, when tuned to a non optimal frequency, DMM can preform
 on occasion worse than even the Gaussian method. TODO maybe a hair more here
 
 \end{document}
