@@ -15,7 +15,7 @@ notes about cyclic and decay artifacts in accuracy over time
 Given the periodic, human, and slightly random nature of Door A, it serves as
 an excellent starting point and litmus test of for various spatio-temporal
 world modeling techniques. Door A's results establish a trend that can be seen
-throughout the rest of the results. This is particularly visible in figure 6.3
+throughout the rest of the results. This is particularly visible in ~\ref{figure:accuracy_door_A}
 where the models accuracy are evaluated over time. \\
 
 \begin{table}[h!]
@@ -31,11 +31,13 @@ where the models accuracy are evaluated over time. \\
     \end{tabular}%
   }
   \caption{Door A Data Overview}
+  \label{table:door_A}
 \end{table}
 
 Do to the periodic nature of the data, the techniques based off of extracting
 periodicities (i.e. FreMEn and HyperTime) do an excellent job of recreating
-passed events as well as predicting the future. HyperTime's slightly better
+passed events as well as predicting the future. The prediction of past and future events can be seen in
+figure ~\ref{figure:historical_door_A} and ~\ref{figure:future_door_A} respectively. HyperTime's slightly better
 prediction is most likely due to the extra steps taken to wrap the data back
 in on itself temporally.  This additional training and accuracy comes at a
 great cost however. HyperTime manages only a small performance increase over
@@ -46,33 +48,38 @@ open state.  This is thought to be due to the sparseness of positive, or open
 states resulting in the model oscillating between 0 and just under 0.5 thus
 never reaching the open threshold. \\
 
-%\begin{figure}
-%  \begin{tabular}{cc}
-%    {\includegraphics[width = 3in]{images/results/Historical_door_A_DMM.png}} &
-%    {\includegraphics[width = 3in]{images/results/Historical_door_A_FreMEn.png}} \\
-%    {\includegraphics[width = 3in]{images/results/Historical_door_A_Gaussian.png}} &
-%    {\includegraphics[width = 3in]{images/results/Historical_door_A_HyT-EM.png}} \\
-%  \end{tabular}
-%  \caption{Historical Recreations - Door A}
-%\end{figure} \\ \\
-%
-%\begin{figure}
-%  \begin{tabular}{cc}
-%    {\includegraphics[width = 3in]{images/results/Future_door_A_DMM.png}} &
-%    {\includegraphics[width = 3in]{images/results/Future_door_A_FreMEn.png}} \\
-%    {\includegraphics[width = 3in]{images/results/Future_door_A_Gaussian.png}} &
-%    {\includegraphics[width = 3in]{images/results/Future_door_A_HyT-EM.png}} \\
-%  \end{tabular}
-%  \caption{Future Predictions - Door A}
-%\end{figure} \\ \\
-%
-%\begin{figure}
-%  \begin{tabular}{cc}
-%    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_door_A.png}} &
-%    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_door_A.png}} \\
-%  \end{tabular}
-%  \caption{Model Accuracy Over Time - Door A}
-%\end{figure} \\ \\
+\begin{center}
+  \begin{figure}[!Hp]
+  \begin{tabular}{cc}
+    {\includegraphics[width = 6in]{images/results/Historical_door_A_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_A_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_A_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_A_HyT-EM.png}} \\
+  \end{tabular}
+  \caption{Historical Recreations - Door A}
+  \label{figure:historical_door_A}
+\end{figure} \\ \\
+
+\begin{figure}[!Hp]
+  \begin{tabular}{cc}
+    {\includegraphics[width = 6in]{images/results/Future_door_A_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_A_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_A_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_A_HyT-EM.png}} \\
+  \end{tabular}
+  \caption{Future Predictions - Door A}
+  \label{figure:future_door_A}
+\end{figure} \\ \\
+
+\begin{figure}[!Hp]
+  \begin{tabular}{cc}
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_door_A.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_door_A.png}} \\
+  \end{tabular}
+  \caption{Model Accuracy Over Time - Door A}
+  \label{figure:accuracy_door_A}
+\end{figure} \\ \\
+\end{center}
 
 \subsection { Door B }
 
@@ -118,34 +125,35 @@ longer. Finally, similar to door A, all approaches use about the same amount
 of memory for training and predicting using around 30 megabytes while being
 within about 10 megabytes of one another.
 
-\begin{figure}
+\begin{center}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_door_B_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_B_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_door_B_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_B_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_B_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_B_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_B_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_B_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Door B}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_door_B_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_B_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_door_B_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_B_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_B_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_B_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_B_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_B_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Door B}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_door_B.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_door_B.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_door_B.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_door_B.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Door B}
 \end{figure}\\ \\
-
+\end{center}
 
 
 \subsection { Door C }
@@ -207,33 +215,35 @@ and stops attempting to improve the model. This is irrelevant however, seeing
 as the predictions are completely inaccurate so any gain in computational time
 is meaningless.
 
-\begin{figure}
+\begin{center}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_door_C_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_C_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_door_C_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_door_C_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_C_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_C_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_C_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_door_C_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Door C}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_door_C_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_C_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_door_C_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_door_C_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_C_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_C_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_C_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_door_C_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Door C}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_door_C.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_door_C.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_door_C.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_door_C.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Door C}
 \end{figure}\\ \\
+\end{center}
 
 
 \section{ Congested Hallways }
@@ -525,197 +535,192 @@ data or data with odd frequency periods or orders. \\
 
 
 
-
-\begin{figure}
+\begin{center}
+  \begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 5in]{images/results/Future_Average_Hard_Errors_During_Planning.png}} \\
-    {\includegraphics[width = 5in]{images/results/Future_Average_Soft_Errors_During_Planning.png}} \\
-    {\includegraphics[width = 5in]{images/results/Future_Average_Distance_From_Optimal_Path_During_Planning.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Average_Hard_Errors_During_Planning.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Average_Soft_Errors_During_Planning.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Average_Distance_From_Optimal_Path_During_Planning.png}} \\
   \end{tabular}
   \caption{ Future Planning Results}
   \label{fig:G_FP_res}
 \end{figure}
 
-
-
-
-
-
-
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_D_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_D_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_D_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_D_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_D_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Delivery}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_D_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_D_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_D_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_D_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_D_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_D_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_D_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_D_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Delivery}
 \end{figure}\\ \\
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_D.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_D.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_D.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_D.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Delivery}
 \end{figure}\\ \\
 
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_L_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_L_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_L_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_L_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_L_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Delivery}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_L_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_L_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_L_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_L_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_L_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_L_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_L_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_L_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Laundry}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_L.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_L.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_L.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_L.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Laundry}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M0_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M0_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M0_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M0_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Meal Section 0}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M0_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M0_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M0_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M0_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Meal Section 0}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_M0.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_M0.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_M0.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_M0.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Meal Section 0}
 \end{figure}
 
 
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_M1_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M1_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M1_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M1_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_M1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Meal Section 1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_M1_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M1_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M1_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M1_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_M1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Meal Section 1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_M1.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_M1.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_M1.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_M1.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Meal Section 1}
 \end{figure}
 
 
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T0_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T0_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T0_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T0_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Trash Section 0}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T0_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T0_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T0_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T0_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T0_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Trash Section 0}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_T0.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_T0.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_T0.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_T0.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Trash Section 0}
 \end{figure}
 
 
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_hallway_T1_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T1_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T1_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T1_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_hallway_T1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Hallway Trash Section 1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_hallway_T1_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T1_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T1_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T1_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_hallway_T1_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Hallway Trash Section 1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_hallway_T1.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_hallway_T1.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_hallway_T1.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_hallway_T1.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Hallway Trash Section 1}
 \end{figure}
+\end{center}
 
 
 
@@ -898,67 +903,69 @@ half to 2 minutes.
 
 
 
-\begin{figure}
+\begin{center}
+  \begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_elevator_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_elevator_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_elevator_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Elevator Data}
   \label{figure:Historical_Recreations_-_Elevator_Data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_elevator_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_elevator_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_elevator_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Elevator Data}
   \label{figure:Future_Predictions_-_Elevator_Data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_Elevator_Data.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_Elevator_Data.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_Elevator_Data.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_Elevator_Data.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Elevator Data}
   \label{figure:Model_Accuracy_Over_Time_-_Elevator_Data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_high_res_elevator_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - High Resolution Elevator Data}
   \label{figure:Historical_Recreations_-_High_Resolution_Elevator_Data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_DMM.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_Gaussian.png}} &
-    {\includegraphics[width = 3in]{images/results/Future_high_res_elevator_HyT-EM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - High Resolution Elevator Data}
   \label{figure:Future_Predictions_-_High_Resolution_Elevator_Data}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!Hp]
   \begin{tabular}{cc}
-    {\includegraphics[width = 3in]{images/results/Future_Predictions_on_High_Resolution_Elevator_Data.png}} &
-    {\includegraphics[width = 3in]{images/results/Historical_Predictions_on_High_Resolution_Elevator_Data.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_High_Resolution_Elevator_Data.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_High_Resolution_Elevator_Data.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - High Resolution Elevator Data}
   \label{figure:Model_Accuracy_Over_Time_-_High_Resolution_Elevator_Data}
 \end{figure}
+\end{center}
 
 
 \section{ Final Thoughts }

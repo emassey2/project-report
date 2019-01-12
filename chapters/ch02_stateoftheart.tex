@@ -115,10 +115,11 @@
   In contrast to the discrete nature of occupancy grids, Hilbert maps provide a
   continuous representation of an environment which allows for arbitrary world
   model resolution. They rely on "fast kernel approximations that project the
-  data in a Hilbert space where a logistic regression classifier is learnt"
+  data in a Hilbert space where a logistic regression classifier is learnt".
   A stochastic gradient optimization can then applied. This approach is similar to
   that of a Gaussian processes occupancy map but with a much lower computational
-  cost computational cost computational cost computational cost. Having been
+  cost computational cost computational cost computational cost. An example
+  of the training process workflow is visible in figure ~\ref{figure:STHM}. Having been
   introduced as recently as 2016, Hilbert maps, and the addition of a temporal
   component, are still a fairly new field of research but already some of the
   authors from the original paper have already begun to introduce a temporal
@@ -251,7 +252,8 @@
   environments can often be cyclic on week boundaries. Although this works well
   assuming all behaviors happen with weekly periodicity, this is not always
   the case, and thus behaviors that don't occur every seven days at the same
-  may be incorrectly predicted.
+  may be incorrectly predicted. An example of a weeks worth of data is visible
+  in figure ~\ref{figure:PSP}.
 
   This idea of manipulating and folding observed data over itself through time
   continued to evolve however. Recently, in

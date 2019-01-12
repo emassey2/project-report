@@ -222,8 +222,8 @@
 
   % Please add the following required packages to your document preamble:
   % \usepackage{graphicx}
-  \begin{table}[]
-  \resizebox{\textwidth}{!}{%
+  %\begin{table}[]
+  %\resizebox{\textwidth}{!}{%
   %Name
   %Additional Model Complexity
   %Learning Method
@@ -236,18 +236,26 @@
   %Work Availability
   %Implementation Complexity
   %Suitable Fields of Application
-  \begin{tabular}{|p{3cm}|p{4cm}|p{3cm}|p{2cm}|p{3cm}|p{3cm}|p{3cm}|p{2cm}|p{2cm}|p{4cm}|p{4cm}|p{3cm}|}
-  \hline
-  Name      & Additional Model Complexity                                                & Learning Method             & Offline vs Online & Efficiency of Data Storage                     & Map Dependent & Restriction(s)         & Historical Predictions & Long-Term Predictions & Work Availability & Implementation Complexity & Suitable Fields of Application                                     \\ \hline
-  IOHMM     & (4+1)*Cells                                                                & Neural Net                  & Offline           & HMM weights                                    & Yes           & Only motion prediction & No                     & No                    & 2                 & 2                         & Motion prediction                                                  \\ \hline
-  CTM       & (8*8)*Cells                                                                & Cross-correlation           & Offline           & Cell Connections                               & Yes           & Only motion prediction & No                     & No                    & 3                 & 3                         & Motion prediction                                                  \\ \hline
-  DMM       & Scales linear with number of maps                                          & Stochastic Sampling         & Online            & Varies with number of maps and samples per map & No            & N/A                    & No                     & No                    & 3                 & 1                         & Very versatile. Works with both binary and continuous observations \\ \hline
-  STHM      & Scales linear with number of dynamic objects being tracked                 & Stochastic Gradient Descent & Online            & 2D vector per object at every time t           & Yes           & N/A                    & Yes                    & Yes                   & 3                 & 3                         & Live dynamic object tracking and prediction                        \\ \hline
-  FreMEn    & Scales linear with Fourier Order                                           & Modified Fourier Transform  & Online            & Order dependent summation of cosines           & No            & Binary Predictions     & Yes                    & Yes                   & 1                 & 2                         & Binary data prediction (e.g. doors)                                \\ \hline
-  Hypertime & Scales linear with Fourier Order \& further dependent on clustering method & FreMen + time folding       & Online            & Order dependent summation of cosines           & No            & N/A                    & Yes                    & Yes                   & 1                 & 3                         & Very versatile. Works with both binary and continuous observations \\ \hline
-  \end{tabular}%
+  %\begin{tabular}{|p{2cm}|p{4cm}|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{3cm}|p{3cm}|}
+  \begin{center}
+  \rotatebox{90}{
+    \scalebox{0.6}{
+      %\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+        \begin{tabular}{|p{2.3cm}|p{4cm}|p{3cm}|p{2cm}|p{3cm}|p{1.5cm}|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{3cm}|p{3cm}|}
+        \hline
+        Name      & Additional Model Complexity                                                & Learning Method             & Offline vs Online & Efficiency of Data Storage                     & Map Dependent & Restriction(s)         & Historical Predictions & Long-Term Predictions & Work Availability & Implementation Complexity & Suitable Fields of Application                                     \\ \hline
+        IOHMM     & (4+1)*Cells                                                                & Neural Net                  & Offline           & HMM weights                                    & Yes           & Only motion prediction & No                     & No                    & 2                 & 2                         & Motion prediction                                                  \\ \hline
+        CTM       & (8*8)*Cells                                                                & Cross-correlation           & Offline           & Cell Connections                               & Yes           & Only motion prediction & No                     & No                    & 3                 & 3                         & Motion prediction                                                  \\ \hline
+        DMM       & Scales linear with number of maps                                          & Stochastic Sampling         & Online            & Varies with number of maps and samples per map & No            & N/A                    & No                     & No                    & 3                 & 1                         & Very versatile. Works with both binary and continuous observations \\ \hline
+        STHM      & Scales linear with number of dynamic objects being tracked                 & Stochastic Gradient Descent & Online            & 2D vector per object at every time t           & Yes           & N/A                    & Yes                    & Yes                   & 3                 & 3                         & Live dynamic object tracking and prediction                        \\ \hline
+        FreMEn    & Scales linear with Fourier Order                                           & Modified Fourier Transform  & Online            & Order dependent summation of cosines           & No            & Binary Predictions     & Yes                    & Yes                   & 1                 & 2                         & Binary data prediction (e.g. doors)                                \\ \hline
+        Hypertime & Scales linear with Fourier Order \& further dependent on clustering method & FreMen + time folding       & Online            & Order dependent summation of cosines           & No            & N/A                    & Yes                    & Yes                   & 1                 & 3                         & Very versatile. Works with both binary and continuous observations \\ \hline
+        \end{tabular}%
+        %\caption{Summary of methods under consideration}
+        %\label{figure:methods_summary}
+      }
   }
-  \end{table}
+  \end{center}
 
   \section{ Method Elimination }
 
