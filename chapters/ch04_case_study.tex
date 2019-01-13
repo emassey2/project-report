@@ -17,7 +17,7 @@
   cost-effective robotic pods for handling legacy in logistics``
   \footnote[1]{https://www.h-brs.de/en/ropod}. In additional to its business
   oriented goals, ROPOD, being a research project, also has a focus on the
-  development and implementation of cutting edge technology.  The main goal of
+  development and implementation of cutting edge technology. The main goal of
   the project is to enable low cost robotic solutions for coordinating logistics
   in a preexisting human environment. Specifically, the current target
   testbed for ROPOD is a mid sized hospital in Frankfurt, Germany.
@@ -82,28 +82,26 @@
   The methods selected for additional analysis here were chosen specifically
   to allow for a variety of modeling techniques to be compared while also
   allowing for comparison of some similar styles in order to highlight the
-  benefits of a comparative evaluation.  They provide both varied range of
+  benefits of a comparative evaluation. They provide both varied range of
   methods and multiple methods of similar styles like have been included for
-  further in-depth comparisons.
+  further in-depth comparisons. \\
 
   Therefore, the following methods will be evaluated for use with ROPOD:
 
-  TODO perhaps table here
-  TODO SITE!
   \begin{itemize}
     \item Occupancy Grids with Input-Output Hidden Markov Model (IOHMM) - Modeling Spatial-Temporal Dynamics of Human Movements for Predicting Future Trajectories \cite{Wang2015}
     \item Conditional Transition Maps (CTM) - Conditional Transition Maps: Learning Motion Patterns in Dynamic Environments \cite{Kucner2013}
     \item Spatio-Temporal Hilbert Maps (STHM) - Spatio-Temporal Hilbert Maps for Continuous Occupancy Representation in Dynamic Environments \cite{Senanayake2016}
-    \item Dynamic Multi-Map (DMM) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{biber2005}
+    \item Dynamic Multi-Map (DMM) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{Biber2005}
     \item Frequency Map Enhancement (FreMEn) - FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments \cite{Krajnik2015}
-    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{kranjik2018}
+    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{Krajnik2018}
   \end{itemize}
 
   The following sections contain a brief overview of the selected methods.
   Although they will not cover all the specifics of a given model, they will
   mention the relevant information for comparison. Sources have been provided
   for each paper if the reader wishes to build a deeper understanding of one
-  or more approaches.
+  or more approaches. \\
 
   TODO review complexities per Dylan
 
@@ -127,7 +125,7 @@
   available, this method relies heavily on preexisting technology like HMM,
   occupancy grids, and neural nets. Using the paper as a guide it to keep
   reasonable to tie these technologies together without too many difficulties,
-  not withstanding the standard roadblocks when working on a new project.
+  not withstanding the standard roadblocks when working on a new project. \\
 
   \subsection { Conditional Transition Maps (CTM) }
   CTMs, as proposed in ``Conditional Transition Maps: Learning Motion Patterns
@@ -144,7 +142,7 @@
   parameter for each combination of input and output direction. Neural nets
   are also not used for learning in this and instead a custom designed
   method is proposed. Due to the use of a custom method for prediction, and
-  the lack of work available the implementation complexity is increased to a 3.
+  the lack of work available the implementation complexity is increased to a 3. \\
 
   \subsection { Dynamic Multi-Map (DMM) }
   The dynamic multi-map approach heavily depends on the number of maps used and their
@@ -161,7 +159,7 @@
   DMM is fairly simple to implement by hand. The major outstanding drawback
   is the lack of a well defined method for choosing between or combining maps.
   This oversight is unfortunate as the method for selection or merging the
-  map/maps has a large impact performance metrics of DMM.
+  map/maps has a large impact performance metrics of DMM. \\
 
   \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
   STHMs extend existing Hilbert maps with the goal of providing real-time
@@ -179,7 +177,7 @@
   Considering the large and diverse number of techniques and the complexity with
   which they are connected to make a working system, this approach is considered
   to have an extremely high implementation complexity. Finally, no existing
-  approach is currently available for use.
+  approach is currently available for use. \\
 
   \subsection { Frequency Map Enhancement (FreMEn) }
   FreMEn relies heavily on the use of a modified version of the Fourier
@@ -220,12 +218,14 @@
   \footnote[2]{https://github.com/gestom/Hypertime-RAL-18-0278/tree/master/door\_state/src/models}
   thus making the work availability a 1. On the other hand, due to the added
   complexity of wrapping space time and the inclusion of additional classification
-  components, complexity has been bumped up to a 3.
+  components, complexity has been bumped up to a 3. \\
 
   \subsection{ Summary of Approaches }
 
   The information gathered in the previous sections has been summarized in the
   following table:
+
+  TODO fix this table somehow please
 
   % Please add the following required packages to your document preamble:
   % \usepackage{graphicx}
@@ -303,14 +303,14 @@
   planning so although it may not be an issue in general, it is a problem for ROPOD. This method would also not be able to represent individual objects,
   yet another issue. Finally, with mediocre, availability and
   implementation complexity, it is clear that IOHMM is not a good fit for this
-  case study.
+  case study. \\
 
   \subsection { Conditional Transition Maps (CTM) }
   CTM follows in the footsteps of IOHMM. Its dependency on occupancy grids as
   and the fact that it is best suited for motion prediction are major drawbacks.
   Additionally, the combination of work availability, or lack thereof, and
   its increased implementation complexity make it the easiest option to
-  eliminate from this list.
+  eliminate from this list. \\
 
   \subsection { Dynamic Multi-Map (DMM) }
   DMM, is an interesting
@@ -323,7 +323,7 @@
   be relatively easy to implement. DMM's lack of future or historical
   predictions is a bit of an inconvenience, but this can be overlooked as it is not
   strictly necessary for ROPOD. Given these reasons it will not be eliminated
-  during the qualitative analysis.
+  during the qualitative analysis. \\
 
   \subsection{ Spatio-Temporal Hilbert Maps (STHM) }
   STHM is another very interesting method with respect to ROPOD.
@@ -338,7 +338,7 @@
   work that these issues could be overcome, but solving these issues would take
   a considerable amount of time. Combined with the time needed to write
   and implement the method from scratch, STHM is not suitable for this
-  use case.
+  use case. \\
 
   \subsection { Frequency Map Enhancement (FreMEn) }
   FreMEn acts somewhat like a foil to STHM, at least with respect to it's
@@ -353,7 +353,7 @@
   solution to this case study. At the very least, it could fit well for
   representing if objects like doors and hallways are passible at a given time.
   Lastly, the ability to make historical or long-term future predictions is
-  a minor, but appreciated plus.
+  a minor, but appreciated plus. \\
 
   \subsection { Hypertime }
   Hypertime is perhaps the best-looking method on paper. Because it is an
@@ -361,7 +361,7 @@
   and has historical and future predictions capabilities. Unlike FreMEn, and to its benefit, it does not have
   restrictions on the type of predictions it can make. This is
   a huge advantage. Finally, with preexisting work being readily available, Hypertime
-  is an excellent contender and will be tested in the experimental section.
+  is an excellent contender and will be tested in the experimental section. \\
 
   \subsection{ Results }
   \subsubsection{ Eliminated Methods }
@@ -375,9 +375,9 @@
   \subsubsection{ Methods Selected for Experimental Testing }
   The following methods will be tested further in the experimental section:
   \begin{itemize}
-    \item Dynamic Multi-Map (DMM) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{biber2005}
+    \item Dynamic Multi-Map (DMM) - Dynamic Maps for Long-Term Operation of Mobile Service Robots \cite{Biber2005}
     \item Frequency Map Enhancement (FreMEn) - FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments \cite{Krajnik2015}
-    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{Kranjik2018}
+    \item Hypertime - Warped Hypertime Representations for Long-term Autonomy of Mobile Robots \cite{Krajnik2018}
   \end{itemize}
 
 \end{document}

@@ -13,14 +13,13 @@
   respective information with regards to the criteria introduced in this section.
   The idea is to provide an overview of some common techniques for modeling
   and to establish a way to easily compare future spatio-temporal world modeling
-  techniques.
-
+  techniques. \\
 
   \section{ Criteria }
 
   \subsection{ Computational Complexity }
-  According to Michael Stiff, a professor at the University of Wisconsin
-  Madison, computational complexity can be defined as `` the study of how much
+  According to Michael Stiff, a professor at the University of Wisconsin-Madison,
+  computational complexity can be defined as `` the study of how much
   of a given resource a program uses. The resource in question is usually
   either space (how much memory) or time (how many basic operations).''
   \cite{ComplexityUW} In the field of computer science this computational
@@ -31,8 +30,6 @@
   how much time a given algorithm may use for any given set of data.
   Additionally, it serves as an excellent benchmark for comparing various
   algorithms.\\
-
-  TODO add picture from images of complexity growth rates
 
   In the particular case of spatio-temporal world modeling, one is most
   concerned with how long planning will take and how much memory the
@@ -48,7 +45,7 @@
   modeling techniques would all be of a similar complexity class for both time
   and space. It is for this reason when comparing spatio-temporal world
   models Big O notation may still be used, however in order to better convey
-  the subtleties of the various methods coefficients will not be dropped.
+  the subtleties of the various methods coefficients will not be dropped. \\
 
 
   \subsection{ Efficiency of Data Storage }
@@ -62,7 +59,7 @@
   day, depending on the data contained within those observations, an
   inefficient storage approach could rapidly cause giga- or terabytes of storage
   space to be required. Therefore, it is important to note once learned or trained,
-  how and if information and predictions can be stored.
+  how and if information and predictions can be stored. \\
 
   \subsection{ Learning Method }
   The learning method is a way a spatio-temporal world model is able to
@@ -82,7 +79,7 @@
   will therefore be classified as offline learning methods if they are designed to
   process large amounts of data before making predictions, specifically if it
   is not uncommon for the data processing time to take so long as to make
-  immediate and live predictions unreasonable.
+  immediate and live predictions unreasonable. \\
 
   \subsection{ Map Type Dependency }
   As mentioned in the State of the Art section, certain spatio-temporal world
@@ -95,7 +92,7 @@
   specific technique and thus limiting the pool of potentially available methods.
   For these reasons, being able to differentiate, and thus choose
   between the various methods with relation to the world modeling method
-  required is extremely useful. TODO this section might need a little love in terms of wording
+  required is extremely useful. \\
 
 
 
@@ -103,19 +100,19 @@
   When examining a large number of options it is often helpful to eliminate
   choices that absolutely will not work. This section will attempt to outline
   the types of limitations would disqualify certain spatio-temporal world
-  models when attempting to find a  best fit solution for a give problem.
+  models when attempting to find a best fit solution for a give problem. \\
 
 
   \subsubsection{ Classification Restrictions }
   Certain techniques used for predictions can cause limitations on the number
   or type of classifications that can be done on a given set of data. The most common
-  and perhaps most limiting is the binary restriction imposed by many of the
-  methods that use FreMEn TODO cite such as X, Y, Z. This restriction only
+  and perhaps most limiting is the binary restriction imposed by the
+  methods that use FreMEn \cite{Krajnik2015} \cite{Hawes2017}. This restriction only
   allows an object's state in the spatio-temporal domain to be represented by one of two
   states. This state is then said to have a probability associated with it.
   Thus, it is often not possible to represent more complex behavior like time
   of travel, number of people present in an area, which can potentially be in
-  more than two states.
+  more than two states. \\
 
   \subsubsection{ Historical Predictability }
   The ability to reflect on and learn from previous mistakes is as useful in
@@ -124,29 +121,29 @@
   improved training of a given model. These improvements can ultimately result
   in more accurate predictions. Therefore, the ability to predict events that
   have already happened can be a desired trait when looking at
-  spatio-temporal world modeling techniques.
+  spatio-temporal world modeling techniques. \\
 
   \subsubsection{ Long-Term Predictability }
   Conversely, compared to historical predictions, sometimes it may be desirable
   to make long-term future predictions about the world. That is to say, predictions
   not just about what is immediately going to happen, but about what may happen
-  in the short, near, or long term. Many scenarios can be imagined
+  in the short, near, or long-term. Many scenarios can be imagined
   in which this would be advantageous. Long-term future predictions allow for
   increased autonomy and decreased requirements for offline learning.
   Furthermore, long-term predictions about the future can also be used to
   retroactively evaluate the performance of multiple models, perhaps using
-  the same technique but with different parameters.
+  the same technique but with different parameters. \\
 
 
   \subsection{ Metainformation }
 
   Some information about a spatio-temporal world modeling technique may not be
   directly observable or even contained within the approach itself. Information
-  about how and when a method is best used or other meta-information not directly
+  about how and when a method is best used or other metainformation not directly
   tied to an approach, like how easy it is to set up, can be vital to a developer
   when attempting to decide between various methods. This section introduces
   some of the metainformation about spatio-temporal world modeling techniques
-  that could prove useful, especially with regard to a developer or engineer.
+  that could prove useful, especially with regard to a developer or engineer. \\
 
   \subsubsection{ Availability of Work }
   Commonly, during or after the development of a new spatio-temporal world
@@ -162,7 +159,7 @@
   would take some time to connect everything together. A 3 means that there
   does not currently exist any available code for this approach. One would have
   to fully acquaint themselves with the original academic paper in order to
-  implement this method.
+  implement this method. \\
 
   \subsubsection{ Implementation Complexity }
   When a new technique is proposed but no implementation is available it is
@@ -176,7 +173,7 @@
   level undergraduate student could understand and implement. 2 means a
   more complex system with multiple components of moderate complexity.
   3 is reserved for cutting edge implementations that almost always involve
-  multiple complex components.
+  multiple complex components. \\
 
   \subsubsection{ Suitable Fields of Application }
   Although the field of spatio-temporal world modeling is generally concerned
@@ -186,22 +183,21 @@
   modify these approaches to fit other fields. Other times, generic
   approaches are developed directly. This section aims to categorize how specific
   a method is for a given problem classification and how well suited is for certain
-  sets of problems.
+  sets of problems. \\
 
 
   \section{ Experimental Criteria }
-
   Comparing and contrasting various techniques on paper is an excellent way
   to narrow down one's options when choosing a modeling technique. However, at
   a certain point it is desirable to evaluate the remaining methods with
   respect to performance data. This information cannot always be obtained via
   research alone due to lack of information provided in the original or
-  subsequent research. Additionally, results from  one experiment in a given domain
+  subsequent research. Additionally, results from one experiment in a given domain
   may not directly translate to that of another. Therefore, in order to best
   compare and thus most effectively choose a technique for spatio-temporal
   world modeling, some experiments must be done. The following criteria are
   a recommended starting point for comparison, however, the specifics of a
-  project may demand modified or additional analysis.
+  project may demand modified or additional analysis. \\
 
   \subsection{ Prediction Accuracy }
   Prediction accuracy is arguably the most important benchmark for for comparing methods
@@ -214,30 +210,19 @@
   to convey is calculating and tracking the average distance from a correct
   result. Regardless of the data being tracked, the end result is best viewed
   in the form of a graph over time. This allows for the most concise comparison
-  of the performance of various spatio-temporal world modeling techniques.
+  of the performance of various spatio-temporal world modeling techniques. \\
 
   \subsection{ Computational Resource Usage }
   Computational resource usage can be thought of as an extension of computational
-  complexity into the real world. This statistic aims to quantify and measure
+  complexity into the real-world. This statistic aims to quantify and measure
   the time, memory, or any additional resources a computer provides during run-time.
   Most commonly these resources are amount of time spent using a processor
   and the amount of memory used. These are commonly measured using seconds and
-  bytes in a resolution scaled to the size of the problem,  milliseconds
+  bytes in a resolution scaled to the size of the problem, milliseconds
   and kilobytes for example. These are excellent ways of predicting the ability
   of a given method to scale. In a real operating environment it does not matter
   if 100\% accuracy is obtained for all data sets if too much memory is required
   for a computer to process the results or if the time taken to
-  produce the prediction invalidates the very prediction it makes.
-
-
-  \subsection{ Feasibility of use with a multi-robot system }
-  TODO what should I do about this? There isn't any research here
-
-
-  \section{ How to use this criteria }
-  TODO discussion and table goes here
-
-
-
+  produce the prediction invalidates the very prediction it makes. \\
 
 \end{document}

@@ -9,7 +9,7 @@
   representation. There are exceptions to this, however, with some models
   being built from the ground up, intertwining spatio and temporal components.
   Conversely, there also exists a few
-  methods that can be used in conjunction with any preexisting world model.
+  methods that can be used in conjunction with any preexisting world model. \\
 
 
   \section{ Map Dependent Models }
@@ -41,7 +41,7 @@
   grids with contemporary methods but each occupancy grid
   would represent, and be generated using samples from, multiple different timescales.
   With multiple occupancy grids spanning multiple timescales, the
-  probability of a cell being occupied could be computed by a simple summation.
+  probability of a cell being occupied could be computed by a simple summation. \\
 
   \subsubsection{ Hidden Markov Models }
 
@@ -56,8 +56,6 @@
   Furthermore, each one of these states has a given probability distribution of
   transitioning from one state to another. It is from this information that a
   Markov Model or Markov Chain can be constructed. \\
-
-  TODO: Add image? \\
 
   In the specific case of occupancy grids, each cell can be thought of as having two
   states, either free or occupied. It is not feasible to directly observe
@@ -99,7 +97,7 @@
   also communicate with its neighbors. In effect, this allowed
   a cell in hallway to be able to predict occupancy based off of a nearby cell
   that is currently occupied as well as its historical occupation. This is particularly
-  well suited for the prediction of trajectories and resulting cell occupation.
+  well suited for the prediction of trajectories and resulting cell occupation. \\
 
   \subsection{ Spatio-Temporal Hilbert Maps }
 
@@ -129,7 +127,7 @@
   and trained on to create a model that can predict both the direction and speed of an
   object at a given location at a given time. It is particularly well-suited to
   short-term predictions such as car traffic on a road or at an intersection.
-  \cite{Senanayake2016} \cite{Senanayake2017}
+  \cite{Senanayake2016} \cite{Senanayake2017} \\
 
   \section{ Map Independent Models }
 
@@ -162,7 +160,7 @@
   Additionally, parameters that work well for one problem may not work well for
   another. Finally, the authors note that the method for selecting
   the correct map is not an easy problem and often depends on the environment
-  encountered and the data collected.
+  encountered and the data collected. \\
 
 
   \subsection{ FreMEn }
@@ -178,7 +176,7 @@
   program's original goals were to improve mapping for long-term scenarios and
   to generate mapping for highly dynamic environments. FreMEn was designed to
   resolve these issues. \cite{Fentanes2014} Although FreMEn was initially used with
-  octomaps, three dimensional occupancy grids, it was later decoupled from
+  octomaps, three-dimensional occupancy grids, it was later decoupled from
   this mapping technique allowing it to be an extremely diverse and flexible
   technique. \\
 
@@ -256,12 +254,12 @@
   assuming all behaviors happen with weekly periodicity, it is not always
   the case, and thus behaviors that don't occur every seven days at the same time
   may be incorrectly predicted. An example of a weeks worth of data is visible
-  in figure ~\ref{figure:PSP}.
+  in figure ~\ref{figure:PSP}. \\
 
   However, this idea of manipulating and folding observed data over itself through time
   continued to evolve. Recently, in
   ``Warped Hypertime Representations for Long-term Autonomy of Mobile Robots''
-  \cite{krajnik2018} the idea was taken a step further. This paper, continues
+  \cite{Krajnik2018} the idea was taken a step further. This paper, continues
   to build off of FreMEn, using the same Fourier-like approach to observing
   periodicity in a data set. It continues to build off of the ideas mentioned
   in \cite{Jovan2016}. Now, no longer is data restricted to being folded at a
@@ -274,7 +272,7 @@
   order is greater than that of the previous step. This approach not only allows
   for non-binary predictions of any data observation type, but also
   for sparse or infrequent data to be the basis of prediction, due to the
-  folding of the data.
+  folding of the data. \\
 
 
 
@@ -300,7 +298,7 @@
   world modeling technique. Because methods for comparing a model against itself
   with different parameters can often be very specific, this section will focus
   on those existing methods that have been, or can be, extended to allow any
-  modeling method to be compared to another.
+  modeling method to be compared to another. \\
 
   \subsection{ Current Methods and Limitations}
 
@@ -321,7 +319,7 @@
   improved training and adjusting tested technique's parameters. Finally,
   ``Learning Temporal Context for Activity Recognition'' \cite{Coppola2016}
   extended this method for comparison to be used to compare multiple different
-  spatio-temporal world modeling techniques over multiple days worth of data.
+  spatio-temporal world modeling techniques over multiple days worth of data. \\
 
   \subsubsection { Resource Usage }
 
@@ -337,7 +335,7 @@
   that an average single observation and prediction would take. Moving forward
   it would be desirable to have not only detailed observations of run-time
   memory and processor usage, but also a comparison of resource usage with
-  respect to the multiple techniques being compared.
+  respect to the multiple techniques being compared. \\
 
 
 \end{document}

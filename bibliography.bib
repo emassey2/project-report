@@ -1,8 +1,6 @@
 @article{Krajnik2015,
-    abstract = {—We present a new approach to long-term mobile robot mapping in dynamic indoor environments. Unlike tradi-tional world models that are tailored to represent static scenes, our approach explicitly models environmental dynamics. We assume that some of the hidden processes that influence the dy-namic environment states are periodic and model the uncertainty of the estimated state variables by their frequency spectra. The spectral model can represent arbitrary timescales of environment dynamics with low memory requirements. Transformation of the spectral model to the time domain allows for the prediction of the future environment states, which improves the robot's long-term performance in dynamic environments. Experiments performed over time periods of months to years demonstrate that the approach can efficiently represent large numbers of observations and reliably predict future environment states. The experiments indicate that the model's predictive capabilities improve mobile robot localisation and navigation in changing environments.},
-    author = {Krajn{\'{i}}k, Tom{\'{a}}{\v{s}} and Fentanes, Jaime P and Santos, Jo{\~{a}}o M and Duckett, Tom},
-    journal = {EEE Transactions on Robotics},
-    keywords = {Index Terms—Mapping,Localization,Long-Term Autonomy},
+    author = {Krajnik, Tomas and Fentanes, Jaime P and Santos, Jo{\~{a}}o M and Duckett, Tom},
+    journal = {IEEE Transactions on Robotics},
     number = {4},
     pages = {964--977},
     title = {{FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments}},
@@ -10,13 +8,11 @@
     year = {2015}
 }
 @article{Hawes2017,
-    abstract = {Thanks to the efforts of the robotics and autonomous systems community, robots are becoming ever more capable. There is also an increasing demand from end-users for autonomous service robots that can operate in real environments for extended periods. In the STRANDS project we are tackling this demand head-on by integrating state-of-the-art artificial intelligence and robotics research into mobile service robots, and deploying these systems for long-term installations in security and care environments. Over four deployments, our robots have been operational for a combined duration of 104 days autonomously performing end-user defined tasks, covering 116km in the process. In this article we describe the approach we have used to enable long-term autonomous operation in everyday environments, and how our robots are able to use their long run times to improve their own performance.},
     archivePrefix = {arXiv},
     arxivId = {1604.04384},
     author = {Hawes, Nick and Burbridge, Christopher and Jovan, Ferdian and Kunze, Lars and Lacerda, Bruno and Mudrov{\'{a}}, Lenka and Young, Jay and Wyatt, Jeremy and Hebesberger, Denise and K{\"{o}}rtner, Tobias and Ambrus, Rares and Bore, Nils and Folkesson, John and Jensfelt, Patric and Beyer, Lucas and Hermans, Alexander and Leibe, Bastian and Aldoma, Aitor and Fa{\"{u}}lhammer, Thomas and Zillich, Michael and Vincze, Markus and Chinellato, Eris and Al-Omari, Muhannad and Duckworth, Paul and Gatsoulis, Yiannis and Hogg, David C. and Cohn, Anthony G. and Dondrup, Christian and {Pulido Fentanes}, Jaime and Krajn{\'{i}}k, Tom{\'{a}}{\v{s}} and Santos, Jo{\~{a}}o M. and Duckett, Tom and Hanheide, Marc},
     doi = {10.1109/MRA.2016.2636359},
     eprint = {1604.04384},
-    file = {:home/ethan/uni/RND/resources/papers/STRANDS.pdf:pdf},
     isbn = {1070-9932 VO  - 24},
     issn = {10709932},
     journal = {IEEE Robotics and Automation Magazine},
@@ -27,9 +23,7 @@
     year = {2017}
 }
 @article{MachadodosSantos2017,
-    abstract = {Recent improvements in the ability of mobile robots to operate safely in human populated environments have allowed their deployment in households, offices and public buildings, such as museums and hospitals. However, the structure of these environments is typically not known a priori, which requires the robots to build their own models of their operational environments. This process is commonly known as $\backslash$exploration" in mobile robotics. Moreover, real-world environments tend to change over time, which means that to achieve long-term autonomous operation, robots must also update their environment models as a part of their daily routine. The assumption of a perpetually-changing world adds a temporal dimension to the exploration problem, making exploration a never-ending lifelong learning process. To the best of our knowledge, this process termed $\backslash$lifelong exploration" has never been studied in detail before and forms the main topic of the work presented in this thesis. efficient lifelong exploration requires a robot to choose the right locations and times at which to collect observations in order to improve its environment model. To evaluate the ability of a robot to build and maintain its environment models, we need to be able to compare lifelong exploration strategies under repeatable experimental conditions. An evaluation methodology based on pre-recorded sensory datasets would not be suitable for this purpose, as this would not allow the robot to choose the location or time of its observations. Evaluating lifelong exploration requires the deterministic reproduction of environment changes, while preserving the robots ability to decide upon its own actions during the experiment. This thesis therefore contributes a new benchmarking methodology for lifelong exploration, which replicates the events occurring in real environments through physical simulations that re ect the environment changes gathered by ambient sensors over long periods of time. The established experimental benchmarks are based on long-term sensory datasets recorded in a smart home, with dynamics produced by a single person over a period of one year, and an office environment, with dynamics produced by a team of workers. Building upon the aforementioned benchmarking methodology, the thesis investigates possible strategies for lifelong exploration. An experimental comparison of lifelong exploration strategies that combine various decision-making paradigms and spatio-temporal representations is presented. Moreover, a new approach to lifelong explorations is proposed that applies information-theoretic exploration techniques to environment representations that model the uncertainty of world states as probabilistic functions of time. The proposed method explicitly models the world dynamics and can predict the environment changes. The predictive ability is used to reason about the most informative locations to explore for a given time. A 16 week long experiment shows that the combination of dynamic environment representations with information-gain exploration principles allows to create and maintain up-to-date models of continuously changing environments, enabling efficient and self-improving long-term operation of mobile service robots. The nal part of the thesis considers the problem of acquiring and maintaining dense 3D models of dynamic environments during long-term operation, building on the work presented in the earlier chapters. The term $\backslash$4D mapping" is used to indicate 3D mapping by mobile robots over extended periods of time. A new approach to lifelong 4D mapping and exploration is presented, which was deployed on a real robotic platform during longterm operation in real-world human-populated environments. The approach integrates sensory data captured by the robot at different times and locations into a global, metric 4D spatio-temporal model and then uses the model to decide where and when to perform the next round of observations. Finally, the deployment of the 4D exploration method in a real-world office scenario is described and evaluated. The one week long experiments show that the method enables reliable 4D mapping and persistent self-localisation of autonomous mobile robots, continually improving the robots maps to re ect the ever-changing world.},
     author = {{Machado dos Santos}, Joao Pedro},
-    file = {:home/ethan/uni/RND/resources/papers/30878{\%}20JSantos{\_}thesis{\_}final.pdf:pdf},
     journal = {University of Lincoln},
     keywords = {Lifelong Exploration,Long-term Autonomy,Mapping,Mobile Robotics,Service Robots,Spatio-temporal},
     pages = {130},
@@ -37,10 +31,8 @@
     year = {2017}
 }
 @article{Coppola2016,
-    abstract = {We investigate how incremental learning of long-term human activity patterns improves the accuracy of activity classification over time. Rather than trying to improve the classification methods themselves, we assume that they can take into account prior probabilities of activities occurring at a particular time. We use the classification results to build temporal models that can provide these priors to the classifiers. As our system gradually learns about typical patterns of human activities, the accuracy of activity classification improves, which results in even more accurate priors. Two datasets collected over several months containing hand-annotated activity in residential and office environments were chosen to evaluate the approach. Several types of temporal models were evaluated for each of these datasets. The results indicate that incremental learning of daily routines leads to a significant improvement in activity classification.},
     author = {Coppola, Claudio and Krajnik, Tomas and Duckett, Tom and Bellotto, Nicola},
     doi = {10.3233/978-1-61499-672-9-107},
-    file = {:home/ethan/uni/RND/resources/papers/Learning{\_}Temporal{\_}Context{\_}for{\_}Activity{\_}Recognition.pdf:pdf},
     isbn = {978-1-61499-672-9; 978-1-61499-671-2},
     issn = {0922-6389},
     journal = {Ecai 2016: 22Nd European Conference on Artificial Intelligence},
@@ -50,10 +42,8 @@
     year = {2016}
 }
 @article{Santos2016,
-    abstract = {This letter presents an exploration method that allows mobile robots to build and maintain spatio-temporal models of changing environments. The assumption of a perpetually changing world adds a temporal dimension to the exploration problem, making spatio-temporal exploration a never-ending, life-long learning process. We address the problem by application of information-theoretic exploration methods to spatio-temporal models that represent the uncertainty of environment states as probabilistic functions of time. This allows to predict the potential information gain to be obtained by observing a particular area at a given time, and consequently, to decide which locations to visit and the best times to go there. To validate the approach, a mobile robot was deployed continuously over 5 consecutive business days in a busy office environment. The results indicate that the robot's ability to spot environmental changes improved as it refined its knowledge of the world dynamics.},
     author = {Santos, Joao Machado and Krajnik, Tomas and Fentanes, Jaime Pulido and Duckett, Tom},
     doi = {10.1109/LRA.2016.2516594},
-    file = {:home/ethan/uni/RND/resources/papers/Lifelong{\_}Information-Driven{\_}Exploration{\_}to{\_}Complete{\_}and{\_}Refine{\_}4-D{\_}Spatio-Temporal{\_}Maps.pdf:pdf},
     isbn = {9781467380256},
     issn = {2377-3766},
     journal = {IEEE Robotics and Automation Letters},
@@ -64,10 +54,8 @@
     year = {2016}
 }
 @article{Fentanes2015,
-    abstract = {In planning for deliberation or navigation in real-world robotic systems, one of the big challenges is to cope with change. It lies in the nature of planning that it has to make assumptions about the future state of the world, and the robot's chances of successively accomplishing actions in this future. Hence, a robot's plan can only be as good as its predictions about the world. In this paper, we present a novel approach to specifically represent changes that stem from periodic events in the environment (e.g. a door being opened or closed), which impact on the success probability of planned actions. We show that our approach to model the probability of action success as a set of superimposed periodic processes allows the robot to predict action outcomes in a long-term data obtained in two real-life offices better than a static model. We furthermore discuss and showcase how this knowledge gathered can be successfully employed in a probabilistic planning framework to devise better navigation plans. The key contributions of this paper are (i) the formation of the spectral model of action outcomes from non-uniform sampling, the (ii) analysis of its predictive power using two long-term datasets, and (iii) the application of the predicted outcomes in an MDP-based planning framework.},
     author = {Fentanes, Jaime Pulido and Lacerda, Bruno and Krajnik, Tomas and Hawes, Nick and Hanheide, Marc},
     doi = {10.1109/ICRA.2015.7139315},
-    file = {:home/ethan/uni/RND/resources/papers/07139315.pdf:pdf},
     isbn = {VO  -},
     issn = {10504729},
     journal = {Proceedings - IEEE International Conference on Robotics and Automation},
@@ -79,10 +67,8 @@
     year = {2015}
 }
 @article{Krajnik2016,
-    abstract = {We present a lifelong mapping and localisation system for long-term autonomous operation of mobile robots in changing environments. The core of the system is a spatio-temporal occupancy grid that explicitly represents the persistence and periodicity of the individual cells and can predict the probability of their occupancy in the future. During navigation, our robot builds temporally local maps and integrates then into the global spatio-temporal grid. Through re-observation of the same locations, the spatio-temporal grid learns the long-term environment dynamics and gains the ability to predict the future environment states. This predictive ability allows to generate time-specific 2d maps used by the robot's localisation and planning modules. By analysing data from a long-term deployment of the robot in a human-populated environment, we show that the proposed representation improves localisation accuracy and the efficiency of path planning. We also show how to integrate the method into the ROS navigation stack for use by other roboticists.},
-    author = {Krajn{\'{i}}k, Tom{\'{a}}{\v{s}} and Fentanes, Jaime Pulido and Hanheide, Marc and Duckett, Tom},
+    author = {Krajnik, Tomas and Fentanes, Jaime Pulido and Hanheide, Marc and Duckett, Tom},
     doi = {10.1109/IROS.2016.7759671},
-    file = {:home/ethan/uni/RND/resources/papers/07759671.pdf:pdf},
     isbn = {9781509037629},
     issn = {21530866},
     journal = {IEEE International Conference on Intelligent Robots and Systems},
@@ -93,10 +79,8 @@
     year = {2016}
 }
 @article{Jovan2016,
-    abstract = {The efficiency of autonomous robots depends on how well they understand their operating environment. While most of the traditional environment models focus on the spatial representation, long-term mobile robot operation in human populated environments requires that the robots have a basic model of human behaviour.},
-    author = {Jovan, Ferdian and Wyatt, Jeremy and Hawes, Nick and Krajn{\'{i}}k, Tom{\'{a}}{\v{s}}},
+    author = {Jovan, Ferdian and Wyatt, Jeremy and Hawes, Nick and Krajnik, Tomas},
     doi = {10.1109/IROS.2016.7759591},
-    file = {:home/ethan/uni/RND/resources/papers/07759591.pdf:pdf},
     isbn = {9781509037629},
     issn = {21530866},
     journal = {IEEE International Conference on Intelligent Robots and Systems},
@@ -106,10 +90,8 @@
     year = {2016}
 }
 @article{Arbuckle2002,
-    abstract = {This paper intmduces the concept of a temporal occu- pancy grid as a method for modeling and classifying spatial areas according fo the time pmpenies of their occupancy. The method exred the idea of occupancy gridr[l] by considering occupancy over a number of dif- ferent timescales. This paper presents the basic formal- ism and ifs implementation using planar laser range- finders. It includes the results of a number of validation experiments, and an experiment in which we demonstrate the ability to locate doors in a real-worldsetting.},
     author = {Arbuckle, D. and Howard, A. and Mataric, M.},
     doi = {10.1109/IRDS.2002.1041424},
-    file = {:home/ethan/uni/RND/resources/papers/01041424.pdf:pdf},
     isbn = {0-7803-7398-7},
     journal = {IEEE/RSJ International Conference on Intelligent Robots and System},
     number = {789349985},
@@ -162,7 +144,6 @@
     year = {2016}
 }
 @article{Senanayake2016,
-    abstract = {We consider the problem of building continuous occupancy representations in dynamic environments for robotics applications. The problem has hardly been discussed previously due to the complexity of patterns in urban environments, which have both spatial and temporal dependencies. We address the problem as learning a kernel classifier on an efficient feature space. The key novelty of our approach is the incorporation of variations in the time domain into the spatial domain. We propose a method to propagate motion uncertainty into the kernel using a hierarchical model. The main benefit of this approach is that it can directly predict the occupancy state of the map in the future from past observations, being a valuable tool for robot trajectory planning under uncertainty. Our approach preserves the main computational benefits of static Hilbert maps — using stochastic gradient descent for fast optimization of model parameters and incremental updates as new data are captured. Experiments conducted in road intersections of an urban environment demonstrated that spatio-temporal Hilbert maps can accurately model changes in the map while outperforming other techniques on various aspects.},
     author = {Senanayake, Ransalu and Ott, Lionel and O'Callaghan, Simon and Ramos, Fabio},
     issn = {10495258},
     journal = {Advances in Neural Information Processing Systems 29},
@@ -171,7 +152,6 @@
     year = {2016}
 }
 @article{Senanayake2017,
-    abstract = {— Understanding the dynamics of urban environ-ments is crucial for path planning and safe navigation. However, the dynamics might be extremely complex making learning the environment an unfathomable task. Within the methods available for learning dynamic environments, dynamic Gaussian process occupancy maps (DGPOM) are very attractive because they can produce spatially-continuous occupancy maps taking into account neighborhood information, and provide probabilis-tic estimates, naturally inferring the uncertainty of predictions. Despite these properties, they are extremely slow, especially in dynamic mapping where the parameters of the map have to be updated as new data arrive from range sensors such as LiDARs. In this work, we leverage recent advancements in stochastic variational inference (SVI) to quickly learn dynamic areas in an online fashion. Further, we propose an information-driven technique to " intelligently " select inducing points required for SVI without relying on any object trackers which essentially improves computational time as well as robustness. These long-term occupancy maps entertain all attractive properties of DGPOM while the learning process is significantly faster, yet accurate. Our experiments with both simulation and real robot data on road intersections show a significant improvement in speed while maintaining a comparable or better accuracy.},
     author = {Senanayake, Ransalu and O'Callaghan, Simon and Ramos, Fabio},
     doi = {10.1109/ICRA.2017.7989294},
     isbn = {9781509046331},
@@ -182,20 +162,19 @@
     year = {2017}
 }
 @article{Fentanes2014,
-author = {Fentanes, Jaime Pulido and Cielniak, Grzegorz and Dondrup, Christian and Duckett, Tom},
-file = {:home/ethan/uni/RND/resources/papers/Spectral{\_}Analysis{\_}for{\_}Long-Term{\_}Robotic{\_}Mapping.pdf:pdf},
-isbn = {9781479936854},
-journal = {IEEE International Conference on Robotics and Automation},
-pages = {3706--3711},
-title = {{Spectral Analysis for Long-Term Robotic Mapping}},
-year = {2014}
+    author = {Fentanes, Jaime Pulido and Cielniak, Grzegorz and Dondrup, Christian and Duckett, Tom},
+    isbn = {9781479936854},
+    journal = {IEEE International Conference on Robotics and Automation},
+    pages = {3706--3711},
+    title = {{Spectral Analysis for Long-Term Robotic Mapping}},
+    year = {2014}
 }
 @online{ComplexityUW,
-  author = {Michael Siff},
-  title = {Computational Complexity},
-  year = 1997,
-  url = {http://pages.cs.wisc.edu/~siff/CS367/Notes/complexity.html},
-  urldate = {2018-12-14}
+    author = {Michael Siff},
+    title = {Computational Complexity},
+    year = 1997,
+    url = {http://pages.cs.wisc.edu/~siff/CS367/Notes/complexity.html},
+    urldate = {2018-12-14}
 }
 @article{Karp1992,
     author = {Richard M. Karp},
@@ -205,7 +184,6 @@ year = {2014}
     year = {1992}
 }
 @article{Krajnik2018,
-    abstract = {This paper presents a novel method for introducing time into discrete and continuous spatial representations used in mobile robotics, by modelling long-term, pseudo-periodic variations caused by human activities. Unlike previous approaches, the proposed method does not treat time and space separately, and its continuous nature respects both the temporal and spatial continuity of the modeled phenomena. The method extends the given spatial model with a set of wrapped dimensions that represent the periodicities of observed changes. By performing clustering over this extended representation, we obtain a model that allows us to predict future states of both discrete and continuous spatial representations. We apply the proposed algorithm to several long-term datasets and show that the method enables a robot to predict future states of repre- sentations with different dimensions. The experiments further show that the method achieves more accurate predictions than the previous state of the art.},
     archivePrefix = {arXiv},
     author = {Krajnik, Tomas and Vintr, Tomas and Molina, Sergi and Fentanes, Jaime P. and Cielniak, Grzegorz and Duckett, Tom},
     eprint = {1810.04285},
@@ -241,4 +219,3 @@ year = {2014}
     url = {http://dx.doi.org/10.1109/IROS.2014.6943205},
     year = {2014}
 }
-

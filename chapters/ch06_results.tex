@@ -44,7 +44,7 @@ great cost. Hypertime manages only a small performance increase over
 around one percent over FreMEn with the total training and prediction time
 taking on the order of two magnitudes longer when compared to either Gaussian or FreMEn.
 Finally, it appears that the Gaussian model completely failed to predict any
-open state.  This is likely due to the sparseness of positive, or open
+open state. This is likely due to the sparseness of positive, or open
 states resulting in the model oscillating between 0 and just under 0.5 thus
 never reaching the open threshold. \\
 
@@ -84,9 +84,9 @@ never reaching the open threshold. \\
 \subsection { Door B }
 
 Door B demonstrates a fact the will be come increasingly clear with future
-experiments.  Methods that use a modified version of the Fourier transform as
+experiments. Methods that use a modified version of the Fourier transform as
 described in TODO: CITATION require a certain threshold of frequency to be met
-in order to accurately make predictions.  In fact, its interesting to note that the
+in order to accurately make predictions. In fact, its interesting to note that the
 very thing that allows these methods perform so well with periodic behavior
 causes issues within data sets with non periodic behavior or datas ets with
 minimal periods of periodic data. \\
@@ -108,7 +108,7 @@ minimal periods of periodic data. \\
 
 DMM, relying almost solely on averages, does surprisingly well in this
 experiment, beating all other models in both historical and prediction
-accuracy.  It is, however, important to note the flaws in DMM's long-term
+accuracy. It is, however, important to note the flaws in DMM's long-term
 prediction. Due to the fact that future predictions are not directly possible
 using DMM and thus historical data is used, it is clear that,
 while DMM performed well overall historically, it is not without problems
@@ -159,7 +159,7 @@ within about 10 megabytes of one another. \\
 \subsection { Door C }
 
 With door A exemplifying the occasionally periodic and somewhat noisy
-behaviour in the real world, door C serves as almost the exact opposite,
+behaviour in the real-world, door C serves as almost the exact opposite,
 modeling a one time, long-term change.
 Perhaps expectedly, the results in terms of prediction accuracy are
 almost completely opposite to that of door A with DMM having the best
@@ -170,12 +170,12 @@ looking at the resulting graphs in table 6.7 and 6.8 shows a somewhat
 initially disappointing result. As discussed in the door B experiment,
 DMM, merely uses its historical predictions again for future
 predictions. This is clearly visible by the prediction of door C being open
-for the first three weeks in the future predictions.  However, DMM was not
+for the first three weeks in the future predictions. However, DMM was not
 designed for long-term future predictions and is instead meant to be used
 ``live''. When this is accounted for, DMM's performance is once again
-impressive.  In fact, as discussed TODO: where will this be discussed? the
+impressive. In fact, as discussed TODO: where will this be discussed? the
 historical predictions made by DMM can be viewed as it's ``live''
-predictions and thus it would be expected that in the real world it would
+predictions and thus it would be expected that in the real-world it would
 continue to predict the door as being closed as long as long-term future
 predictions are not requested. Thus it is likely that DMM's
 performance would be closer to 100\% for future actives for as long as the door
@@ -201,7 +201,7 @@ As alluded to above in door B's experiment, the lack of periodic data has
 caused both FreMEn and Hypertime to take the easiest prediction for the
 training data and predict that the door will always be open. Unfortunately,
 this causes the future predictions to be entirely inaccurate. The only possible redemption
-for the Fourier based approaches on this long term changes is that the
+for the Fourier based approaches on this long-term changes is that the
 prediction would eventually flip to always being closed, but only after the total number of observations of the door being
 closed surpassed that of the door being open. In this case, that would take a
 total of just over 6 weeks if training was being done every night. \\
@@ -213,7 +213,7 @@ computation time. This is believed to be because the prediction model created
 by Hypertime, after the initial naive approach, has a larger error than the first and thus it immediately quits
 and stops attempting to improve the model. This is irrelevant however, seeing
 as the predictions are completely inaccurate so any gain in computational time
-is meaningless.
+is meaningless. \\
 
 \begin{center}
 \begin{figure}[!Hp]
@@ -268,7 +268,7 @@ a higher frequency are better modeled using Fourier methods like FreMEn and
 Hypertime. This is most obvious when looking at behaviors that are repeated multiple
 times a day such as the laundry or meal nodes. In these experiments, the Fourier
 methods achieved an impressive 100\% accuracy. TODO should this go here or
-else where?  One caveat to these impressive results is the lack of noise
+else where? One caveat to these impressive results is the lack of noise
 present in the data used for the hallway test. Large amounts of noise were
 explicitly left out of this particular experiment to minimize the variables
 present. The presence and effect of noise in data is, however, analyzed in
@@ -729,7 +729,7 @@ data or data with unusual frequency periods or orders. \\
 \subsection{ Classification Methods }
 
 Upon even a cursory glance at the resulting graphs, such as the one in figure
-~\ref{figure:Future_Recreations_-_Elevator_Data}, it is immediately
+~\ref{figure:Future_Predictions_Elevator_Data}, it is immediately
 obvious that each model has a different approach to classification and
 prediction of the data. DMM, which predicts by
 averaging each of its sub-models is perhaps the easiest to understand at first
@@ -737,7 +737,7 @@ glance. It results in a somewhat smooth curve that follows the training data
 extremely closely. \\
 
 On the other hand, Gaussian Mixture Models and FreMEn take a drastically
-different approach.  Since, at their core they are binary classifiers, the
+different approach. Since, at their core they are binary classifiers, the
 prediction methods' as described in Section 5 result into two distinct
 prediction options. Both method's predictions hover around 0 and 7, although
 not exactly on an integer boundary. It is clear the lower value is close to 0
@@ -749,9 +749,9 @@ looking at the nominal times for waiting. When ruling out values that would be
 placed into a 0 prediction, there are a large amount of nominal values between 4
 and 9 which average out to 6.5. Finally, due to the large amount of noise
 combined with the fact that an elevator cannot have a negative wait time,
-the average is pulled up a bit by the extremely long wait times as high as 30 seconds during peak hours.
+the average is pulled up a bit by the extremely long wait times as high as 30 seconds during peak hours. \\
 
-Finally, and perhaps most interesting, are the Hypertime results. HyperTime takes a
+Finally, and perhaps most interesting, are the Hypertime results. Hypertime takes a
 unique approach to classifying its data. Once again, looking at the figure TODO TODODODODODODOOOOO
 we can see that predictions are clustered on integer boundaries. To be clear,
 non-binary Hypertime in its current implementation, although capable of training
@@ -767,7 +767,7 @@ be able to predict a wait time of 30 seconds or greater. Looking again at the
 resulting figures, it is clear this is not an issue as there does not appear to
 be any prediction greater than 10 seconds. Thus, with no predictions even
 nearing 30, it is reasonable to conclude that the upper limit did not hamper the ability for
-the model to produce accurate predictions.
+the model to produce accurate predictions. \\
 
 \subsection{ Metrics }
 
@@ -779,8 +779,7 @@ averaged for every time step to illustrate how the average changes over time. Th
 metric does not make a differentiation between the robot waiting for the
 elevator versus the elevator waiting for the robot. No other additional
 factors have been taken into account. Specifically, this includes something like calling an
-elevator so far in advance that the elevator shows up and is called by someone
-else
+elevator so far in advance that the elevator shows up and is called by someone else. \\
 
 \subsection{ Performance \& Scalability }
 
@@ -821,7 +820,7 @@ Table ~\ref{table:Elevator_Wait_Time_Overview} shows similar results to those
 in previous sections with a few notable exceptions. Foremost, computation time
 remains mostly consistent, with Gaussian Mixture Models and FreMEn coming in at
 the upper tens of milliseconds, DMM an order of magnitude higher and
-Hypertime being yet another order of magnitude higher than DMM. HyperTime,
+Hypertime being yet another order of magnitude higher than DMM. Hypertime,
 although remaining under 10 seconds, does take slightly longer than would
 be expected compared to previous results. This extra time is likely to originate
 from the switch from binary to non-binary state classification. As mentioned previously,
@@ -854,7 +853,7 @@ occur at 15 minute increments as seen both in the low resolution data for the
 elevator and the meal nodes back in the navigation experiment.
 Additionally, a tenth of a second decrease in wait time prediction is now much more obvious.
 In the real-world this would not be a significant problem,
-but it shows issues with long-term future predictions.
+but it shows issues with long-term future predictions. \\
 
 Slight movement was seen in either direction for Gaussian Mixture Models and
 FreMEn. The simplistic nature of the Gaussian Mixture Models results in roughly
@@ -894,7 +893,7 @@ a given time t. It is important to recall that a reduction in the maximum
 prediction value, would most likely reduce the
 computational time considerably, perhaps as much as a third of its original
 value if the max estimate was limited to 10. This would likely result in a
-computational time between 1 and 2.5 minutes.
+computational time between 1 and 2.5 minutes. \\
 
 
 
@@ -908,7 +907,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Historical_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Elevator Data}
-  \label{figure:Historical_Recreations_-_Elevator_Data}
+  \label{figure:Historical_Recreations_Elevator_Data}
 \end{figure}
 
 \begin{figure}[!Hp]
@@ -919,7 +918,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Future_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Elevator Data}
-  \label{figure:Future_Predictions_-_Elevator_Data}
+  \label{figure:Future_Predictions_Elevator_Data}
 \end{figure}
 
 \begin{figure}[!Hp]
@@ -928,7 +927,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_Elevator_Data.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Elevator Data}
-  \label{figure:Model_Accuracy_Over_Time_-_Elevator_Data}
+  \label{figure:Model_Accuracy_Over_Time_Elevator_Data}
 \end{figure}
 
 \begin{figure}[!Hp]
@@ -939,7 +938,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - High Resolution Elevator Data}
-  \label{figure:Historical_Recreations_-_High_Resolution_Elevator_Data}
+  \label{figure:Historical_Recreations_High_Resolution_Elevator_Data}
 \end{figure}
 
 \begin{figure}[!Hp]
@@ -950,7 +949,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - High Resolution Elevator Data}
-  \label{figure:Future_Predictions_-_High_Resolution_Elevator_Data}
+  \label{figure:Future_Predictions_High_Resolution_Elevator_Data}
 \end{figure}
 
 \begin{figure}[!Hp]
@@ -959,7 +958,7 @@ computational time between 1 and 2.5 minutes.
     {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_High_Resolution_Elevator_Data.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - High Resolution Elevator Data}
-  \label{figure:Model_Accuracy_Over_Time_-_High_Resolution_Elevator_Data}
+  \label{figure:Model_Accuracy_Over_Time_High_Resolution_Elevator_Data}
 \end{figure}
 \end{center}
 

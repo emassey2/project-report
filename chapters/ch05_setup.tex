@@ -25,7 +25,7 @@
   made. The model has a reduced area to allow for faster model training and
   path planning, and extraneous rooms and hallways have been
   removed. A comparison between the actual hospital model and the experiment model can
-  be seen below.
+  be seen below. \\
 
   TODO add picture
 
@@ -96,7 +96,7 @@
   the NumPy library. TODO CITE Each object is broken down into a series of days which is
   then further broken down into a series of behaviors. Each behavior
   represents the likelihood of an object being in a given state between two
-  times.  Furthermore, each behavior has a starting state and an ending state
+  times. Furthermore, each behavior has a starting state and an ending state
   which, if different, are swept through linearly. E.g. if a behavior is
   modeling the binary state of a door that starts at 100\% open and then becomes
   100\% closed an hour later at the half hour mark the door would be defined as having
@@ -146,7 +146,7 @@
   was written by the author of this paper TODO phrasing? while the other three
   are available on Tom Krajnik's Github page. TODO link? Finally, the non-binary
   version of Hypertime, although not yet freely available on Github, can
-  be obtained upon request as mentioned in the binary-only repository.
+  be obtained upon request as mentioned in the binary-only repository. \\
 
 
 
@@ -155,7 +155,7 @@
   In order to evaluate the intricacies of the selected models, a wide variety
   of data points have been selected for comparison. A focus has been placed on
   collecting data relevant to accuracy and scaleability of the modeling
-  technique given the eventual scope of the ROPOD project.
+  technique given the eventual scope of the ROPOD project. \\
 
   \begin{itemize}
 
@@ -181,7 +181,7 @@
   or chaotic time of the day. \\
 
   Regardless of why the states of doors are often
-  dynamic and exhibit both periodic and long term changes. In the ideal case, a robot
+  dynamic and exhibit both periodic and long-term changes. In the ideal case, a robot
   would learn when certain doors are closed and be able to plan accordingly.
   While making an accurate prediction can save time, making an inaccurate
   predication can be extremely costly. An inaccurate prediction would force a robot
@@ -221,7 +221,7 @@
   below will delve deeper into the ramifications of inaccurate
   predictions. The result of a prediction is
   being carried out is undoubtedly valuable, but is outside the scope of this
-  experiment.
+  experiment. \\
 
   \subsection{ Data Generation }
 
@@ -234,9 +234,9 @@
 
   Door A models a door that is highly influenced by the daily schedule of a
   9:00 to 17:00 job and has a high rate of periodic behavior with a small
-  amount of noise.  There are 5 behaviors which model a standard work day. The
+  amount of noise. There are 5 behaviors which model a standard work day. The
   time from midnight until 9:00 has the door in a normally closed
-  state.  From 9:00 until 12:00 the door is likely open. 12:00 until 13:00 is
+  state. From 9:00 until 12:00 the door is likely open. 12:00 until 13:00 is
   considered lunch time and thus the door is likely closed. Work resumes at
   13:00 until 17:00 and thus the door is likely open. From 17:00 until midnight
   the door again remains in a likely closed state. Finally, the door is always
@@ -312,13 +312,13 @@
   When planning paths with multiple dynamic objects it, is critical that not just
   few, but all of the objects are correctly predicted. If any of the objects' states are
   predicted incorrectly, a robot may need to reroute dynamically or it may not
-  be able to arrive at is destination thus wasting time and resources.
+  be able to arrive at is destination thus wasting time and resources. \\
 
 
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{images/basement_congestion.png}
-    \caption{The path from the elevator to the storage area is often congested with multiple dynamic obstacles. }
+    \caption{Conested Basement}
     \label{figure:basement_congestion}
   \end{figure}
 
@@ -479,7 +479,7 @@
   [1, 2, 3, 4, 5, 6] the dataset would be split into [1, 2, 3] and [4, 5, 6].
   Any prediction greater than or equal to four would be a 1 and lower a 0. All 0's during
   prediction would then be the average of the first dataset, e.g. 2 and all
-  1's would result in a prediction of 5.
+  1's would result in a prediction of 5. \\
 
   \subsection{ Data Generation }
 
@@ -548,6 +548,6 @@
   15 minutes. In the additional ``High Resolution'' dataset, observations happen
   every 1 minute. The inclusion of this additional dataset aims to outline how
   the models perform with larger sets of data while keeping the actual
-  underlying data similar to the standard resolution dataset.
+  underlying data similar to the standard resolution dataset. \\
 
 \end{document}
