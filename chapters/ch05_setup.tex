@@ -18,16 +18,17 @@
   hospital, it is necessary to pare down features of the building until only
   the core components remain. The three dynamic environmental components being
   considered are doors, path planning with carts that are often strewn about the
-  hallways and surrounding rooms, and elevators. To that effect, a model
-  environment has been designed for the simulations to be run in which contains
-  these three key components. The model environment
-  draws heavily from the actual environment, but some notable changes have been
-  made. The model has a reduced area to allow for faster model training and
-  path planning, and extraneous rooms and hallways have been
-  removed. A comparison between the actual hospital model and the experiment model can
-  be seen below. \\
+  hallways and surrounding rooms, and elevators.
+  To that effect, experiments have been designed to assess these key features.
+  In the case of the doors and the elevator, the object under test, and its
+  behavior, can be pulled out of the original complex environment. By
+  isolating and simulating only the behavior of the object under test, the
+  number of potential variables in the experiment is reduced.\\
 
-  TODO add picture
+  In the case of the path planning experiment, complete and total isolation from the operating
+  environment is not possible. Instead, a graph has been designed to closely
+  resemble an actual section of the hospital. Experiment specific details are
+  covered in their respective sections. \\
 
 
   \section{ Common Assumptions }
@@ -80,6 +81,10 @@
     \item All of these paths will then be compared using the criteria described
           below.
 
+    \item Computational resource usage will be tracked using the built-in Linux
+      binary ``time'' \footnote[1]{Specifically, ``/usr/bin/time -f 'max\_RSS=\%MKB t\_kernel=\%S t\_user=\%U t\_total=\%E' \$TEST was used''}
+
+
     \item All experiments will be done on the same hardware
       \begin{itemize}
         \item ASUS UX330UAK Laptop
@@ -93,7 +98,7 @@
   \section{ Data Generation }
 
   Data generation is performed using a combination of built-in Python libraries and
-  the NumPy library. TODO CITE Each object is broken down into a series of days which is
+  the NumPy library. \footnote[1]{http://www.numpy.org/} Each object is broken down into a series of days which is
   then further broken down into a series of behaviors. Each behavior
   represents the likelihood of an object being in a given state between two
   times. Furthermore, each behavior has a starting state and an ending state
@@ -116,22 +121,26 @@
   generation will be discussed in their respective sections. \\
 
   \section{ Model Parameters }
-  TODO expand? \\
 
-  Four models will be tested: DMM, FreMEn, Hypertime, and Gaussian TODO do I mention this was thrown in because why not
-  Mixture Models. Hypertime and FreMEn are of particular interest as they will
+  Four models will be tested: DMM, FreMEn, Hypertime, and Gaussian. The first
+  three models were selected using the comparison criteria in the previous
+  section but, the keen reader will notice the inclusion of a fourth model.
+  That model, the Gaussian Mixture Model is not
+  expected to perform as well as the others. Despite this, it has been included
+  for historical reasons as it has been used as benchmark spatio-temporal model
+  in the past such as the work in \cite{Coppola2016}. \\
+
+  As for the other methods, Hypertime and DMM are of particular interest as they will
   be able to represent non-binary states. Hypertime will be using the
-  expectation mean variant TODO why? The Gaussian Mixture Model, despite not
-  being expected to perform as well as the others, has been included as a
-  comparison with previous experiments like that done in TODO SITE. FreMEn and
+  expectation mean variant.  FreMEn and
   Hypertime will both use an order of three as that has, on average produced,
-  the best results as seen in TODO SITE and improve DMM info. During
+  the best results as seen in \cite{Krajnik2015}. During
   non-binary prediction Hypertime requires an upper limit for it estimates. In
   the case of the elevator experiment, an upper limit of 30 (seconds) has been
   given. This will be expanded upon in Section 6. The DMM model will
-  contain three sub-models. The models will have a TODO wording .75, .25, and
-  .05 TODO replacement rate? all with a size of 20. This is to closely match
-  the approach in TODO PAPER. The three internal models will be averaged
+  contain three sub-models. The models will have a .75, .25, and
+  .05 replacement rate. All DMM maps/objects will have a size of 20. This is to closely match
+  the approach in \cite{Biber2005}. The three internal models will be averaged
   to produce a prediction.\\
 
   It is important to note that unlike the other three approaches, DMM does
@@ -141,10 +150,11 @@
   That is to say, whatever a given DMM's prediction was on the third day of the first month
   will be considered the same for the third of the next month. \\
 
-  The DMM implementation was done using Python 3 while Gaussian Mixture
+  The DMM implementation was implemented using Python 3 while Gaussian Mixture
   Models, FreMEn, and Hypertime were all written in C++. The DMM implementation
-  was written by the author of this paper TODO phrasing? while the other three
-  are available on Tom Krajnik's Github page. TODO link? Finally, the non-binary
+  was written by the author of this paper while the other three
+  are available on Tom Krajnik's Github page. \footnote[1]{https://github.com/gestom}
+  Finally, the non-binary
   version of Hypertime, although not yet freely available on Github, can
   be obtained upon request as mentioned in the binary-only repository. \\
 
@@ -163,9 +173,9 @@
 
     \item Accuracy to Historical Recreations
 
-    \item Planning Run-time
+    \item Training and Planning Run-time
 
-    \item Planning Memory Consumption
+    \item Training and Planning Memory Consumption
 
   \end{itemize}
 
@@ -295,8 +305,34 @@
     \label{figure:Door C Training Month}
   \end{figure}
 
+  \begin{table}[!htb]
+    \begin{tabular}{|l|l|l|l|l|}
+      \hline
+      Behavior Name          & End Time & $\mu$ in Seconds & $\sigma$ in Seconds & Max Wait \\ \hline
+      Morning Lull           & 6:00     & 0                                 & 0.4                           & 2        \\ \hline
+      Morning Early Arrivals & 7:30     & 0                                 & 0.5                           & N/A      \\ \hline
+      Morning Pre Rush       & 8:30     & 2                                 & 2                             & N/A      \\ \hline
+      Morning Work           & 10:00    & 9                                 & 1                             & N/A      \\ \hline
+      Early Lunch            & 11:00    & 4                                 & 1                             & N/A      \\ \hline
+      Lunch Pre Rush         & 11:30    & 4                                 & 2                             & N/A      \\ \hline
+      Lunch Rush             & 12:30    & 9                                 & 2                             & N/A      \\ \hline
+      Midday Work            & 13:30    & 9                                 & 1                             & N/A      \\ \hline
+      Evening Pre Rush       & 16:00    & 4                                 & 2                             & N/A      \\ \hline
+      Evening Rush           & 17:30    & 9                                 & 2                             & N/A      \\ \hline
+      Day Wind Down          & 22:00    & 9                                 & 0.5                           & N/A      \\ \hline
+      Day End                & 24:00    & 0                                 & 0.4                           & 2        \\ \hline
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item $\mu$ - Nominal Wait
+      \item $\sigma$ - Noise
+    \end{tablenotes}
+    \caption{Behaviors used to describe daily wait times for the elevator}
+    \label{table:elevator_day_t}
+  \end{table}
 
-  \clearpage
+
+  \newpage
   \section{ Path Planning in Congested Hallways}
 
   \subsection{ Experimental Motivation }
@@ -318,7 +354,7 @@
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{images/basement_congestion.png}
-    \caption{Conested Basement}
+    \caption{Congested Basement}
     \label{figure:basement_congestion}
   \end{figure}
 
@@ -335,7 +371,7 @@
   \end{figure}
 
   The specific area under test in this experiment is a representation
-  of the basement area of the hospital ROPOD will be deployed in. Figure 5.5
+  of the basement area of the hospital ROPOD will be deployed in. Figure 5.5 TODO FIX THESE THREE FIGURES
   is a cleaned up version of ROPOD-generated map. Areas have been marked
   to highlight where common dynamic obstacles occur. Figure 5.6 shows a graph
   representation of this same area, simplified for path planning. Figure 5.7
@@ -371,21 +407,19 @@
   \subsection{ Data Generation }
 
   The data for these tests was generated using the same program as the doors
-  and in the same manner. The graph generation and path planning was done using
-  NetworkX a free and open source tool that allows for, amongst other functionality, the creation and subsequent
-  path planning on graphs. More information can be
-  found on online at https://networkx.github.io/
+  and in the same manner. The graph generation and path planning was done
+  using NetworkX
+  \footnote[1]{More information can be found on online at https://networkx.github.io/}
+  a free and open source tool that allows for, amongst other functionality,
+  the creation and subsequent path planning on graphs.
 
   The specifics for each door are as follows.
   TODO perhaps a graph that shows all at once for a week?
-  TODO where do I clarify that this is only for example and not real data again?
-  TODO standardize order
-  TODO footnote
 
   \subsubsection{ Meals - Nodes 1,2 \& 1,2}
 
   Meals are a periodic and consistent behavior in the hospital. They happen
-  three times a day regardless of the day of the wekk. Meals and their
+  three times a day regardless of the day of the week. Meals and their
   associated materials are staged in the hallway before being moved to
   another area or delivered. For ease of simulation, carts begin to pile up
   at node 1,2 at 4:00 and continue to build up until overflowing into node 1,3
@@ -441,7 +475,7 @@
 
   Historically, many efforts in the field of spatio-temporal world modeling
   have been focused on modeling or classifying behavior into one of two binary
-  states. (TODO give some citations here) Although this works well for
+  states. Although this works well for
   representing the traverseability of an environment or detecting the presence of an object,
   it does not translate well into the tracking and predicting the behavior and
   state of many real-world objects. The ability to track and predict
