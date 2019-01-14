@@ -11,7 +11,9 @@ Door A, is an excellent starting point and litmus test for various spatio-tempor
 world modeling techniques due to its periodic, human, and slightly random nature.
 Door A's results establish a trend that can be seen
 throughout the rest of the results. This is particularly visible in ~\ref{figure:accuracy_door_A}
-where the accuracy of each model is evaluated over time. \\
+where the accuracy of each model is evaluated over time. Table ~\ref{table:door_A}
+also establishes a trend with respect to accuracy and computational resource
+usage that is mirrored in the majority of experiments.\\
 
 \begin{table}[h!]
   \centering
@@ -32,7 +34,7 @@ where the accuracy of each model is evaluated over time. \\
 Do to the periodic nature of the data, the techniques based off of extracting
 periodicities (i.e. FreMEn and Hypertime) do an excellent job of recreating
 past events as well as predicting future events. The prediction of past and future events can be seen in
-figure ~\ref{figure:historical_door_A} and ~\ref{figure:future_door_A} respectively. Hypertime's slightly better
+figure ~\ref{figure:historical_door_A} and ~\ref{figure:future_door_A} respectively. HyperTime's slightly better
 prediction ability is most likely due to the extra steps taken to wrap the data back
 in on itself temporally. However, this additional training and accuracy comes at a
 great cost. Hypertime manages only a small performance increase over
@@ -99,11 +101,12 @@ minimal periods of periodic data. \\
     \end{tabular}%
   }
   \caption{Door B Data Overview}
+  \label{table:door_B}
 \end{table} \\
 
 DMM, relying almost solely on averages, does surprisingly well in this
 experiment, beating all other models in both historical and prediction
-accuracy. It is, however, important to note the flaws in DMM's long-term
+accuracy visible in figure ~\ref{figure:historical_door_B} and ~\ref{figure:future_door_B}. It is, however, important to note the flaws in DMM's long-term
 prediction. Due to the fact that future predictions are not directly possible
 using DMM and thus historical data is used, it is clear that,
 while DMM performed well overall historically, it is not without problems
@@ -113,7 +116,8 @@ boundaries. Since the behavior that happens every three days does not happen
 on the same day between the two months DMM incorrectly predicts its
 occurrence as happening on the same days each month. \\
 
-In terms of resource usage, a similar trend to door A is observed. Gaussian
+In terms of resource usage, a similar trend to door A is observed as visible
+int ~\ref{table:door_B}. Gaussian
 and FreMEn predictions take under 100 milliseconds while DMM takes around
 an order of magnitude longer, and Hypertime yet another order of magnitude
 beyond that. Finally, again, similar to door A, all approaches use roughly the same amount
@@ -129,6 +133,7 @@ within about 10 megabytes of one another. \\
     {\includegraphics[width = 6in]{images/results/Historical_door_B_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Door B}
+  \label{figure:historical_door_B}
 \end{figure}\\ \\
 
 \begin{figure}[!Hp]
@@ -139,6 +144,7 @@ within about 10 megabytes of one another. \\
     {\includegraphics[width = 6in]{images/results/Future_door_B_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Door B}
+  \label{figure:future_door_B}
 \end{figure}\\ \\
 
 \begin{figure}[!Hp]
@@ -147,6 +153,7 @@ within about 10 megabytes of one another. \\
     {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_door_B.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Door B}
+  \label{figure:accuracy_door_B}
 \end{figure}\\ \\
 \end{center}
 
@@ -160,8 +167,11 @@ Perhaps expectedly, the results in terms of prediction accuracy are
 almost completely opposite to that of door A with DMM having the best
 performance both historically and with future predictions. \\
 
-Unfortunately, despite DMM's better performance by the numbers in table 6.3, TODO PROPER LINK
-looking at the resulting graphs in table 6.7 and 6.8 shows a somewhat
+Unfortunately, despite DMM's better performance by the numbers in table
+~\ref{table:door_C}
+looking at the resulting graphs in figures
+~\ref{figure:historical_door_C} and ~\ref{figure:future_door_C}
+show a somewhat
 initially disappointing result. As discussed in the door B experiment,
 DMM, merely uses its historical predictions again for future
 predictions. This is clearly visible by the prediction of door C being open
@@ -188,27 +198,27 @@ remained shut. \\
       Memory Usage (KB)               & 31224   & 35004    & 34976   & 37208     \\ \hline
     \end{tabular}%
   }
-
   \caption{Door C Data Overview}
+  \label{table:door_C}
 \end{table}
 
 As alluded to above in door B's experiment, the lack of periodic data has
 caused both FreMEn and Hypertime to take the easiest prediction for the
 training data and predict that the door will always be open. Unfortunately,
-this causes the future predictions to be entirely inaccurate. The only possible redemption
+this causes the future predictions, seen in figure ~\ref{figure:future_door_C} to be entirely inaccurate. The only possible redemption
 for the Fourier based approaches on this long-term changes is that the
 prediction would eventually flip to always being closed, but only after the total number of observations of the door being
 closed surpassed that of the door being open. In this case, that would take a
 total of just over 6 weeks if training was being done every night. \\
 
-The resource usage statistics in figure 6.3 do interestingly break slightly
+The resource usage statistics in table ~\ref{table:door_C} do interestingly break slightly
 from the norm. It appears that due to the simplistic predictions of the
 Fourier approaches, Hypertime has shaved off an order of magnitude in
 computation time. This is believed to be because the prediction model created
 by Hypertime, after the initial naive approach, has a larger error than the first and thus it immediately quits
 and stops attempting to improve the model. This is irrelevant however, seeing
 as the predictions are completely inaccurate so any gain in computational time
-is meaningless. \\
+is meaningless as seen in figure ~\ref{figure:accuracy_door_C}\\
 
 \begin{center}
 \begin{figure}[!Hp]
@@ -219,6 +229,7 @@ is meaningless. \\
     {\includegraphics[width = 6in]{images/results/Historical_door_C_HyT-EM.png}} \\
   \end{tabular}
   \caption{Historical Recreations - Door C}
+  \label{figure:historical_door_C}
 \end{figure}\\ \\
 
 \begin{figure}[!Hp]
@@ -229,6 +240,7 @@ is meaningless. \\
     {\includegraphics[width = 6in]{images/results/Future_door_C_HyT-EM.png}} \\
   \end{tabular}
   \caption{Future Predictions - Door C}
+  \label{figure:future_door_C}
 \end{figure}\\ \\
 
 \begin{figure}[!Hp]
@@ -237,12 +249,12 @@ is meaningless. \\
     {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_door_C.png}} \\
   \end{tabular}
   \caption{Model Accuracy Over Time - Door C}
+  \label{figure:accuracy_door_C}
 \end{figure}\\ \\
 \end{center}
 
 
 \section{ Congested Hallways }
-TODO pare down images and move them to the end of the paper
 
 Having already given an in-depth look at the individual predictions in the
 previous section will
@@ -259,7 +271,10 @@ of a given spatio-temporal modeling technique and the period of the behavior
 attempting to be modeled. In general, the data suggest that behaviors with
 a higher frequency are better modeled using Fourier methods like FreMEn and
 Hypertime. This is most obvious when looking at behaviors that are repeated multiple
-times a day such as the laundry or meal nodes. In these experiments, the Fourier
+times a day such as the laundry or meal nodes as seen in tables
+~\ref{table:Hallway_Laundry_Section},
+~\ref{table:Hallway_Meal_Section_0}, and
+~\ref{table:Hallway_Meal_Section_1}. In these experiments, the Fourier
 methods achieved an impressive 100\% accuracy.
 One caveat to these impressive results is the lack of noise
 present in the data used for the hallway test. Large amounts of noise were
@@ -280,6 +295,7 @@ both the door and elevator experiments. \\
     \end{tabular}%
   }
   \caption{Hallway Laundry Section}
+  \label{table:Hallway_Laundry_Section}
 \end{table}
 
 \begin{table}[h!]
@@ -295,6 +311,7 @@ both the door and elevator experiments. \\
     \end{tabular}%
   }
   \caption{Hallway Meal Section 0}
+  \label{table:Hallway_Meal_Section_0}
 \end{table}
 
 \begin{table}[h!]
@@ -310,11 +327,13 @@ both the door and elevator experiments. \\
     \end{tabular}%
   }
   \caption{Hallway Meal Section 1}
+  \label{table:Hallway_Meal_Section_1}
 \end{table}
 
 
 When observing the behavior that occurs with the least frequency, the trash
-nodes, the opposite trend is observed. Fourier methods no longer are able to
+nodes, table ~\ref{table:Hallway_Trash_Section_0} and ~\ref{table:Hallway_Trash_Section_0},
+the opposite trend is observed. Fourier methods no longer are able to
 accurately predict behaviors and their predictions drop to around 66\% accuracy.
 This is not believed to be a problem with predicting or modeling behaviors with a
 lower frequency, but rather a consequence of the ratio between frequency and
@@ -362,6 +381,7 @@ than an offline learning model that trains on a set of data. \\
     \end{tabular}%
   }
   \caption{Hallway Delivery Section}
+  \label{table:Hallway_Delivery_Section}
 \end{table}
 
 \begin{table}[htb!]
@@ -377,6 +397,7 @@ than an offline learning model that trains on a set of data. \\
     \end{tabular}%
   }
   \caption{Hallway Trash Section 0}
+  \label{table:Hallway_Trash_Section_0}
 \end{table}
 
 \begin{table}[htb!]
@@ -392,6 +413,7 @@ than an offline learning model that trains on a set of data. \\
     \end{tabular}%
   }
   \caption{Hallway Trash Section 1}
+  \label{table:Hallway_Trash_Section_1}
 \end{table}
 
 
@@ -430,7 +452,9 @@ into the simulated data. Thus, aside from DMM, the historical and future
 predictions are, for all intents and purposes identical. The reasons for this
 will be discussed in the section below, but because of this only the future
 path planning results will be analyzed. Finally, a keen reader may notice that both
-historical and future total time spent planning are the same. This is because
+historical and future total time spent planning are the same, visible in
+tables ~\ref{table:Historical_Path_Planning_Results} and
+  ~\ref{table:Future_Path_Planning_Results}. This is because
 during simulation both historical and future predictions were produced. \\
 
 Finally, it is important to note that although all of the behaviors were
@@ -464,6 +488,7 @@ a predictive model is desired. \\
     \end{tabular}%
   }
   \caption{Historical Path Planning Results}
+  \label{table:Historical_Path_Planning_Results}
 \end{table}
 
 \begin{table}[htb!]
@@ -480,6 +505,7 @@ a predictive model is desired. \\
     \end{tabular}%
   }
   \caption{Future Path Planning Results}
+  \label{table:Future_Path_Planning_Results}
 \end{table}
 
 
@@ -741,9 +767,35 @@ and 9 which average out to 6.5. Finally, due to the large amount of noise
 combined with the fact that an elevator cannot have a negative wait time,
 the average is pulled up a bit by the extremely long wait times as high as 30 seconds during peak hours. \\
 
+\begin{center}
+  \begin{figure}[!Hp]
+  \begin{tabular}{cc}
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Historical_elevator_HyT-EM.png}} \\
+  \end{tabular}
+  \caption{Historical Recreations - Elevator Data}
+  \label{figure:Historical_Recreations_Elevator_Data}
+\end{figure}
+
+\begin{figure}[!Hp]
+  \begin{tabular}{cc}
+    {\includegraphics[width = 6in]{images/results/Future_elevator_DMM.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_FreMEn.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_Gaussian.png}} \\
+    {\includegraphics[width = 6in]{images/results/Future_elevator_HyT-EM.png}} \\
+  \end{tabular}
+  \caption{Future Predictions - Elevator Data}
+  \label{figure:Future_Predictions_Elevator_Data}
+\end{figure}
+
+
 Finally, and perhaps most interesting, are the Hypertime results. Hypertime takes a
-unique approach to classifying its data. Once again, looking at the figure TODO TODODODODODODOOOOO
-we can see that predictions are clustered on integer boundaries. To be clear,
+unique approach to classifying its data. Once again, looking at the Hypertime
+graph in figures ~\ref{figure:Historical_Recreations_Elevator_Data} and
+~\ref{figure:Future_Predictions_Elevator_Data}
+it is seen that predictions are clustered on integer boundaries. To be clear,
 non-binary Hypertime in its current implementation, although capable of training
 on real data\footnote[1]{Real data as in both real-world data and all the numbers in the set of real numbers that can be represented using standard floating point notation},
 can only produce
@@ -887,73 +939,6 @@ prediction value, would most likely reduce the
 computational time considerably, perhaps as much as a third of its original
 value if the max estimate was limited to 10. This would likely result in a
 computational time between 1 and 2.5 minutes. \\
-
-
-
-
-\begin{center}
-  \begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Historical_elevator_DMM.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_elevator_Gaussian.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_elevator_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Historical Recreations - Elevator Data}
-  \label{figure:Historical_Recreations_Elevator_Data}
-\end{figure}
-
-\begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Future_elevator_DMM.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_elevator_Gaussian.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_elevator_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Future Predictions - Elevator Data}
-  \label{figure:Future_Predictions_Elevator_Data}
-\end{figure}
-
-\begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_Elevator_Data.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_Elevator_Data.png}} \\
-  \end{tabular}
-  \caption{Model Accuracy Over Time - Elevator Data}
-  \label{figure:Model_Accuracy_Over_Time_Elevator_Data}
-\end{figure}
-
-\begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_DMM.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_Gaussian.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_high_res_elevator_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Historical Recreations - High Resolution Elevator Data}
-  \label{figure:Historical_Recreations_High_Resolution_Elevator_Data}
-\end{figure}
-
-\begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_DMM.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_FreMEn.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_Gaussian.png}} \\
-    {\includegraphics[width = 6in]{images/results/Future_high_res_elevator_HyT-EM.png}} \\
-  \end{tabular}
-  \caption{Future Predictions - High Resolution Elevator Data}
-  \label{figure:Future_Predictions_High_Resolution_Elevator_Data}
-\end{figure}
-
-\begin{figure}[!Hp]
-  \begin{tabular}{cc}
-    {\includegraphics[width = 6in]{images/results/Future_Predictions_on_High_Resolution_Elevator_Data.png}} \\
-    {\includegraphics[width = 6in]{images/results/Historical_Predictions_on_High_Resolution_Elevator_Data.png}} \\
-  \end{tabular}
-  \caption{Model Accuracy Over Time - High Resolution Elevator Data}
-  \label{figure:Model_Accuracy_Over_Time_High_Resolution_Elevator_Data}
-\end{figure}
-\end{center}
 
 
 \section{ Final Thoughts }

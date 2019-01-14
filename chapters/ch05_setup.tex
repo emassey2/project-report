@@ -209,7 +209,8 @@
   object itself has been modeled. For this example the doors could belong to a room where a
   package must delivered or perhaps a hallway that could be used as a
   shortcut. Each model will be directly or indirectly be tasked with
-  predicting the state of this door. TODO fix cite Figure 5.1 displays an example of three
+  predicting the state of this door. Figure ~\ref{figure:ward_24_door}
+  displays an example of three
   doors in ward 24 of the hospital that may display the dynamic behavior
   previously mentioned. \\
 
@@ -236,9 +237,7 @@
   \subsection{ Data Generation }
 
   As mentioned above, both the training and the test data for all models was
-  generated using the same program.
-
-  The specifics for each door are as follows.
+  generated using the same program. The specifics for each door are as follows.
 
   \subsubsection{ Door A }
 
@@ -256,13 +255,14 @@
   Likewise, when in a likely closed state it has a 70\% chance of being closed.
   Finally, when noise is introduced during the weekday it uses a standard deviation
   of 0.1 where $\mu$ is either 0.3 or 0.7 and 0.5 is the cutoff for being open or
-  closed. \\
+  closed. Figure ~\ref{figure:Door_A_example} shows an example of what a
+  month of this behavior looks like.\\
 
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{images/Door_A_Example_Month.png}
-    \caption{The training data for Month A}
-    \label{figure:Door A Training Month}
+    \caption{An example month of Door A behavior}
+    \label{figure:Door_A_example}
   \end{figure}
 
   \subsubsection{ Door B }
@@ -278,13 +278,14 @@
   entire day. This trend is continued across month boundaries meaning if
   the doors were closed on the day before the last day of the first month it
   will again be closed on the second day of the next month. Finally, on
-  weekends the door will always be open with 100\% certainty and no noise. \\
+  weekends the door will always be open with 100\% certainty and no noise. An
+  example of this behavior is found below in figure ~\ref{figure:Door_B_example}. \\
 
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{images/Door_B_Example_Month.png}
-    \caption{The training data for Month B}
-    \label{figure:Door B Training Month}
+    \caption{An example month of Door B behavior}
+    \label{figure:Door_B_example}
   \end{figure}
 
   \subsubsection{ Door C }
@@ -296,43 +297,16 @@
   being remodeled or has been removed. In the test data, this behavior is
   achieved by having the door be open for the first three weeks and then being
   closed for the rest of the training month and through the test month. In
-  this model no noise was introduced. \\
+  this model no noise was introduced. Figure ~\ref{figure:Door_C_example} shows
+  an example of this behavior.\\
 
   \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{images/Door_C_Example_Month.png}
-    \caption{The training data for Month C}
-    \label{figure:Door C Training Month}
+    \caption{An example month of Door C behavior}
+    \label{figure:Door_C_example}
   \end{figure}
 
-  \begin{table}[!htb]
-    \begin{tabular}{|l|l|l|l|l|}
-      \hline
-      Behavior Name          & End Time & $\mu$ in Seconds & $\sigma$ in Seconds & Max Wait \\ \hline
-      Morning Lull           & 6:00     & 0                                 & 0.4                           & 2        \\ \hline
-      Morning Early Arrivals & 7:30     & 0                                 & 0.5                           & N/A      \\ \hline
-      Morning Pre Rush       & 8:30     & 2                                 & 2                             & N/A      \\ \hline
-      Morning Work           & 10:00    & 9                                 & 1                             & N/A      \\ \hline
-      Early Lunch            & 11:00    & 4                                 & 1                             & N/A      \\ \hline
-      Lunch Pre Rush         & 11:30    & 4                                 & 2                             & N/A      \\ \hline
-      Lunch Rush             & 12:30    & 9                                 & 2                             & N/A      \\ \hline
-      Midday Work            & 13:30    & 9                                 & 1                             & N/A      \\ \hline
-      Evening Pre Rush       & 16:00    & 4                                 & 2                             & N/A      \\ \hline
-      Evening Rush           & 17:30    & 9                                 & 2                             & N/A      \\ \hline
-      Day Wind Down          & 22:00    & 9                                 & 0.5                           & N/A      \\ \hline
-      Day End                & 24:00    & 0                                 & 0.4                           & 2        \\ \hline
-    \end{tabular}
-    \begin{tablenotes}
-      \small
-      \item $\mu$ - Nominal Wait
-      \item $\sigma$ - Noise
-    \end{tablenotes}
-    \caption{Behaviors used to describe daily wait times for the elevator}
-    \label{table:elevator_day_t}
-  \end{table}
-
-
-  \newpage
   \section{ Path Planning in Congested Hallways}
 
   \subsection{ Experimental Motivation }
@@ -353,8 +327,8 @@
 
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{images/basement_congestion.png}
-    \caption{Congested Basement}
+    \includegraphics[width=\linewidth]{images/results/overlay.png}
+    \caption{Congested Basement with marked nodes}
     \label{figure:basement_congestion}
   \end{figure}
 
@@ -371,12 +345,19 @@
   \end{figure}
 
   The specific area under test in this experiment is a representation
-  of the basement area of the hospital ROPOD will be deployed in. Figure 5.5 TODO FIX THESE THREE FIGURES
+  of the basement area of the hospital ROPOD will be deployed in. Figure
+  ~\ref{figure:basement_congestion}
   is a cleaned up version of ROPOD-generated map. Areas have been marked
-  to highlight where common dynamic obstacles occur. Figure 5.6 shows a graph
-  representation of this same area, simplified for path planning. Figure 5.7
-  shows the same area but with all dynamic obstacles present. The obstacles
-  and there frequencies are as follows: \\
+  to highlight where common dynamic obstacles occur. Figure
+  ~\ref{figure:basement_congestion_empty} shows a graph
+  representation of this same area, simplified for path planning. Black nodes
+  are static and not traversable. The start and goal nodes have been marked
+  and all connected nodes are traversable. Finally,
+  figure ~\ref{figure:basement_congestion_full}
+  shows the same area but with all dynamic obstacles present. Notice how when
+  all obstacles are present it is no longer possible to get from the start
+  to the goal. The obstacles
+  and their frequencies are as follows: \\
 
   \begin{itemize}
 
@@ -414,7 +395,6 @@
   the creation and subsequent path planning on graphs.
 
   The specifics for each door are as follows.
-  TODO perhaps a graph that shows all at once for a week?
 
   \subsubsection{ Meals - Nodes 1,2 \& 1,2}
 
@@ -463,10 +443,6 @@
   or obstacles completely cut off a given path. Examples of this are when both
   laundry and the first trash node are present or when both trash nodes and both
   meal nodes are present.
-  \clearpage
-
-
-
 
 
   \section{ Busy Elevators }
@@ -525,8 +501,8 @@
   specific case, represent the average time one must wait after calling an
   elevator. There are still linear transitions between behaviors as well as
   a variable amount Gaussian noise being applied on top of the nominal state
-  (i.e. noise applied on top of the average wait time). The month of training
-  data is visible in TODO. \\
+  (i.e. noise applied on top of the average wait time). An example month
+  of data is visible in figure ~\ref{figure:Elevator_Example_Data}.
 
 
   \subsubsection{ Average Daily Model}
@@ -536,8 +512,7 @@
   Peak elevator use time, and thus peak delays, are said to occur around times
   when people would being arriving or leaving work or lunch. The specifics of
   the behaviors and their parameters are visible in Table
-  \ref{table:elevator_day_t}. While ~\ref{figure:Elevator Training Data} shows
-  what an entire month of this data looks like.
+  \ref{table:elevator_day_t}.
 
   \begin{table}[!htb]
     \begin{tabular}{|l|l|l|l|l|}
@@ -571,7 +546,7 @@
     \centering
     \includegraphics[width=\linewidth]{images/Elevator_Data_Example_Month.png}
     \caption{The training data for the first elevator month}
-    \label{figure:Elevator Training Data}
+    \label{figure:Elevator_Example_Data}
   \end{figure}
 
 
