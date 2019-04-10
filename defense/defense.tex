@@ -1,0 +1,271 @@
+\documentclass{beamer}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{ragged2e}  % `\justifying` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{url}       % `\url
+\usepackage{listings}  % Code listings
+\usepackage[T1]{fontenc}
+
+
+\usepackage{theme/beamerthemehbrs}
+
+\author[Ethan Oswald Massey]{Ethan Oswald Massey}
+\title{Comparative Analysis of Techniques for Spatio-Temporal World Modeling}
+%\subtitle{Subtitle of presentation}
+%\title{Techniques for Spatio-Temporal World Modeling}
+%\subtitle{A Comparative Analysis}
+\institute[HBRS]{Hochschule Bonn-Rhein-Sieg}
+\date{2019-04-16}
+%\subject{Test beamer}
+
+% \thirdpartylogo{path/to/your/image}
+
+
+\begin{document}
+{
+\begin{frame}
+\titlepage
+\end{frame}
+}
+
+\begin{frame}[t]{Breakdown of Research Topic}
+\begin{itemize}
+    \setlength\itemsep{1em}
+
+    \item \textbf{World Modeling}
+    \begin{itemize}
+      \item “an internal representation of their [a robot's] surroundings to be able to reason
+        about and to interact with it”\cite{krajnik2015}
+    \item Historically, only two or three dimensional
+    \end{itemize}
+
+    \item \textbf{Spatio-Temporal}
+    \begin{itemize}
+      \item Introduction of the fourth dimension
+      \item Allows for prediction of changes in environment
+    \end{itemize}
+
+    \item \textbf{Comparative Analysis}
+    \begin{itemize}
+      \item Various techniques exist and are still emerging
+      \item How can someone choose between these methods?
+      \item Establish criteria for comparison and evaluation
+    \end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]{Uses of Spatio-Temporal World Models}
+  \begin{itemize}
+    \setlength\itemsep{1em}
+    \item Useful where real-world changes are predictable and frequent
+    \item Human environments are often quite predictable when generalized
+    \item Logistics network (e.g. ROPOD)
+  \end{itemize}
+
+  \begin{block}{Common Predictions}
+    \begin{itemize}
+    \item Availability of resources
+      \begin{itemize}
+        \item Doors open/closed
+        \item How long until the next elevator
+      \end{itemize}
+    \item Human traffic density
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Benefits of Selecting the Best Model}
+  \centering
+    Improved predictions
+    \\
+    $\downarrow$
+    \\
+    Improves path planning
+    \\
+    $\downarrow$
+    \\
+    Decreases travel time
+    \\
+    $\downarrow$
+    \\
+    Increases work throughput
+    \\
+    $\downarrow$
+    \\
+    Saves time \& money
+    \\
+\end{frame}
+
+
+\begin{frame}[t]{Previous Work}
+
+  \begin{itemize}
+    \item \scriptsize Occupancy Grid Models for Robot Mapping in Changing Environments (D. Meyer-Delius et al. 2012) \cite{Meyer-Delius2012} \normalsize
+    \begin{itemize}
+      \item Internal comparison based on prediction accuracy
+    \end{itemize}
+
+    \item \scriptsize FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments \cite{krajnik2015} \normalsize
+    \begin{itemize}
+      \item Basic discussion about space and time complexity
+    \end{itemize}
+
+  \item \scriptsize A Poisson-Spectral Model for Modelling Temporal Patterns in Human Data Observed by a Robot \cite{Jovan2016} \normalsize
+    \begin{itemize}
+      \item Discussion of prediction accuracy and representation
+    \end{itemize}
+  \end{itemize}
+
+  \begin{block}{Limitations}
+    \begin{itemize}
+      \item The majority of these approaches are inward focused
+      \item Little to no comparison with other existing methods
+      \item Limited in scope and depth
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}[t]{Establishing Criteria for Comparison}
+  \framesubtitle{Characteristic Information}
+  \begin{itemize}
+    \setlength\itemsep{1em}
+    \item Computational Complexity
+      \begin{itemize}
+        \item Theoretical space and time complexity (Big O)
+      \end{itemize}
+
+    \item Efficiency of Data Storage
+      \begin{itemize}
+        \item Space taken to store observations and corrosponding fidelity
+      \end{itemize}
+
+    \item Learning Method
+      \begin{itemize}
+        \item Online vs Offline
+      \end{itemize}
+
+    \item Map Type Dependency
+      \begin{itemize}
+        \item e.g. methods only works with 2D occupancy girds
+      \end{itemize}
+
+    \item Limitations on Predictions
+      \begin{itemize}
+        \item Classification restrictions (e.g. binary vs non-binary)
+        \item Historical and longterm future predictions
+      \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Establishing Criteria for Comparison}
+  \framesubtitle{Metainformation}
+  \begin{itemize}
+    \setlength\itemsep{1em}
+    \item Availability of Work (1-3)
+      \begin{itemize}
+        \item 1 - Freely available
+        \item 2 - Some, but not all, components available
+        \item 3 - Limited or no resources
+      \end{itemize}
+
+    \item Implementation Complexity (1-3)
+      \begin{itemize}
+        \item 1 - Combination of preexisting models or mathematical constructs
+        \item 2 - Multiple complex components
+        \item 3 - Cutting edge complex and/or novel approach with multiple components
+      \end{itemize}
+
+    \item Suitable Fields of Application
+      \begin{itemize}
+        \item Generic vs field specific implementations
+      \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]{ROPOD - A Case Study}
+    %\framesubtitle{ROPOD}
+  \begin{columns}[t]
+
+    \column{.5\textwidth}
+    \begin{block}{What is ROPOD?}
+      \begin{itemize}
+        \item Aims to handle legacy in logistics
+        \item Low cost multi-robot solution
+        \item Moves supplies \& beds
+        \item Operates in a preexisting human environment (hospital)
+      \end{itemize}
+    \end{block}
+
+    \column{.5\textwidth}
+    \begin{block}{Why ROPOD?}
+      \begin{itemize}
+        \item Real world context
+        \item Extensive data collection
+        \item Periodic \& dynamic behaviors
+        \item Binary and non-binary behaviors
+      \end{itemize}
+    \end{block}
+  \end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}[t]{Contributions}
+
+  \begin{itemize}
+    \setlength\itemsep{1em}
+    \item Completed survey of spatio-temporal world modeling techniques
+    \item Defined qualitative criteria and evaluated existing methods
+    \item Defined and preformed experiments for benchmarking methods
+    \item Applied results of benchmarking to make real-world recommendations
+  \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[label=bibliography]{Bibliography}
+  \begin{thebibliography}{9}
+    \bibitem{krajnik2015}
+        \emph{FreMEn: Frequency Map Enhancement for Long-Term Mobile Robot Autonomy in Changing Environments}
+        T. Krajník, J. Fentanes, J. Santos, \& T. Duckett,
+        ICRA Workshop on Visual Place Recognition in Changing Environments
+        2015
+    \bibitem{Meyer-Delius2012}
+        \emph{Occupancy Grid Models for Robot Mapping in Changing Environments},
+        Meyer-Delius, Daniel and Beinhofer, Maximilian and Burgard, Wolfram,
+        Proc. of the Twenty-Sixth AAAI Conference on Artificial Intelligence
+        2012
+    \bibitem{Jovan2016}
+        \emph{A poisson-spectral model for modelling temporal patterns in human data observed by a robot},
+        Jovan, Ferdian and Wyatt, Jeremy and Hawes, Nick and Krajnik, Tomas,
+        IEEE International Conference on Intelligent Robots and Systems
+        2016
+  \end{thebibliography}
+\end{frame}
+
+
+
+
+\end{document}
