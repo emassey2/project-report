@@ -9,7 +9,7 @@
   only a partial solution. Given the focus ROPOD places on real-world
   environments it is critical that some operational tests be performed before
   selection of a method. Not only will these experiments serve as a guide for ROPOD,
-  and will also serve as a template for the comparison of future
+  but they will also serve as a template for the comparison of future
   spatio-temporal world modeling techniques in other projects. \\
 
   \section{ Environmental Representation}
@@ -17,18 +17,17 @@
   Given the complexity and size of the target environment for ROPOD, a large
   hospital, it is necessary to pare down features of the building until only
   the core components remain. The three dynamic environmental components being
-  considered are doors, path planning with carts that are often strewn about the
-  hallways and surrounding rooms, and elevators.
+  considered are doors, path planning with dynamic objects such as carts that are often strewn about the
+  hallways, and elevators.
   To that effect, experiments have been designed to assess these key features.
   In the case of the doors and the elevator, the object under test, and its
   behavior, can be pulled out of the original complex environment. By
   isolating and simulating only the behavior of the object under test, the
-  number of potential variables in the experiment is reduced.\\
-
+  number of potential variables in the experiment is reduced.
   In the case of the path planning experiment, complete and total isolation from the operating
   environment is not possible. Instead, a graph has been designed to closely
-  resemble an actual section of the hospital. Experiment specific details are
-  covered in their respective sections. \\
+  resemble an actual section of the hospital along with the possible dynamic objects
+  in that environment. Experiment specific details are covered in their respective sections. \\
 
 
   \section{ Common Assumptions }
@@ -82,10 +81,10 @@
           below.
 
     \item Computational resource usage will be tracked using the built-in Linux
-      binary ``time'' \footnote[1]{Specifically, ``/usr/bin/time -f 'max\_RSS=\%MKB t\_kernel=\%S t\_user=\%U t\_total=\%E' \$TEST was used''}
+      binary ``time''\footnote[1]{Specifically, ``/usr/bin/time -f 'max\_RSS=\%MKB t\_kernel=\%S t\_user=\%U t\_total=\%E' \$TEST was used''}
 
 
-    \item All experiments will be done on the same hardware
+    \item All experiments will be done on the same hardware and operating system
       \begin{itemize}
         \item ASUS UX330UAK Laptop
         \item i5-7200k 2.5GHz
@@ -98,11 +97,11 @@
   \section{ Data Generation }
 
   Data generation is performed using a combination of built-in Python libraries and
-  the NumPy library. \footnote[1]{http://www.numpy.org/} Each object is broken down into a series of days which is
+  the NumPy\footnote[1]{http://www.numpy.org/} library. Each behavior to be modeled is broken down into a series of days which is
   then further broken down into a series of behaviors. Each behavior
   represents the likelihood of an object being in a given state between two
   times. Furthermore, each behavior has a starting state and an ending state
-  which, if different, are swept through linearly. E.g. if a behavior is
+  which, if different, are swept through linearly, e.g., if a behavior is
   modeling the binary state of a door that starts at 100\% open and then becomes
   100\% closed an hour later at the half hour mark the door would be defined as having
   a 50\% likelihood of being open. Additionally, it is possible
@@ -113,7 +112,7 @@
   simulated month with each month assumed to have exactly 31 days. \\
 
   As an example, if a door was open from noon until midnight every day and then closed from
-  midnight until noon there would be two behaviors one from midnight until
+  midnight until noon there would be two behaviors, one from midnight until
   noon and one from noon until right before midnight. In this case, the
   starting and ending values of each behavior would be the same and no noise
   would be introduced. This would create a sharp, well defined change at
@@ -127,13 +126,13 @@
   section but, the keen reader will notice the inclusion of a fourth model.
   That model, the Gaussian Mixture Model is not
   expected to perform as well as the others. Despite this, it has been included
-  for historical reasons as it has been used as benchmark spatio-temporal model
-  in the past such as the work in \cite{Coppola2016}. \\
+  for historical reasons as it has been used as a benchmark model
+  in the past specifically in \cite{Coppola2016}. \\
 
   As for the other methods, Hypertime and DMM are of particular interest as they will
   be able to represent non-binary states. Hypertime will be using the
   expectation mean variant.  FreMEn and
-  Hypertime will both use an order of three as that has, on average produced,
+  Hypertime will both use an order of three as that has, on average, produced
   the best results as seen in \cite{Krajnik2015}. During
   non-binary prediction Hypertime requires an upper limit for it estimates. In
   the case of the elevator experiment, an upper limit of 30 (seconds) has been
@@ -153,7 +152,7 @@
   The DMM implementation was implemented using Python 3 while Gaussian Mixture
   Models, FreMEn, and Hypertime were all written in C++. The DMM implementation
   was written by the author of this paper while the other three
-  are available on Tom Krajnik's Github page. \footnote[1]{https://github.com/gestom}
+  are available on Tom Krajnik's Github\footnote[1]{https://github.com/gestom} page.
   Finally, the non-binary
   version of Hypertime, although not yet freely available on Github, can
   be obtained upon request as mentioned in the binary-only repository. \\
@@ -183,14 +182,14 @@
 
   \subsection{ Experimental Motivation }
 
-  As is the case in many places of employment many areas of a building may not
+  As is the case in many places of employment, many areas of a building may not
   be accessible to the public, and by extension the robots, outside of work
   hours. This could come in the form of a given hallway between two areas being
   locked when public access ends or workers leave for the day. In another case, it could be as
-  simple as someone preferring to having a door to a hallway shut during a loud
-  or chaotic time of the day. \\
+  simple as someone preferring to having a door to a hallway shut during a
+  particularly loud time of the day. \\
 
-  Regardless of why the states of doors are often
+  Regardless of why, it is certain that the states of doors are often
   dynamic and exhibit both periodic and long-term changes. In the ideal case, a robot
   would learn when certain doors are closed and be able to plan accordingly.
   While making an accurate prediction can save time, making an inaccurate
@@ -199,17 +198,17 @@
   target. Additionally, it may not be possible to make deliveries at all times.
   In the worst case, bad pathing can lead to a robot becoming locked in an
   environment and making it unable to return to its base thus eventually running out of power and
-  requiring human intervention. For these reasons and more the door
-  experiment is highlights the benefits of spatio-temporal world
-  modeling. \\
+  requiring human intervention. For these reasons and more, the door
+  experiment highlights the benefits and importance of selecting the correct spatio-temporal world
+  model. \\
 
   \subsection{ Experimental Details }
 
   In order to keep this test as simple as possible, only the door
   object itself has been modeled. For this example the doors could belong to a room where a
   package must delivered or perhaps a hallway that could be used as a
-  shortcut. Each model will be directly or indirectly be tasked with
-  predicting the state of this door. Figure ~\ref{figure:ward_24_door}
+  shortcut. Each model will be directly or indirectly tasked with
+  predicting the state of a given door. Figure~\ref{figure:ward_24_door}
   displays an example of three
   doors in ward 24 of the hospital that may display the dynamic behavior
   previously mentioned. \\
@@ -230,8 +229,8 @@
   of making a wrong prediction, but this particular experiment is designed only to
   investigate the accuracy of the prediction. The hallway experiment discussed
   below will delve deeper into the ramifications of inaccurate
-  predictions. The result of a prediction is
-  being carried out is undoubtedly valuable, but is outside the scope of this
+  predictions. The result of a incorrect prediction
+  being carried out is undoubtedly valuable, but is outside the scope of this specific
   experiment. \\
 
   \subsection{ Data Generation }
@@ -255,7 +254,7 @@
   Likewise, when in a likely closed state it has a 70\% chance of being closed.
   Finally, when noise is introduced during the weekday it uses a standard deviation
   of 0.1 where $\mu$ is either 0.3 or 0.7 and 0.5 is the cutoff for being open or
-  closed. Figure ~\ref{figure:Door_A_example} shows an example of what a
+  closed. Figure~\ref{figure:Door_A_example} shows an example of what a
   month of this behavior looks like.\\
 
   \begin{figure}[!htb]
@@ -279,7 +278,7 @@
   the doors were closed on the day before the last day of the first month it
   will again be closed on the second day of the next month. Finally, on
   weekends the door will always be open with 100\% certainty and no noise. An
-  example of this behavior is found below in figure ~\ref{figure:Door_B_example}. \\
+  example of this behavior is found below in figure~\ref{figure:Door_B_example}. \\
 
   \begin{figure}[!htb]
     \centering
@@ -297,7 +296,7 @@
   being remodeled or has been removed. In the test data, this behavior is
   achieved by having the door be open for the first three weeks and then being
   closed for the rest of the training month and through the test month. In
-  this model no noise was introduced. Figure ~\ref{figure:Door_C_example} shows
+  this model no noise was introduced. Figure~\ref{figure:Door_C_example} shows
   an example of this behavior.\\
 
   \begin{figure}[!htb]
@@ -317,9 +316,9 @@
   this reason that multiple dynamic objects will be used to model an environment
   that closely replicates ROPOD's target environment. Not only does this
   serve as an excellent test case for ROPOD, but it also serves as an initial
-  evaluation into the scalability of a method. \\
+  evaluation into the scalability of the proposed method. \\
 
-  When planning paths with multiple dynamic objects it, is critical that not just
+  When planning paths with multiple dynamic objects it is critical that not just a
   few, but all of the objects are correctly predicted. If any of the objects' states are
   predicted incorrectly, a robot may need to reroute dynamically or it may not
   be able to arrive at is destination thus wasting time and resources. \\
@@ -331,8 +330,6 @@
     \caption{Congested Basement with marked nodes}
     \label{figure:basement_congestion}
   \end{figure}
-
-  \clearpage
 
 
   \subsection{ Experimental Details }
@@ -353,11 +350,10 @@
   representation of this same area, simplified for path planning. Black nodes
   are static and not traversable. The start and goal nodes have been marked
   and all connected nodes are traversable. Finally,
-  figure ~\ref{figure:basement_congestion_full}
+  figure~\ref{figure:basement_congestion_full}
   shows the same area but with all dynamic obstacles present. Notice how when
   all obstacles are present it is no longer possible to get from the start
-  to the goal. The obstacles
-  and their frequencies are as follows: \\
+  to the goal. The obstacles and their frequencies are as follows: \\
 
   \begin{itemize}
 
@@ -422,7 +418,7 @@
 
   \subsubsection{ Trash - Node 2,4 \& 3,4 }
 
-  Trash or other objects are periodically stored temporally in hallways.
+  Trash or other nondescript objects are periodically stored in the hallway.
   For the sake of simulation, trash begins to build up at node 3,4
   and then expands into node 2,4. On the first day of the first month both nodes
   will be free for traversal. After the first day, at precisely 00:01, the first
@@ -435,10 +431,10 @@
 
   \subsubsection{ Areas of Particular Note }
 
-  As visible in Figure 5.7 it is not always possible to reach the goal from the
+  As visible in figure~\ref{figure:basement_congestion_full} it is not always possible to reach the goal from the
   starting node. Additionally, certain obstacles block paths that might
-  normally be considered first. An example is the obstacles caused by
-  the meal nodes, obstruct the most direct path to the goal upon leaving
+  normally be considered first or optimal. An example is the obstacles caused by
+  the meal nodes. They obstruct the most direct path to the goal upon leaving
   the elevator. Choke points are also a concern. These happen when an obstacle
   or obstacles completely cut off a given path. Examples of this are when both
   laundry and the first trash node are present or when both trash nodes and both
@@ -477,7 +473,7 @@
   classification of non-binary data. Additionally, although FreMEn and Gaussian Mixture Models
   do not natively support the prediction of non-binary states, they have been
   modified in order to produce results for analysis. Before training either of
-  the models, the data sets are ordered and split in half at the median. The
+  the models, the datasets are ordered and split in half at the median. The
   median value is then used for classification. If an observed value is below
   the median it is considered a 0 and considered a 1 if above the median. In this way, a continuous
   dataset can be broken into two states. Predictions are then made as normal.
@@ -485,9 +481,9 @@
   set is averaged to produce an average value for all values classified as 0 and
   all values classified as 1. These averages are then used for predictions. \\
 
-  For example, if the original data set contained six observations,
+  For example, if the original dataset contained six observations,
   [1, 2, 3, 4, 5, 6] the dataset would be split into [1, 2, 3] and [4, 5, 6].
-  Any prediction greater than or equal to four would be a 1 and lower a 0. All 0's during
+  Any prediction greater than or equal to 4 would be a 1, and lower a 0. All 0's during
   prediction would then be the average of the first dataset, e.g. 2 and all
   1's would result in a prediction of 5. \\
 
@@ -501,8 +497,8 @@
   specific case, represent the average time one must wait after calling an
   elevator. There are still linear transitions between behaviors as well as
   a variable amount Gaussian noise being applied on top of the nominal state
-  (i.e. noise applied on top of the average wait time). An example month
-  of data is visible in figure ~\ref{figure:Elevator_Example_Data}.
+  (i.e., noise applied on top of the average wait time). An example month
+  of data is visible in figure~\ref{figure:Elevator_Example_Data}.
 
 
   \subsubsection{ Average Daily Model}
@@ -552,9 +548,9 @@
 
   \subsection{ High Resolution Data }
 
-  Finally, an additional data set has been included for comparison. During
+  Finally, an additional dataset has been included for comparison. During
   normal data generation, observations are assumed to occur consistently every
-  15 minutes. In the additional ``High Resolution'' dataset, observations happen
+  15 minutes. In the additional ``high resolution'' dataset, observations happen
   every 1 minute. The inclusion of this additional dataset aims to outline how
   the models perform with larger sets of data while keeping the actual
   underlying data similar to the standard resolution dataset. \\

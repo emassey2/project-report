@@ -8,13 +8,13 @@
     First and foremost, this work developed a comprehensive method for the
     comparison of various spatio-temporal world modeling methods. Although as
     some previous work in this area
-    already exists, it was limited both in its ability to be applied to various
+    already exists, that work was limited both in its ability to be applied to various
     methods and the depth at which any two methods could be compared. The
     new techniques for comparison established in the Criteria for Comparison
     section built on the current methods to offer increased breadth and depth.
     Furthermore, the ROPOD case study section shows in detail how these new testing criteria
     can be used with respect to an actual project. This is an extremely important
-    contribution as all previous work merely used criteria to look reflexively
+    contribution as nearly all previous work merely used criteria to look reflexively
     at the quality of a new approach and not which method may be
     best suited for a given problem. \\
 
@@ -26,11 +26,12 @@
     Additionally, this section provides a roadmap for what types of experiments
     should be done, what results to look for, and how to evaluate those results.
     Beyond a roadmap, a novel approach for applying binary classification to
-    non-binary data was presented and demonstrated. \\
+    non-binary data was presented and demonstrated. Lastly, some new metrics
+    were proposed to evaluate path planning. \\
 
     Finally, a common thread for both the qualitative and experimental
-    sections was the emphasis was placed on experiments being done with respect to a
-    real-world project. Although, in the past work has been done with real
+    sections was the emphasis placed on experiments being done with respect to a
+    real-world project. Although, in the past some work has been done with real
     world projects, comparative techniques primarily focused on
     the performance of the existing specific algorithm under test. That is to say, previous work has
     focused solely on how ``correct'' a spatio-temporal modeling technique was
@@ -39,8 +40,6 @@
     resulting predictions. \\
 
     \subsection{ Recommendations for ROPOD }
-
-    TODO rewrite maybe
 
     After paring down the initial list of methods for spatio-temporal
     world modeling, designing and running the experiments, and analyzing the
@@ -51,7 +50,7 @@
     also had consistently the worst accuracy. With that aside, the methods
     under consideration are dynamic multi-maps, FreMEn, and Hypertime.
     Dynamic multi-maps are a tempting option given their low computational
-    usage and occasional moments of high performance. Despite these upsides,
+    usage and occasional moments of high performance and accuracy. Despite these upsides,
     the dynamic multi-maps are not recommended due to the high level of maintenance
     and tuning required to achieve high accuracy predictions. That leaves the
     final two methods, FreMEn and Hypertime. Both of these methods have fairly
@@ -71,10 +70,11 @@
     it allows computational power and resources be concentrated instead of each
     robot being individually responsible for processing. Centralization
     allows an older model to be stored on the central server and used
-    while a newer one is trained. Additionally, although training time is not a large concern, a central server
-    will drastically reduce training time. For
-    these reasons, it is recommended that Hypertime be chosen for use with
-    ROPOD. \\
+    while a newer one is trained. Because an old model can be used while a new
+    one is trained, training time is less of a concern.
+    Given it's high accuracy, and the central servers ability to mitigate some
+    of the heavier resource usage, it is recommended that Hypertime be chosen
+    for use with ROPOD. \\
 
     Integration can be achieved by establishing a database on the central server
     where observations made by robots in the field can be stored along
@@ -85,66 +85,25 @@
     doors, graph edges, etc. Once the new models are complete, whenever a query is
     made for a given time they will be asked to produce a prediction.
     Those predictions will then be used to modify the existing world model at
-    which point path planning can take place. If as the project scales it is
+    which point path planning can take place. If, as the project scales, it is
     determined that Hypertime is too much of a computational drain FreMEn
     can be introduced for use with binary data to lighten the load. \\
 
-
-    \section{ Lessons Learned }
-
-    The project as a whole a provided a wealth of knowledge and
-    numerous learning opportunities. Personal and academic lessons aside, this
-    comparative analysis produced two main results.\\
-
-    First, designing criteria for qualitative analysis obscures many complexities
-    within the details. From a high-level perspective, choosing common
-    qualities for evaluate or compare should be relatively simple.
-    Selection can be accomplished by conducting a survey of existing work,
-    summarizing the approaches and results, and listing their respective
-    similarities and differences. Next, the key differences can be
-    identified and with various metrics can be used to analyze any given piece of
-    work on its own. However, it is here that issues being to arise. Some methods
-    may have properties so vastly different from others that they are not
-    directly comparable. Yet others methods may have issues with non-deterministic
-    properties that vary between run or that are heavily dependent on environmental
-    characteristics. These differences and issues make it much harder to directly
-    compare methods without qualification or the need to include additional detail
-    that may make quick comparison difficult and tables cluttered. Moreover,
-    the issues encountered in designing the qualitative analysis section serve
-    to highlight the importance of running experiments and analyzing their results. \\
-
-
-    The other key lesson learned was or the importance of experimental
-    data for accurate experimental results. Early attempts at data simulation
-    for this comparative analysis was plagued with issues. Although
-    the simulation of data can often easily be generated in arbitrary amounts,
-    lengths, and resolution, the same is not always true of the real-world.
-    The imperfections in real-world data gathering, irregularities,
-    inaccuracies such as noise, and many other issues can be simulated
-    only to a limited extent and with limited accuracy. This can be seen in the
-    work of this paper. Experimental data alone does contain a given amount of noise
-    and other data inaccuracies, but it does not cover all irregularities or
-    issues that may be seen in real-world data. Although perhaps not in this
-    particular work, or at least not to a significant detriment, it is possible that
-    real-world data may yield different results. The comparision of Hypertime
-    versus that of FreMEn would be of paricular interest when comparing their
-    ability to deal with noisy data. It can therefore be concluded that the
-    use of real-world data is vital and should be used whenever possible. \\
 
     \section{ Future work }
 
     Although this work has made helpful contributions to the field, it is
     certain that further work remains. ROPOD can be used as an example
-    to base future study namely because ROPOD, unlike previous work, is a multi robot
+    to base future studies. This is particularly true because ROPOD, unlike previous work, is a multi-robot
     system. This means that while running tests with respect to a single robot
     is valid and fully accurate, the addition of multiple robots creates
     additional opportunities and complexities. Having multiple robots moving about
-    the environment at different times allows for the gathering much
-    more data which decreases the sparsity of data
-    available for testing and developing models.. This is likely to increase model accuracy as evident in the
+    the environment at different times allows for gathering much
+    more data. This in turn decreases the sparsity of data
+    available for testing and developing models. Furthermore, this is likely to increase model accuracy as evident in the
     elevator experiments, but may also cause issues when trying to mitigate
     or merge multiple samples of the same object at the same time. Moreover,
-    the very prescience of multiple robots may themselves introduce spatio-temporal
+    the very presence of multiple robots may themselves introduce spatio-temporal
     complexities. Having multiple robots moving about a shared
     space, especially during peak traffic, could create additional obstacles
     in the form of congestion that would need to be planned around
@@ -152,15 +111,16 @@
 
     Another area of future work is the collection
     of additional real-world data. This data is often more noisy, irregular,
-    and generally unpredictable when compared to even the best simulated data
-    It would be ideal if this new data could be collected and compiled into a
+    and generally unpredictable when compared to even the best simulated data.
+    Ideally this new data new data will be collected and compiled into a
     new dataset for use in other experiments. Early steps have been been taken as exemplified in the
-    'Brayford' dataset \cite{Krajnik2014}. This dataset, however, contains
-    it only 3D data for a single room. The observation was done using a static device and
+    ``Brayford'' dataset \cite{Krajnik2014}. This dataset, however, contains
+    only 3D data for a single room. The observation was done using a static device and
     thus observations are at regular intervals and contain minimal noise.
     Furthermore, because this is was only one device the complexities of a
-    multi-robot system are also overlooked. This work is an excellent step
-    in the right direction but the field of spatio-temporal world modeling
-    remains open with many rich and intricate problems ripe for exploration. \\
+    multi-robot system are also overlooked. The work done in this paper is an
+    excellent step in the right direction, but the field of spatio-temporal
+    world modeling remains open with many rich and intricate problems left for
+    exploration. \\
 
 \end{document}

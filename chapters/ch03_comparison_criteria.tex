@@ -8,26 +8,22 @@
   section, some initial work has been done in this regard. This section,
   however, aims to introduce a complete list of criteria that can be used
   for comparison. The methods will be introduced, outlined, and their relevance
-  to the field explained. At the end of the section is table that contains
-  a number of methods for spatio-temporal world modeling as well as their
-  respective information with regards to the criteria introduced in this section.
-  The idea is to provide an overview of some common techniques for modeling
-  and to establish a way to easily compare future spatio-temporal world modeling
-  techniques. \\
+  to the field explained. The idea is to provide an overview of some common
+  techniques for modeling and to establish a way to easily compare future
+  spatio-temporal world modeling techniques. \\
 
   \section{ Criteria }
 
   \subsection{ Computational Complexity }
   According to Michael Stiff, a professor at the University of Wisconsin-Madison,
-  computational complexity can be defined as `` the study of how much
-  of a given resource a program uses. The resource in question is usually
-  either space (how much memory) or time (how many basic operations).''
-  \cite{ComplexityUW} In the field of computer science this computational
+  computational complexity can be defined as
+  ``the study of how much of a given resource a program uses. The resource in question is usually either space (how much memory) or time (how many basic operations).''
+  \cite{ComplexityUW}. In the field of computer science this computational
   complexity is often represented using asymptotic notation, also commonly
   known as Big O notation. The general idea is to estimate how much of a given
   resource will be used as the size of the input data is increased, specifically
   as it approaches infinity. This is useful for estimating how much memory or
-  how much time a given algorithm may use for any given set of data.
+  how much time a given algorithm may use for a given set of data.
   Additionally, it serves as an excellent benchmark for comparing various
   algorithms.\\
 
@@ -35,51 +31,51 @@
   concerned with how long planning will take and how much memory the
   process will consume while planning. Furthermore, although Big O notation is
   still applicable and accurate within reason, some details may be lost.
-  Specifically, Big O will often drop constants in growth rates as they are
+  Specifically, Big O will often drop coefficients in growth rates as they are
   not relevant when looking at asymptotic behavior. An example of this with
   regard to spatio-temporal world modeling would be if one model stored a
   single copy of every observation made while another stored multiple, say
   five. Although the second model would grow five times as fast as the first,
   according to Big O notation, they would both be linear, thus growing at the
-  same rate of N. This is obviously a drawback when the vast majority of
+  same rate of ``N''. This is obviously a drawback when the vast majority of
   modeling techniques would all be of a similar complexity class for both time
-  and space. It is for this reason when comparing spatio-temporal world
-  models Big O notation may still be used, however in order to better convey
-  the subtleties of the various methods coefficients will not be dropped. \\
+  and space. For the purpose of comparative analysis outlined in this paper, Big O
+  notation will still be used. However, in order to
+  highlight subtleties between mapping methods, coefficients in
+  growth rates will not be dropped. \\
 
 
-  \subsection{ Efficiency of Data Storage }
-  Similar to spatial and time complexity, the efficiency of storage also
+  \subsection{ Method of Data Storage }
+  Similar to spatial and time complexity, the method of storage also
   evaluates how a method handles the resources available to it. However, where
   spatial and time complexity are focused on the use of resources during
-  run-time, the evaluation of the efficiency of storage is focused on how well
+  run-time, the evaluation of the method of storage is focused on how well and in what manor
   the information used for predictions can be stored when not in use. This
   can be important when looking at the scaleability of a particular model. One
   can imagine if hundreds of thousands of observations are being made every
   day, depending on the data contained within those observations, an
   inefficient storage approach could rapidly cause giga- or terabytes of storage
   space to be required. Therefore, it is important to note once learned or trained,
-  how and if information and predictions can be stored. \\
+  if and how information and predictions can be stored. \\
 
   \subsection{ Learning Method }
-  The learning method is a way a spatio-temporal world model is able to
+  The learning method is a way a to describe how a spatio-temporal world model is able to
   make predictions. Often this is based off of preexisting concepts like neural
-  nets or mathematical models. Information on these methods is commonly known
+  nets or other mathematical models. Information on these methods is commonly known
   and thus additional information may be desired to further compare methods.
   One such vital piece of information is distinguishing when a model
   changes or updates in relation to when predictions are made. A common way to
   make this differentiation is by categorizing an algorithm or method as one
-  two categories: Online or Offline. Historically, offline algorithms or methods are the
-  historically common approach. Data is taken in an analyzed in batches before,
-  in the case of spatio-temporal world modeling, and predictions are made. Online
+  two categories: Online or Offline. Offline algorithms methods have been the
+  historically common approach. Data is taken in an analyzed in batches before
+  any predictions are made. Online
   learning on the other hand sees a much quicker turn-around time between the
-  observation of new data and the resulting prediction. \cite{Karp1992} For the sake of this
-  paper, methods will be classified as online learning methods if they update
-  after ever new observation or after a given number of observations. Methods
-  will therefore be classified as offline learning methods if they are designed to
-  process large amounts of data before making predictions, specifically if it
-  is not uncommon for the data processing time to take so long as to make
-  immediate and live predictions unreasonable. \\
+  observation of new data and the resulting prediction \cite{Karp1992}. For the sake of this
+  paper, methods will be classified as online if they update
+  after every new observation or after a given number of observations. Methods
+  will therefore be classified as offline if they are designed to
+  process large amounts of data before making predictions, specifically if
+  processing time makes live and immediate predictions unreasonable. \\
 
   \subsection{ Map Type Dependency }
   As mentioned in the State of the Art section, certain spatio-temporal world
@@ -90,16 +86,17 @@
   world model with the ability to make spatio-temporal predictions. It is
   therefore conceivable that an environment may already be modeled using a
   specific technique and thus limiting the pool of potentially available methods.
-  For these reasons, being able to differentiate, and thus choose
-  between the various methods with relation to the world modeling method
-  required is extremely useful. \\
+  For these reasons being able to differentiate, and thus choose
+  between, the various methods with relation to the world modeling method
+  required is highly desired. \\
 
 
 
   \subsection { Limitations on Predictions }
   When examining a large number of options it is often helpful to eliminate
   choices that absolutely will not work. This section will attempt to outline
-  the types of limitations would disqualify certain spatio-temporal world
+  the types of limitations on predictions or model representation that
+  would disqualify certain spatio-temporal world
   models when attempting to find a best fit solution for a give problem. \\
 
 
@@ -107,18 +104,18 @@
   Certain techniques used for predictions can cause limitations on the number
   or type of classifications that can be done on a given set of data. The most common
   and perhaps most limiting is the binary restriction imposed by the
-  methods that use FreMEn \cite{Krajnik2015} \cite{Hawes2017}. This restriction only
+  methods that use FreMEn \cite{Hawes2017, Krajnik2015}. This restriction only
   allows an object's state in the spatio-temporal domain to be represented by one of two
   states. This state is then said to have a probability associated with it.
   Thus, it is often not possible to represent more complex behavior like time
-  of travel, number of people present in an area, which can potentially be in
+  of travel, or the number of people present in an area, which often requires the use of
   more than two states. \\
 
   \subsubsection{ Historical Predictability }
-  The ability to reflect on and learn from previous mistakes is as useful in
-  robotics as it is for humans. Being able to recreate and analyze historical
-  events allows for unexpected to be debugged and for
-  improved training of a given model. These improvements can ultimately result
+  The ability to reflect on and learn from previous mistakes is as useful for
+  humans as it is in robotics. Being able to recreate and analyze historical
+  events allows for the unexpected to be debugged and for
+  a model to be improved through iterative training. These improvements can ultimately result
   in more accurate predictions. Therefore, the ability to predict events that
   have already happened can be a desired trait when looking at
   spatio-temporal world modeling techniques. \\
@@ -140,7 +137,7 @@
   Some information about a spatio-temporal world modeling technique may not be
   directly observable or even contained within the approach itself. Information
   about how and when a method is best used or other metainformation not directly
-  tied to an approach, like how easy it is to set up, can be vital to a developer
+  tied to an approach, can be vital to a developer
   when attempting to decide between various methods. This section introduces
   some of the metainformation about spatio-temporal world modeling techniques
   that could prove useful, especially with regard to a developer or engineer. \\
@@ -150,30 +147,17 @@
   modeling technique the author or authors will release the new method in the
   form of a library or source code. The availability of libraries or source code
   can save time developing
-  and debugging and prevent extra work. Additionally, the preexisting work may have an effect
+  and debugging. Additionally, the preexisting work may have an effect
   on what language will be used on a given project. The availability of work
-  will be graded on scale of 1-3. 1 means that the work is
-  freely available as a package or source code and may be open or closed source.
-  2 means that some of the subcomponents may be freely available others,
-  commonly the connecting or support structures are not yet implemented and it
-  would take some time to connect everything together. A 3 means that there
-  does not currently exist any available code for this approach. One would have
+  can be categorized into three fields. Open source means that the work is
+  freely available as a package or source code.
+  Partially available means that some of the subcomponents may be freely available, but not connected to create the entire package, or the
+  component is available, but closed source.
+  In this case, it is common that the connecting or support structures are not yet implemented and it
+  would take some time to connect everything together. Finally, some work
+  may not currently exist in any available form. One would have
   to fully acquaint themselves with the original academic paper in order to
   implement this method. \\
-
-  \subsubsection{ Implementation Complexity }
-  When a new technique is proposed but no implementation is available it is
-  up to a developer or engineer to implement the technique proposed in a given paper.
-  Depending on the complexity of the approach proposed, this takes days or
-  weeks to understand and fully implement. Depending
-  on the requirements of a project, it may be desirable to avoid overly complex
-  approaches that may consume limited development resources. For this reason,
-  implementation complexity will be graded on a scale from 1-3 where 1 is a
-  simple combination of preexisting math or models that a high
-  level undergraduate student could understand and implement. 2 means a
-  more complex system with multiple components of moderate complexity.
-  3 is reserved for cutting edge implementations that almost always involve
-  multiple complex components. \\
 
   \subsubsection{ Suitable Fields of Application }
   Although the field of spatio-temporal world modeling is generally concerned
@@ -200,7 +184,7 @@
   project may demand modified or additional analysis. \\
 
   \subsection{ Prediction Accuracy }
-  Prediction accuracy is arguably the most important benchmark for for comparing methods
+  Prediction accuracy is arguably the most important benchmark for comparing methods
   of spatio-temporal world modeling. It can take many forms, but the goal is
   to convey on average how well a model can predict a future event. This is
   most commonly achieved by comparing a predictive model to the ground truth
@@ -216,13 +200,13 @@
   Computational resource usage can be thought of as an extension of computational
   complexity into the real-world. This statistic aims to quantify and measure
   the time, memory, or any additional resources a computer provides during run-time.
-  Most commonly these resources are amount of time spent using a processor
+  Most commonly these resources are the amount of time spent using a processor
   and the amount of memory used. These are commonly measured using seconds and
   bytes in a resolution scaled to the size of the problem, milliseconds
   and kilobytes for example. These are excellent ways of predicting the ability
   of a given method to scale. In a real operating environment it does not matter
-  if 100\% accuracy is obtained for all data sets if too much memory is required
+  if 100\% accuracy is obtained for all datasets if too much memory is required
   for a computer to process the results or if the time taken to
-  produce the prediction invalidates the very prediction it makes. \\
+  produce the prediction invalidates the very prediction it is attempting to make. \\
 
 \end{document}
